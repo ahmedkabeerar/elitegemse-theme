@@ -1,0 +1,33 @@
+{% comment %}
+  Fixed bottom bar (mobile): mirrors price + variant + Add to cart when main ATC scrolls out of view.
+  Requires: main product form with id product_form_id.
+{% endcomment %}
+{{ 'sticky-add-to-cart.css' | asset_url | stylesheet_tag }}
+<sticky-add-to-cart
+  class="sticky-atc color-{{ section.settings.color_scheme }} gradient"
+  id="StickyATC-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+  aria-hidden="true"
+>
+  <div class="sticky-atc__surface">
+    <div class="sticky-atc__inner page-width">
+      <div class="sticky-atc__info">
+        <p class="sticky-atc__title">{{ product.title | escape }}</p>
+        <p class="sticky-atc__variant" data-sticky-variant hidden></p>
+        <div class="sticky-atc__price" data-sticky-price></div>
+      </div>
+      <button
+        type="submit"
+        form="{{ product_form_id }}"
+        name="add"
+        class="button button--primary sticky-atc__submit"
+        id="StickySubmitButton-{{ section.id }}"
+        data-sticky-submit
+      >
+        <span data-sticky-submit-text>{{ 'products.product.add_to_cart' | t }}</span>
+        {% render 'loading-spinner' %}
+      </button>
+    </div>
+  </div>
+</sticky-add-to-cart>
+<script src="{{ 'sticky-add-to-cart.js' | asset_url }}" defer="defer"></script>

@@ -1,0 +1,3666 @@
+/* =======================================================
+   ELITEGEMSE — Warm Natural Custom Styles
+   Palette: Cream #F5F0E8 | Walnut #2C1810 | Wood #8B5E3C
+   Typography: theme settings → Shopify CDN (default: Cormorant heading, Jost body)
+   ======================================================= */
+
+/* -------------------------
+   1. TYPOGRAPHY FOUNDATION
+   ------------------------- */
+:root {
+  --eg-cream: #F5F0E8;
+  --eg-cream-2: #EDE8DF;
+  --eg-walnut: #2C1810;
+  --eg-walnut-dark: #1A0F08;
+  --eg-wood: #8B5E3C;
+  --eg-wood-light: #B5845A;
+  --eg-border: rgba(44, 24, 16, 0.1);
+
+  /* Corners — editorial square; aligns with buttons / variant pills (theme settings) */
+  --eg-radius: 0;
+
+  /* Tracking: body vs uppercase / overlines only */
+  --eg-track-body: 0.02em;
+  --eg-track-heading: 0.02em;
+  --eg-track-overline: 0.14em;
+
+  /* Few display steps (reduces competing clamps) */
+  --eg-hero-display: clamp(3.75rem, 6vw, 8rem);
+  --eg-display-1: clamp(3.2rem, 4.2vw, 5rem);
+  --eg-display-2: clamp(2.6rem, 3.4vw, 4rem);
+  --eg-display-3: clamp(2.1rem, 2.4vw, 2.9rem);
+  --eg-product-title: clamp(2rem, 2.5vw, 2.85rem);
+  --eg-price-large: clamp(2rem, 2.35vw, 2.65rem);
+  --eg-card-title: 1.75rem;
+
+  --eg-line-body: 1.75;
+  --eg-line-heading: 1.18;
+  --eg-size-body: 1.6rem;
+  --eg-size-body-lg: 1.7rem;
+
+  --eg-stack-md: 1.65rem;
+  --eg-stack-lg: 2.15rem;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6,
+.card__heading,
+.title,
+.product__title,
+.banner__heading,
+.footer-block__heading {
+  font-family: var(--font-heading-family);
+}
+
+body,
+p, li, a, span, button, input, select, textarea {
+  font-family: var(--font-body-family);
+  letter-spacing: var(--eg-track-body);
+}
+
+/* -------------------------
+   2. GLOBAL BASE
+   ------------------------- */
+html {
+  scroll-behavior: smooth;
+}
+
+.color-scheme-1,
+.color-scheme-2 {
+  background-color: var(--eg-cream);
+}
+
+/* -------------------------
+   2b. SECTION & CONTENT LAYER SPACING
+   Vertical rhythm between blocks (title → copy → grid, hero stack, newsletter).
+   Theme Layout → Section spacing also applies via --spacing-sections-* (theme.liquid).
+   ------------------------- */
+
+.collection-list-wrapper .title-wrapper-with-link {
+  margin-bottom: 1.5rem;
+}
+
+@media screen and (min-width: 990px) {
+  .collection-list-wrapper .title-wrapper-with-link {
+    margin-bottom: 2rem;
+  }
+}
+
+.collection__title.title-wrapper .title {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.collection__title.title-wrapper .collection__description {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.collection__title.title-wrapper {
+  margin-bottom: 1.35rem;
+}
+
+@media screen and (min-width: 990px) {
+  .collection__title.title-wrapper {
+    margin-bottom: 1.75rem;
+  }
+}
+
+.image-with-text__content > * + * {
+  margin-top: var(--eg-stack-md);
+}
+
+.image-with-text__content .image-with-text__text + .button {
+  margin-top: var(--eg-stack-lg);
+}
+
+.newsletter__wrapper > * + * {
+  margin-top: 1.5rem;
+}
+
+.newsletter__wrapper > .newsletter__subheading + div {
+  margin-top: 2rem;
+}
+
+/* -------------------------
+   2c. MOBILE VERTICAL RHYTHM
+   Tighter stacks + caps section gaps (pairs with Layout → Section spacing).
+   ------------------------- */
+@media screen and (max-width: 749px) {
+  :root {
+    --eg-stack-md: 1.18rem;
+    --eg-stack-lg: 1.42rem;
+  }
+
+  /* Dawn: .section + .section uses --spacing-sections-mobile */
+  .section + .section {
+    margin-top: min(var(--spacing-sections-mobile), 1.75rem);
+  }
+
+  /* Title → description / grid */
+  .title-wrapper-with-link {
+    margin-bottom: 1.05rem !important;
+  }
+
+  .collection .title-wrapper,
+  .featured-collection .title-wrapper-with-link,
+  .blog .title-wrapper-with-link {
+    margin-bottom: 1rem !important;
+  }
+
+  .collection-list-wrapper .title-wrapper-with-link {
+    margin-bottom: 1.25rem;
+  }
+
+  /* Multicolumn sections */
+  .section-multicolumn .multicolumn-list {
+    gap: 1.1rem 0.75rem !important;
+  }
+
+  .multicolumn-card__info {
+    padding: 1.25rem 1.1rem 1.35rem !important;
+  }
+
+  /* Newsletter */
+  .newsletter__wrapper > * + * {
+    margin-top: 1rem;
+  }
+
+  .newsletter__wrapper > .newsletter__subheading + div {
+    margin-top: 1.35rem;
+  }
+
+  /* Image + text brand blocks */
+  .image-with-text__grid .image-with-text__content {
+    padding-top: 1.25rem;
+    padding-bottom: 0.25rem;
+  }
+}
+
+/* Thin scrollbar */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--eg-cream); }
+::-webkit-scrollbar-thumb { background: var(--eg-wood); border-radius: 3px; }
+
+/* -------------------------
+   3. ANNOUNCEMENT BAR
+   ------------------------- */
+.announcement-bar {
+  background: var(--eg-walnut) !important;
+}
+.announcement-bar .color-scheme-1,
+.announcement-bar__message {
+  background: var(--eg-walnut) !important;
+  color: var(--eg-cream) !important;
+  font-size: 1.1rem;
+  letter-spacing: var(--eg-track-overline);
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+/* -------------------------
+   4. HEADER / NAV
+   ------------------------- */
+.header-wrapper {
+  background: rgba(245, 240, 232, 0.96) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--eg-border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header--top-center .header__heading,
+.header__heading-link .h2 {
+  font-family: var(--font-heading-family);
+  font-size: 2.2rem;
+  letter-spacing: var(--eg-track-heading);
+  color: var(--eg-walnut);
+  font-weight: 500;
+}
+
+.header__menu-item span,
+.header__active-menu-item {
+  font-family: var(--font-body-family);
+  font-size: 1.15rem;
+  font-weight: 400;
+  letter-spacing: var(--eg-track-overline);
+  text-transform: uppercase;
+  color: var(--eg-walnut);
+}
+
+.header__menu-item:hover span {
+  color: var(--eg-wood);
+}
+
+.header__icon {
+  color: var(--eg-walnut);
+}
+
+/* Cart bubble */
+.cart-count-bubble {
+  background: var(--eg-wood) !important;
+}
+
+/* -------------------------
+   5. SLIDESHOW / HERO
+   ------------------------- */
+/* Height follows first slide image (Theme editor: Slide height → Adapt to first image) */
+.slideshow.banner.banner--adapt_image:not(.slideshow--placeholder) {
+  min-height: 0 !important;
+}
+
+.slideshow.banner.banner--adapt_image:not(.slideshow--placeholder) .slideshow__slide {
+  min-height: 0 !important;
+}
+
+/*
+ * Slideshow + “Show content below image”: Dawn’s component-slideshow sets flex-grow on the
+ * text wrapper — can balloon an empty band (colour scheme / .media grey) above the photo on mobile.
+ */
+@media screen and (max-width: 749px) {
+  slideshow-component.mobile-text-below .slideshow.banner.banner--mobile-bottom .slideshow__slide {
+    justify-content: flex-start !important;
+    align-items: stretch !important;
+    min-height: 0 !important;
+  }
+
+  slideshow-component.mobile-text-below
+    .slideshow.banner.banner--mobile-bottom
+    .slideshow__media.banner__media.media {
+    order: -1 !important;
+    flex: 0 0 auto !important;
+    width: 100%;
+    background-color: transparent !important;
+  }
+
+  slideshow-component.mobile-text-below
+    .slideshow.banner.banner--mobile-bottom
+    .slideshow__text-wrapper.banner__content {
+    order: 1 !important;
+    flex-grow: 0 !important;
+    flex-shrink: 0 !important;
+    min-height: 0 !important;
+    height: auto !important;
+  }
+
+  slideshow-component.mobile-text-below
+    .slideshow.banner.banner--mobile-bottom
+    .slideshow__text.banner__box {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+}
+
+.slideshow .banner {
+  position: relative;
+}
+
+.slideshow__slide .banner__box {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0;
+  max-width: 700px;
+}
+
+/* Dark gradient at bottom for text readability (overlay layout only) */
+.slideshow:not(.banner--mobile-bottom) .banner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(16, 8, 6, 0.85) 0%,
+    rgba(16, 8, 6, 0.35) 45%,
+    rgba(16, 8, 6, 0.05) 100%
+  ) !important;
+  opacity: 1 !important;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.slideshow__slide .banner__content {
+  position: relative;
+  z-index: 2;
+}
+
+.slideshow:not(.banner--mobile-bottom) .banner__heading,
+.slideshow:not(.banner--mobile-bottom) .banner__heading.h0 {
+  font-family: var(--font-heading-family) !important;
+  font-size: var(--eg-hero-display) !important;
+  font-weight: 300 !important;
+  line-height: 1.1;
+  letter-spacing: var(--eg-track-heading);
+  color: #F5F0E8 !important;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  margin-bottom: 1.25rem;
+}
+
+.slideshow:not(.banner--mobile-bottom) .banner__subheading,
+.slideshow:not(.banner--mobile-bottom) .slideshow__slide .banner__box > .banner__text {
+  font-family: var(--font-body-family) !important;
+  font-size: 1.35rem !important;
+  font-weight: 300 !important;
+  letter-spacing: var(--eg-track-overline) !important;
+  text-transform: uppercase !important;
+  color: rgba(245, 240, 232, 0.8) !important;
+}
+
+.slideshow:not(.banner--mobile-bottom) .banner__subheading {
+  margin-bottom: 2.1rem;
+}
+
+.slideshow:not(.banner--mobile-bottom) .button--primary,
+.slideshow:not(.banner--mobile-bottom) .banner__box .button {
+  background: transparent !important;
+  border: 1.5px solid #F5F0E8 !important;
+  color: #F5F0E8 !important;
+  letter-spacing: var(--eg-track-overline);
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  font-weight: 400;
+  padding: 1.4rem 3.2rem;
+  transition: background 0.3s ease, color 0.3s ease !important;
+}
+
+.slideshow:not(.banner--mobile-bottom) .button--primary:hover,
+.slideshow:not(.banner--mobile-bottom) .banner__box .button:hover {
+  background: #F5F0E8 !important;
+  color: var(--eg-walnut) !important;
+}
+
+/* Dawn .button::after (z-index 1) sits above anonymous text — span stacks label above border glow */
+.slideshow .banner__box .banner__buttons .button > span {
+  position: relative;
+  z-index: 2;
+  opacity: 1;
+  color: inherit;
+}
+
+/* Slideshow controls inside .slider-buttons — solid icon/text color (was 0.6 and overrode arrow styling below) */
+.slideshow__controls .slider-buttons .slider-button {
+  color: #F5F0E8 !important;
+  opacity: 1;
+}
+.slideshow__controls .slider-buttons .slider-button:hover {
+  color: #F5F0E8 !important;
+}
+
+/* -------------------------
+   6. SECTION HEADINGS
+   ------------------------- */
+.title-wrapper .title,
+.collection-description .title,
+.featured-collection .title {
+  font-family: var(--font-heading-family);
+  font-weight: 400;
+  letter-spacing: var(--eg-track-heading);
+  color: var(--eg-walnut);
+}
+
+/* Decorative rule under section titles */
+.title-wrapper--self-padded-tablet-down .title::after,
+.title-wrapper-with-link .title::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 1.5px;
+  background: var(--eg-wood);
+  margin-top: 1.2rem;
+}
+
+.title-wrapper .title-wrapper__text {
+  font-family: var(--font-body-family);
+  font-size: 1.35rem;
+  font-weight: 300;
+  color: rgba(44, 24, 16, 0.65);
+  line-height: 1.7;
+  margin-top: 0.65rem;
+}
+
+/* -------------------------
+   7. PRODUCT CARDS
+   ------------------------- */
+
+/* Overflow hidden so zoom stays clipped */
+.card-wrapper {
+  overflow: hidden;
+}
+
+.card--standard .card__inner {
+  overflow: hidden;
+}
+
+/* Image zoom on card hover */
+@media (prefers-reduced-motion: no-preference) {
+  .card--standard .card__inner .media img,
+  .card .card__inner .media img {
+    transition: transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+    will-change: transform;
+  }
+
+  .card-wrapper:hover .card--standard .card__inner .media img,
+  .card-wrapper:hover .card .card__inner .media img {
+    transform: scale(1.05) !important;
+  }
+}
+
+/* Product cards — ảnh vuông 1:1 (ghi đè Portrait / Adapt trong section) */
+.card-wrapper.product-card-wrapper .card.ratio,
+.card-wrapper.product-card-wrapper .card__inner.ratio {
+  --ratio-percent: 100% !important;
+}
+
+.card-wrapper.product-card-wrapper .card__inner .media.media--hover-effect > img {
+  object-fit: cover;
+  object-position: center center;
+}
+
+/* Card info area */
+.card__information {
+  padding: 1.4rem 0.2rem 0.8rem !important;
+}
+
+.card__heading.h5,
+.card__heading {
+  font-family: var(--font-heading-family);
+  font-size: var(--eg-card-title);
+  font-weight: 500;
+  line-height: 1.28;
+  letter-spacing: var(--eg-track-heading);
+  margin-top: 0;
+  margin-bottom: 0.28rem;
+}
+
+/* Title text only — 2 lines + ellipsis ( keeps Dawn card link ::after intact ) */
+.card-wrapper .card__information > .card__heading .card__heading-inner {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+/*
+ * Product grids: align quick-add row across columns when titles wrap to different heights.
+ * Stretch card to grid row height, flex column content, push .quick-add / quick-add-bulk to bottom.
+ */
+.product-grid .grid__item > .card-wrapper.product-card-wrapper,
+.slider .slider__slide.grid__item > .card-wrapper.product-card-wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-grid .grid__item > .card-wrapper.product-card-wrapper .card.card--media,
+.slider .slider__slide.grid__item > .card-wrapper.product-card-wrapper .card.card--media {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.product-grid .grid__item > .card-wrapper.product-card-wrapper .card.card--media > .card__inner,
+.slider .slider__slide.grid__item > .card-wrapper.product-card-wrapper .card.card--media > .card__inner {
+  flex-shrink: 0;
+}
+
+.product-grid .grid__item > .card-wrapper.product-card-wrapper .card.card--media > .card__content,
+.slider .slider__slide.grid__item > .card-wrapper.product-card-wrapper .card.card--media > .card__content {
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  width: 100%;
+}
+
+.product-grid .grid__item > .card-wrapper.product-card-wrapper .card.card--media > .card__content > .quick-add,
+.product-grid .grid__item > .card-wrapper.product-card-wrapper .card.card--media > .card__content > quick-add-bulk,
+.slider .slider__slide.grid__item > .card-wrapper.product-card-wrapper .card.card--media > .card__content > .quick-add,
+.slider .slider__slide.grid__item > .card-wrapper.product-card-wrapper .card.card--media > .card__content > quick-add-bulk {
+  margin-top: auto !important;
+}
+
+.card__heading a {
+  color: var(--eg-walnut);
+  text-decoration: none !important;
+}
+
+.card__heading a:hover {
+  color: var(--eg-wood);
+}
+
+/* Five decorative stars (SVG) under titles — a bit larger, softer wood tone & gentle glow */
+.eg-title-stars {
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(0.4rem, 1.65vw, 0.62rem);
+}
+
+.eg-title-stars__icon {
+  width: clamp(1.52rem, 4.05vw, 1.92rem);
+  height: clamp(1.52rem, 4.05vw, 1.92rem);
+  flex-shrink: 0;
+  color: rgba(139, 94, 60, 0.78);
+  opacity: 0.94;
+  filter: drop-shadow(0 1px 2px rgba(139, 94, 60, 0.18));
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.card__information > .card__heading + .eg-title-stars {
+  margin-top: 0.35rem;
+  margin-bottom: 0.4rem;
+}
+
+/* PDP: Dawn sets .product__title > * { margin: 0 } — use padding for space above stars */
+.product__title .eg-title-stars {
+  margin-top: 0;
+  padding-top: 0.45rem;
+  margin-bottom: 0.2rem;
+}
+
+.product__title .eg-title-stars__icon {
+  width: clamp(1.72rem, 4.45vw, 2.18rem);
+  height: clamp(1.72rem, 4.45vw, 2.18rem);
+  color: rgba(139, 94, 60, 0.82);
+  filter: drop-shadow(0 1px 3px rgba(139, 94, 60, 0.2));
+}
+
+/* Hide duplicate metafield rating row on cards (decorative 5 stars sit under title) */
+.card__information > .eg-title-stars + .card-information .rating,
+.card__information > .eg-title-stars + .card-information .rating-text,
+.card__information > .eg-title-stars + .card-information .rating-count {
+  display: none !important;
+}
+
+/* Price on cards */
+.card-information .price .price-item {
+  font-family: var(--font-body-family);
+  font-size: 1.5rem;
+  line-height: 1.45;
+  font-weight: 400;
+  color: var(--eg-wood);
+}
+
+.card-information .price--on-sale .price-item--sale {
+  color: var(--eg-wood);
+}
+
+.card-information .price--on-sale .price-item--regular {
+  color: rgba(44, 24, 16, 0.4);
+  font-size: 1.2rem;
+}
+
+/* Vendor */
+.card-information .caption-with-letter-spacing {
+  font-family: var(--font-body-family);
+  letter-spacing: var(--eg-track-overline);
+  text-transform: uppercase;
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: rgba(44, 24, 16, 0.45);
+}
+
+/* Quick-add — always show label (theme preview, desktop, mobile; no hover required) */
+.card-wrapper .quick-add,
+.complementary-products__container .quick-add {
+  transform: none;
+  transition: background 0.25s ease;
+  visibility: visible;
+  pointer-events: auto;
+  opacity: 1;
+}
+
+.quick-add__submit.button {
+  opacity: 1 !important;
+  background: var(--eg-walnut) !important;
+  color: var(--eg-cream) !important;
+  border-color: var(--eg-walnut) !important;
+  border-radius: var(--eg-radius);
+  letter-spacing: var(--eg-track-overline);
+  text-transform: uppercase;
+  font-family: var(--font-body-family);
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: background 0.25s ease !important;
+}
+
+.quick-add__submit.button:hover {
+  background: var(--eg-wood) !important;
+  border-color: var(--eg-wood) !important;
+}
+
+/* Above Dawn's decorative .button::after (z-index 1) so label + icons stay crisp */
+.card-wrapper .quick-add__submit.button > *,
+.complementary-products__container .quick-add__submit.button > * {
+  position: relative;
+  z-index: 2;
+  color: inherit;
+}
+
+.card-wrapper .quick-add__submit.button .loading__spinner,
+.complementary-products__container .quick-add__submit.button .loading__spinner {
+  z-index: 3;
+}
+
+/*
+ * Mobile: collapse card content grid so title/price don’t leave a huge gap above the quick-add row.
+ */
+@media screen and (max-width: 749px) {
+  /*
+   * Dawn uses grid-template-rows with minmax(0, 1fr) on the info row — equal-height cards
+   * leave a tall empty band above the quick-add row. Collapse rows so title/price sit tight.
+   */
+  .card:not(.ratio) > .card__content {
+    grid-template-rows: max-content max-content max-content max-content !important;
+    align-content: start;
+  }
+
+  .card__inner:not(.ratio) > .card__content {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  .card--extend-height .card__inner {
+    height: auto !important;
+  }
+}
+
+/* Badge */
+.badge {
+  font-family: var(--font-body-family);
+  font-size: 0.9rem;
+  letter-spacing: var(--eg-track-overline);
+  text-transform: uppercase;
+  font-weight: 500;
+  border-radius: var(--eg-radius);
+}
+
+/* Grid spacing on product grids */
+.grid--4-col-desktop.product-grid {
+  gap: 2.4rem 2rem;
+}
+
+/* Product grids: force a real 2-column layout below desktop. Dawn uses flex + slider classes;
+   that often reads as one wide column. CSS Grid avoids flex/slider width fights. */
+@media screen and (max-width: 749px) {
+  slider-component .product-grid.grid--2-col-tablet-down,
+  .collection .product-grid.grid--2-col-tablet-down,
+  .related-products .product-grid.grid--2-col-tablet-down,
+  #product-grid.product-grid.grid--2-col-tablet-down {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    column-gap: var(--grid-mobile-horizontal-spacing);
+    row-gap: var(--grid-mobile-vertical-spacing);
+    overflow-x: visible !important;
+    scroll-snap-type: none;
+    margin-bottom: 0;
+  }
+
+  /*
+   * Dawn `grid--peek` + slider: only the first tile gets margin-left (carousel “peek”).
+   * With a real 2-col grid, that indents only product #1 — left column looks staggered.
+   */
+  slider-component .product-grid.grid--peek.slider .grid__item:first-of-type,
+  .collection .product-grid.grid--peek.slider .grid__item:first-of-type,
+  .related-products .product-grid.grid--peek.slider .grid__item:first-of-type {
+    margin-left: 0 !important;
+  }
+
+  slider-component .product-grid.grid--2-col-tablet-down .grid__item,
+  .collection .product-grid.grid--2-col-tablet-down .grid__item,
+  .related-products .product-grid.grid--2-col-tablet-down .grid__item,
+  #product-grid.product-grid.grid--2-col-tablet-down .grid__item {
+    width: auto !important;
+    max-width: none !important;
+    flex: none !important;
+    min-width: 0;
+  }
+
+  .collection .product-grid.grid--2-col-tablet-down .grid__item:only-child,
+  #product-grid.product-grid.grid--2-col-tablet-down .grid__item:only-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  /* Dawn keeps tablet widths at 50% for grid--2-col-tablet-down; skip grids that should stay 4-up */
+  slider-component .product-grid.grid--2-col-tablet-down:not(.grid--4-col-desktop),
+  .collection .product-grid.grid--2-col-tablet-down:not(.grid--4-col-desktop),
+  .related-products .product-grid.grid--2-col-tablet-down:not(.grid--4-col-desktop),
+  #product-grid.product-grid.grid--2-col-tablet-down:not(.grid--4-col-desktop) {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    column-gap: var(--grid-desktop-horizontal-spacing);
+    row-gap: var(--grid-desktop-vertical-spacing);
+    overflow-x: visible !important;
+    scroll-snap-type: none;
+  }
+
+  slider-component .slider--tablet.grid--peek .grid__item:first-of-type,
+  .collection .slider--tablet.grid--peek .grid__item:first-of-type,
+  .related-products .slider--tablet.grid--peek .grid__item:first-of-type {
+    margin-left: 0 !important;
+  }
+
+  slider-component .product-grid.grid--2-col-tablet-down:not(.grid--4-col-desktop) .grid__item,
+  .collection .product-grid.grid--2-col-tablet-down:not(.grid--4-col-desktop) .grid__item,
+  .related-products .product-grid.grid--2-col-tablet-down:not(.grid--4-col-desktop) .grid__item,
+  #product-grid.product-grid.grid--2-col-tablet-down:not(.grid--4-col-desktop) .grid__item {
+    width: auto !important;
+    max-width: none !important;
+    flex: none !important;
+    min-width: 0;
+  }
+
+  .collection .product-grid.grid--2-col-tablet-down:not(.grid--4-col-desktop) .grid__item:only-child,
+  #product-grid.product-grid.grid--2-col-tablet-down:not(.grid--4-col-desktop) .grid__item:only-child {
+    grid-column: 1 / -1;
+  }
+
+  /* Homepage / sections: 4 desktop columns should render as four tiles between tablet and desktop breakpoints */
+  slider-component .product-grid.grid--4-col-desktop.grid--2-col-tablet-down,
+  .collection .product-grid.grid--4-col-desktop.grid--2-col-tablet-down,
+  .related-products .product-grid.grid--4-col-desktop.grid--2-col-tablet-down,
+  #product-grid.product-grid.grid--4-col-desktop.grid--2-col-tablet-down,
+  ul.collection-list.grid--4-col-desktop.grid--2-col-tablet-down {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    column-gap: var(--grid-desktop-horizontal-spacing);
+    row-gap: var(--grid-desktop-vertical-spacing);
+    overflow-x: visible !important;
+    scroll-snap-type: none;
+  }
+
+  slider-component .product-grid.grid--4-col-desktop.grid--2-col-tablet-down .grid__item,
+  .collection .product-grid.grid--4-col-desktop.grid--2-col-tablet-down .grid__item,
+  .related-products .product-grid.grid--4-col-desktop.grid--2-col-tablet-down .grid__item,
+  #product-grid.product-grid.grid--4-col-desktop.grid--2-col-tablet-down .grid__item,
+  ul.collection-list.grid--4-col-desktop.grid--2-col-tablet-down .grid__item {
+    width: auto !important;
+    max-width: none !important;
+    flex: none !important;
+    min-width: 0;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  /* Dawn .grid is flex; grid-template-columns only applies after display:grid */
+  slider-component .product-grid.grid--4-col-desktop,
+  .collection .product-grid.grid--4-col-desktop,
+  .related-products .product-grid.grid--4-col-desktop,
+  #product-grid.product-grid.grid--4-col-desktop,
+  ul.collection-list.grid--4-col-desktop {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+
+  slider-component .product-grid.grid--4-col-desktop .grid__item,
+  .collection .product-grid.grid--4-col-desktop .grid__item,
+  .related-products .product-grid.grid--4-col-desktop .grid__item,
+  #product-grid.product-grid.grid--4-col-desktop .grid__item,
+  ul.collection-list.grid--4-col-desktop .grid__item {
+    width: auto !important;
+    max-width: none !important;
+    flex: none !important;
+    min-width: 0;
+  }
+}
+
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .grid--3-col-tablet {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+/* -------------------------
+   8. COLLECTION CARDS
+   ------------------------- */
+.collection-list .card__inner {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .collection-list .card--standard .card__inner .media img {
+    transition: transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+  }
+
+  .collection-list .card-wrapper:hover .card--standard .card__inner .media img {
+    transform: scale(1.05) !important;
+  }
+}
+
+.collection-list .card__heading.h3 {
+  font-size: var(--eg-display-3);
+  font-weight: 400;
+  letter-spacing: var(--eg-track-heading);
+}
+
+/* -------------------------
+   9. MULTICOLUMN / TRUST BAR — cards + optional feature icons
+   ------------------------- */
+.section-multicolumn .multicolumn-list {
+  gap: 1.6rem 1.25rem;
+}
+
+.multicolumn-card {
+  border: none;
+  border-radius: var(--eg-radius);
+  background: rgba(255, 252, 247, 0.92);
+  box-shadow:
+    0 1px 0 rgba(44, 24, 16, 0.06),
+    0 10px 28px rgba(44, 24, 16, 0.07);
+  overflow: hidden;
+  height: 100%;
+  transition:
+    box-shadow 0.28s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 0.28s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .multicolumn-card:hover {
+    box-shadow:
+      0 1px 0 rgba(44, 24, 16, 0.08),
+      0 14px 36px rgba(44, 24, 16, 0.11);
+    transform: translateY(-3px);
+  }
+}
+
+.multicolumn-card__info {
+  padding: 2rem 1.75rem 2.25rem !important;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.multicolumn-list__item:not(.center) .multicolumn-card__info {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.multicolumn-list__item.center .multicolumn-card__info {
+  align-items: center;
+  text-align: center;
+}
+
+.multicolumn-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.75rem;
+  height: 3.75rem;
+  border-radius: 50%;
+  background: linear-gradient(155deg, rgba(139, 94, 60, 0.14), rgba(44, 24, 16, 0.06));
+  color: var(--eg-wood);
+  flex-shrink: 0;
+  margin-bottom: 0.15rem;
+}
+
+.multicolumn-card__icon-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+}
+
+.multicolumn-card__icon svg {
+  width: 1.75rem;
+  height: 1.75rem;
+  display: block;
+  fill: currentColor;
+}
+
+.multicolumn-card__info .multicolumn-card__title {
+  font-family: var(--font-heading-family);
+  font-size: var(--eg-display-3);
+  font-weight: 500;
+  color: var(--eg-walnut);
+  margin: 0;
+  line-height: 1.25;
+  letter-spacing: var(--eg-track-heading);
+}
+
+.multicolumn-card__info .rte,
+.multicolumn-card__info p {
+  font-family: var(--font-body-family);
+  font-size: 1.35rem;
+  font-weight: 300;
+  color: rgba(44, 24, 16, 0.72);
+  line-height: 1.72;
+  margin: 0;
+}
+
+.multicolumn-card__info .link {
+  margin-top: 0.35rem;
+  font-family: var(--font-body-family);
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: var(--eg-track-body);
+  color: var(--eg-wood);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(139, 94, 60, 0.35);
+  padding-bottom: 0.1rem;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.multicolumn-card__info .link:hover {
+  color: var(--eg-walnut);
+  border-bottom-color: var(--eg-walnut);
+}
+
+.multicolumn-card__info .svg-wrapper .icon-wrap {
+  vertical-align: middle;
+}
+
+@media screen and (max-width: 749px) {
+  .multicolumn-card__info {
+    padding: 1.75rem 1.5rem 2rem !important;
+  }
+}
+
+/* -------------------------
+   10. IMAGE WITH TEXT (brand story)
+   ------------------------- */
+.image-with-text .image-with-text__text-item .caption-with-letter-spacing {
+  font-family: var(--font-body-family);
+  letter-spacing: var(--eg-track-overline);
+  text-transform: uppercase;
+  font-size: 1.0rem;
+  font-weight: 400;
+  color: var(--eg-wood);
+  margin-bottom: 0.45rem;
+}
+
+.image-with-text__heading {
+  font-family: var(--font-heading-family);
+  font-size: var(--eg-display-1);
+  font-weight: 300;
+  line-height: 1.2;
+  color: var(--eg-walnut);
+}
+
+.image-with-text__text {
+  font-family: var(--font-body-family);
+  font-size: 1.4rem;
+  font-weight: 300;
+  line-height: 1.85;
+  color: rgba(44, 24, 16, 0.75);
+}
+
+/* -------------------------
+   11. BUTTONS (global)
+   ------------------------- */
+.button--primary {
+  background-color: var(--eg-walnut) !important;
+  color: var(--eg-cream) !important;
+  border-color: var(--eg-walnut) !important;
+  border-radius: var(--eg-radius);
+  letter-spacing: var(--eg-track-overline);
+  text-transform: uppercase;
+  font-family: var(--font-body-family);
+  font-size: 1.15rem;
+  font-weight: 400;
+  padding: 1.5rem 3rem;
+  transition: background-color 0.25s ease, border-color 0.25s ease !important;
+}
+
+.button--primary:hover {
+  background-color: var(--eg-wood) !important;
+  border-color: var(--eg-wood) !important;
+}
+
+.button--primary:focus-visible,
+.button--secondary:focus-visible {
+  outline: 2px solid var(--eg-wood);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button--primary,
+  .button--secondary {
+    transition: none !important;
+  }
+}
+
+.button--secondary {
+  border-color: var(--eg-walnut) !important;
+  color: var(--eg-walnut) !important;
+  border-radius: var(--eg-radius);
+  letter-spacing: var(--eg-track-overline);
+  text-transform: uppercase;
+  font-family: var(--font-body-family);
+  font-size: 1.15rem;
+  font-weight: 400;
+  transition: background-color 0.25s ease, color 0.25s ease !important;
+}
+
+.button--secondary:hover {
+  background-color: var(--eg-walnut) !important;
+  color: var(--eg-cream) !important;
+}
+
+/* Shopify Pay button area */
+.shopify-payment-button__button--unbranded {
+  background: var(--eg-walnut) !important;
+  color: var(--eg-cream) !important;
+  border-radius: var(--eg-radius) !important;
+  font-family: var(--font-body-family) !important;
+  letter-spacing: var(--eg-track-overline);
+  text-transform: uppercase;
+}
+
+/* -------------------------
+   12. PRODUCT PAGE
+   ------------------------- */
+.product__title {
+  font-family: var(--font-heading-family);
+  font-size: var(--eg-product-title);
+  font-weight: 400;
+  line-height: 1.22;
+  letter-spacing: var(--eg-track-heading);
+  color: var(--eg-walnut);
+  margin-bottom: 1.25rem;
+}
+
+.product__price .price--large {
+  font-family: var(--font-body-family);
+  font-size: var(--eg-price-large);
+  font-weight: 400;
+  color: var(--eg-wood);
+}
+
+.product__price .price--large .price-item,
+.product__info-container .price--large .price-item {
+  font-variant-numeric: tabular-nums;
+}
+
+/* PDP: confident tap target + depth on primary add-to-cart (Shop Pay row stays separate) */
+.product-form__buttons .product-form__submit {
+  min-height: 4.8rem;
+}
+
+.product-form__buttons .product-form__submit.button--primary {
+  font-weight: 500;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 2px 8px rgba(44, 24, 16, 0.08);
+}
+
+.product-form__buttons .product-form__submit.button--primary:not(:disabled):hover {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 4px 14px rgba(44, 24, 16, 0.12);
+}
+
+.product-form__buttons .product-form__submit.button--primary:disabled {
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.eg-product-specs {
+  margin-top: 0.35rem;
+  margin-bottom: 1.35rem;
+}
+
+.eg-product-specs__list {
+  margin: 0;
+}
+
+.eg-product-specs__row {
+  display: grid;
+  grid-template-columns: minmax(9rem, 12rem) 1fr;
+  gap: 0.5rem 1.5rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(44, 24, 16, 0.08);
+}
+
+.eg-product-specs__row:last-child {
+  border-bottom: none;
+}
+
+.eg-product-specs__term {
+  margin: 0;
+  font-family: var(--font-body-family);
+  font-size: 1.05rem;
+  letter-spacing: var(--eg-track-overline);
+  text-transform: uppercase;
+  font-weight: 500;
+  color: rgba(44, 24, 16, 0.52);
+}
+
+.eg-product-specs__detail {
+  margin: 0;
+  font-family: var(--font-body-family);
+  font-size: 1.38rem;
+  font-weight: 400;
+  line-height: 1.55;
+  color: rgb(var(--color-foreground));
+}
+
+.eg-product-specs__detail .rte {
+  font-size: inherit;
+  line-height: inherit;
+}
+
+@media screen and (max-width: 749px) {
+  .eg-product-specs__row {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+    padding: 0.85rem 0;
+  }
+}
+
+.product__description {
+  font-family: var(--font-body-family);
+  font-size: 1.4rem;
+  font-weight: 300;
+  line-height: 1.9;
+  color: rgba(44, 24, 16, 0.78);
+}
+
+.product__description h2,
+.product__description h3,
+.product__description h4 {
+  font-family: var(--font-heading-family);
+  font-weight: 500;
+  color: var(--eg-walnut);
+  margin-top: 2.4rem;
+}
+
+/* Variant pills */
+.swatch-input__input:checked + .swatch-input__label,
+.product-form__input .swatch-input__input:checked + .swatch-input__label {
+  border-color: var(--eg-walnut) !important;
+  box-shadow: 0 0 0 2px var(--eg-walnut);
+}
+
+/* Product gallery — thumbnail rail (active state is on the button, not the li) */
+.thumbnail-list .thumbnail-list__item button.thumbnail {
+  border: 2px solid transparent;
+  border-radius: var(--media-radius, 0);
+  transition:
+    border-color 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.thumbnail-list .thumbnail-list__item button.thumbnail[aria-current='true'] {
+  border-color: var(--eg-walnut);
+  box-shadow: 0 0 0 1px rgba(44, 24, 16, 0.12);
+}
+
+.thumbnail-list .thumbnail-list__item button.thumbnail:focus-visible {
+  outline: 2px solid var(--eg-walnut);
+  outline-offset: 2px;
+}
+
+/* Stable layout when images load (width/height attrs + responsive scaling) */
+.product__media.media img,
+.thumbnail.global-media-settings img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+
+/* Mobile: horizontal swipe — scroll snap + momentum */
+@media screen and (max-width: 749px) {
+  ul.product__media-list.slider.slider--mobile {
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .product__media-list.slider .product__media-item.slider__slide {
+    scroll-snap-align: center;
+    scroll-snap-stop: normal;
+  }
+
+  /* Thumbnail strip: easier thumb sliding */
+  .thumbnail-slider .thumbnail-list.slider.slider--mobile {
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    padding-bottom: 0.35rem;
+  }
+
+  .thumbnail-slider .thumbnail-list__item.slider__slide {
+    scroll-snap-align: start;
+  }
+
+  .thumbnail-list .thumbnail-list__item button.thumbnail {
+    min-height: 5.2rem;
+    min-width: 5.2rem;
+  }
+}
+
+@media screen and (max-width: 749px) and (prefers-reduced-motion: reduce) {
+  .product__media-list.slider,
+  .thumbnail-list.slider {
+    scroll-snap-type: none;
+    scroll-behavior: auto;
+  }
+}
+
+/* Lightbox / modal zoom — comfortable full-screen image + pinch-friendly */
+.product-media-modal__content img.global-media-settings {
+  max-height: min(88vh, 1200px);
+  width: auto;
+  max-width: 100%;
+  margin-inline: auto;
+  object-fit: contain;
+  touch-action: manipulation;
+}
+
+/* PDP mobile gallery (overlay counter): assets/section-main-product.css */
+
+/* Product form labels */
+.product-form__input label.form__label {
+  font-family: var(--font-body-family);
+  font-size: 1.15rem;
+  font-weight: 400;
+  letter-spacing: var(--eg-track-overline);
+  text-transform: uppercase;
+  color: var(--eg-walnut);
+}
+
+/* Related products heading — align with section hierarchy (below PDP title) */
+.related-products .title {
+  font-size: var(--eg-display-2);
+}
+
+/* -------------------------
+   13. NEWSLETTER
+   ------------------------- */
+.newsletter .title {
+  font-family: var(--font-heading-family);
+  font-size: var(--eg-display-1);
+  font-weight: 300;
+  color: var(--eg-cream);
+}
+
+.newsletter p {
+  font-family: var(--font-body-family);
+  font-size: 1.35rem;
+  font-weight: 300;
+  color: rgba(245, 240, 232, 0.8);
+  letter-spacing: var(--eg-track-body);
+}
+
+.newsletter .field__input {
+  border-radius: var(--eg-radius);
+  border-color: rgba(245, 240, 232, 0.4) !important;
+  background: transparent;
+  color: var(--eg-cream);
+  font-family: var(--font-body-family);
+}
+
+.newsletter .field__input::placeholder {
+  color: rgba(245, 240, 232, 0.5);
+}
+
+.newsletter .button--primary {
+  background: var(--eg-wood) !important;
+  border-color: var(--eg-wood) !important;
+}
+
+.newsletter .button--primary:hover {
+  background: var(--eg-wood-light) !important;
+  border-color: var(--eg-wood-light) !important;
+}
+
+/* -------------------------
+   14. FOOTER
+   ------------------------- */
+.footer {
+  border-top: 1px solid var(--eg-border);
+}
+
+.footer-block__heading {
+  font-family: var(--font-heading-family);
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--eg-walnut);
+  margin-bottom: 1.6rem;
+}
+
+.footer-block .list-unstyled a,
+.footer-block .list-unstyled li {
+  font-family: var(--font-body-family);
+  font-size: 1.3rem;
+  font-weight: 300;
+  color: rgba(44, 24, 16, 0.7);
+  transition: color 0.2s ease;
+}
+
+.footer-block .list-unstyled a:hover {
+  color: var(--eg-wood);
+  text-decoration: none;
+}
+
+.footer__copyright {
+  font-family: var(--font-body-family);
+  font-size: 1.1rem;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  color: rgba(44, 24, 16, 0.5);
+}
+
+/* -------------------------
+   15. COLLECTION PAGE
+   ------------------------- */
+.main-collection-banner .page-header__title {
+  font-family: var(--font-heading-family);
+  font-size: var(--eg-display-1);
+  font-weight: 300;
+  letter-spacing: var(--eg-track-heading);
+  color: var(--eg-walnut);
+}
+
+/* Facets/Filters */
+.facets-wrap .facets__summary {
+  font-family: var(--font-body-family);
+  font-size: 1.2rem;
+  letter-spacing: var(--eg-track-overline);
+  text-transform: uppercase;
+  color: var(--eg-walnut);
+}
+
+.facets__heading {
+  font-family: var(--font-body-family);
+  font-size: 1.1rem;
+  letter-spacing: var(--eg-track-overline);
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--eg-walnut);
+}
+
+/* Product count text */
+.product-count {
+  font-family: var(--font-body-family);
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: rgba(44, 24, 16, 0.5);
+}
+
+/* -------------------------
+   16. SEARCH
+   ------------------------- */
+.search-modal__form .field__input {
+  font-family: var(--font-body-family);
+  font-size: 1.6rem;
+  color: var(--eg-walnut);
+  border-color: var(--eg-border) !important;
+}
+
+/* -------------------------
+   17. CART
+   ------------------------- */
+.cart-item__name {
+  font-family: var(--font-heading-family);
+  font-size: 1.7rem;
+  font-weight: 500;
+  color: var(--eg-walnut);
+}
+
+.cart__footer .totals__subtotal {
+  font-family: var(--font-heading-family);
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--eg-walnut);
+}
+
+/* -------------------------
+   18. BREADCRUMBS
+   ------------------------- */
+.breadcrumbs {
+  font-family: var(--font-body-family);
+  font-size: 1.05rem;
+  letter-spacing: var(--eg-track-overline);
+  text-transform: uppercase;
+  color: rgba(44, 24, 16, 0.45);
+}
+
+.breadcrumbs a {
+  color: rgba(44, 24, 16, 0.45);
+  transition: color 0.2s ease;
+}
+
+.breadcrumbs a:hover {
+  color: var(--eg-wood);
+}
+
+/* -------------------------
+   19. PAGINATION
+   ------------------------- */
+.pagination__list .pagination__item a,
+.pagination__list .pagination__item span {
+  font-family: var(--font-body-family);
+  font-size: 1.3rem;
+  color: var(--eg-walnut);
+  border-color: var(--eg-border);
+}
+
+.pagination__item--current .pagination__link {
+  background: var(--eg-walnut) !important;
+  color: var(--eg-cream) !important;
+  border-color: var(--eg-walnut) !important;
+}
+
+/* -------------------------
+   20. MOBILE MENU DRAWER
+   ------------------------- */
+.menu-drawer .header__menu-item span {
+  font-size: 1.8rem;
+  font-family: var(--font-heading-family);
+  font-weight: 400;
+}
+
+/* =======================================================
+   ELITEGEMSE EXTENDED STYLES v2
+   Hero (text-below / placeholder) · PDP variants · Accordion · Cart
+   Note: overlay hero gradient + subheading live in §5 Slideshow / Hero.
+   ======================================================= */
+
+/* -------------------------
+   22. HERO — placeholder + “text below image” layout
+   ------------------------- */
+
+/* Dark background when no image is uploaded yet (overlay hero only) */
+.slideshow.banner.slideshow--placeholder:not(.banner--mobile-bottom) {
+  background: linear-gradient(
+    160deg,
+    #100806 0%,
+    #1A0F08 30%,
+    #2C1810 55%,
+    #4A2C18 80%,
+    #5A3520 100%
+  ) !important;
+  min-height: 72rem;
+}
+
+/* Text box transparent on desktop (text sits on gradient) */
+.slideshow:not(.banner--mobile-bottom) .banner--desktop-transparent .banner__box {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  max-width: 74rem;
+  padding: 4rem 5rem 8rem;
+}
+
+/* -------------------------
+   Text below image — all breakpoints (theme: show_text_below)
+   ------------------------- */
+.slideshow.banner.banner--mobile-bottom .slideshow__slide {
+  min-height: 0;
+}
+
+.slideshow.banner.banner--mobile-bottom .slideshow__media.banner__media {
+  position: relative !important;
+  left: auto !important;
+  top: auto !important;
+  width: 100% !important;
+  height: auto !important;
+  flex-shrink: 0;
+  overflow: hidden;
+  /* Theme .media uses rgba(foreground, 0.1); fill happens via absolutely positioned img over ::before ratio box */
+  background-color: transparent !important;
+}
+
+/* Img/SVG fills the aspect-ratio box created by .media::before. Skip when ambient/zoom-in/fixed
+   animations are active so Dawn’s motion CSS keeps working. */
+.slideshow.banner.banner--mobile-bottom
+  .slideshow__media.banner__media:not(.animate--ambient):not(.animate--zoom-in):not(.animate--fixed)
+  > img,
+.slideshow.banner.banner--mobile-bottom
+  .slideshow__media.banner__media:not(.animate--ambient):not(.animate--zoom-in):not(.animate--fixed)
+  > svg {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+}
+
+@media screen and (min-width: 750px) {
+  .slideshow.banner.banner--mobile-bottom .slideshow__text-wrapper.banner__content {
+    position: relative !important;
+    height: auto !important;
+    max-height: none !important;
+    flex-grow: 0 !important;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 2.8rem 3rem 3.2rem;
+    box-sizing: border-box;
+  }
+
+  .slideshow.banner.banner--mobile-bottom .slideshow__text-wrapper.banner__content:has(.slideshow__text--center) {
+    justify-content: center !important;
+  }
+
+  .slideshow.banner.banner--mobile-bottom .slideshow__text.banner__box {
+    height: auto !important;
+    max-width: 62rem;
+    padding: 0 1.5rem !important;
+  }
+
+  .slideshow.banner.banner--mobile-bottom .slideshow__text.slideshow__text--center.banner__box {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  .slideshow.banner.banner--mobile-bottom .slideshow__text.slideshow__text--center .banner__buttons {
+    justify-content: center !important;
+  }
+
+  .slideshow.banner.banner--mobile-bottom .banner__heading,
+  .slideshow.banner.banner--mobile-bottom .banner__heading.h0 {
+    font-family: var(--font-heading-family) !important;
+    font-size: clamp(3.2rem, 4.2vw, 5.2rem) !important;
+    font-weight: 300 !important;
+    line-height: 1.12;
+    letter-spacing: var(--eg-track-heading);
+    color: rgb(var(--color-foreground)) !important;
+    text-shadow: none !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .slideshow.banner.banner--mobile-bottom .slideshow__slide .banner__box > .banner__text {
+    font-family: var(--font-body-family) !important;
+    font-size: 1.22rem !important;
+    font-weight: 300 !important;
+    letter-spacing: var(--eg-track-overline) !important;
+    text-transform: uppercase !important;
+    color: rgba(var(--color-foreground), 0.72) !important;
+  }
+
+  .slideshow.banner.banner--mobile-bottom .banner__box > * + .banner__buttons {
+    margin-top: 1.75rem !important;
+  }
+
+  .slideshow.banner.banner--mobile-bottom .button--primary,
+  .slideshow.banner.banner--mobile-bottom .banner__box .button {
+    background: transparent !important;
+    border: 1.5px solid rgb(var(--color-foreground)) !important;
+    color: rgb(var(--color-foreground)) !important;
+    letter-spacing: var(--eg-track-overline);
+    text-transform: uppercase;
+    font-size: 1.05rem;
+    font-weight: 400;
+    padding: 1.25rem 2.8rem;
+    transition: background 0.3s ease, color 0.3s ease !important;
+  }
+
+  .slideshow.banner.banner--mobile-bottom .button--primary:hover,
+  .slideshow.banner.banner--mobile-bottom .banner__box .button:hover {
+    background: rgb(var(--color-foreground)) !important;
+    color: rgb(var(--color-background)) !important;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .slideshow.banner.banner--mobile-bottom .slideshow__text-wrapper.banner__content {
+    flex-grow: 0 !important;
+    padding: 2rem 1.75rem 2.5rem !important;
+  }
+
+  .slideshow.banner.banner--mobile-bottom
+    .slideshow__text-wrapper.banner__content:has(.slideshow__text-mobile--center) {
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .slideshow.banner.banner--mobile-bottom .slideshow__text.banner__box {
+    height: auto !important;
+  }
+
+  .slideshow.banner.banner--mobile-bottom .slideshow__text.slideshow__text-mobile--center.banner__box {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    align-items: center !important;
+    text-align: center !important;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .slideshow.banner.banner--mobile-bottom .slideshow__text.slideshow__text-mobile--center .banner__buttons {
+    justify-content: center !important;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .slideshow.banner.banner--mobile-bottom .banner__heading,
+  .slideshow.banner.banner--mobile-bottom .banner__heading.h0 {
+    font-family: var(--font-heading-family) !important;
+    font-weight: 300 !important;
+    color: rgb(var(--color-foreground)) !important;
+    text-shadow: none !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .slideshow.banner.banner--mobile-bottom .slideshow__slide .banner__box > .banner__text {
+    font-family: var(--font-body-family) !important;
+    font-size: 1.18rem !important;
+    font-weight: 300 !important;
+    letter-spacing: var(--eg-track-overline) !important;
+    text-transform: uppercase !important;
+    color: rgba(var(--color-foreground), 0.72) !important;
+  }
+
+  .slideshow.banner.banner--mobile-bottom .button--primary,
+  .slideshow.banner.banner--mobile-bottom .banner__box .button {
+    border-color: rgb(var(--color-foreground)) !important;
+    color: rgb(var(--color-foreground)) !important;
+  }
+
+  .slideshow.banner.banner--mobile-bottom .button--primary:hover,
+  .slideshow.banner.banner--mobile-bottom .banner__box .button:hover {
+    background: rgb(var(--color-foreground)) !important;
+    color: rgb(var(--color-background)) !important;
+  }
+}
+
+/* Prev / Next arrows */
+.slideshow__controls .slider-button {
+  background: rgba(245, 240, 232, 0.1) !important;
+  border: 1px solid rgba(245, 240, 232, 0.25) !important;
+  color: #F5F0E8 !important;
+  border-radius: var(--eg-radius) !important;
+  width: 4.8rem !important;
+  height: 4.8rem !important;
+  transition: background 0.25s ease !important;
+}
+
+.slideshow__controls .slider-button:hover {
+  background: rgba(245, 240, 232, 0.22) !important;
+}
+
+/* Dots */
+.slider-counter__link .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(245, 240, 232, 0.35);
+  display: inline-block;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.slider-counter__link[aria-current='true'] .dot {
+  background: #F5F0E8;
+  transform: scale(1.3);
+}
+
+/* Option groups: clearer separation when multiple dimensions (finish + size) */
+variant-selects .eg-variant-picker__group + .eg-variant-picker__group {
+  margin-top: 1.85rem;
+  padding-top: 1.85rem;
+  border-top: 1px solid rgba(44, 24, 16, 0.07);
+}
+
+/* -------------------------
+   23. VARIANT PICKER LABEL (scan-friendly hierarchy above controls)
+   ------------------------- */
+
+.product-form__input .form__label,
+:is(.product-form__input--pill, .product-form__input--swatch, .product-form__input--dropdown) > .form__label {
+  font-family: var(--font-body-family) !important;
+  font-size: 1.15rem !important;
+  font-weight: 500 !important;
+  letter-spacing: var(--eg-track-overline) !important;
+  text-transform: uppercase !important;
+  color: rgba(44, 24, 16, 0.55) !important;
+  margin-bottom: 1.15rem !important;
+  display: flex !important;
+  align-items: baseline !important;
+  flex-wrap: wrap !important;
+  gap: 0.35rem 0.5rem !important;
+  line-height: 1.35 !important;
+}
+
+.eg-variant-picker__label-sep {
+  color: rgba(44, 24, 16, 0.35);
+  font-weight: 400;
+  user-select: none;
+}
+
+/* Current selection — large, sentence case, walnut (pill + swatch legends) */
+.product-form__input .form__label .eg-variant-picker__label-value,
+.product-form__input .form__label span[data-selected-value] {
+  font-size: 1.48rem !important;
+  font-weight: 400 !important;
+  color: var(--eg-walnut) !important;
+  text-transform: none !important;
+  letter-spacing: var(--eg-track-body) !important;
+}
+
+/* Dropdown: stacked label + live selection (updates on change) */
+.product-form__input--dropdown > .form__label.eg-variant-picker__dropdown-heading {
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 0.4rem !important;
+  margin-bottom: 1.05rem !important;
+}
+
+.product-form__input--dropdown > .eg-variant-picker__dropdown-heading .eg-variant-picker__label-value {
+  font-size: 1.48rem !important;
+  font-weight: 400 !important;
+  color: var(--eg-walnut) !important;
+  text-transform: none !important;
+  letter-spacing: var(--eg-track-body) !important;
+  line-height: 1.25 !important;
+}
+
+/* -------------------------
+   24. VARIANT PILLS — min ~48px touch height, clear tap targets
+   ------------------------- */
+
+.product-form__input--pill {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: stretch !important;
+  gap: 0.85rem !important;
+  margin-bottom: 2.75rem !important;
+}
+
+.product-form__input--pill input[type='radio'] {
+  position: absolute !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 1px !important;
+  height: 1px !important;
+}
+
+.product-form__input--pill input[type='radio'] + label {
+  border: 1.5px solid rgba(44, 24, 16, 0.18) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: var(--eg-walnut) !important;
+  font-family: var(--font-body-family) !important;
+  font-size: 1.42rem !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.03em !important;
+  padding: 1.05rem 2.15rem !important;
+  min-height: 4.8rem !important;
+  margin: 0 !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  white-space: nowrap !important;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease !important;
+  position: relative !important;
+  line-height: 1.2 !important;
+  box-sizing: border-box !important;
+}
+
+.product-form__input--pill input[type='radio'] + label:hover {
+  border-color: rgba(44, 24, 16, 0.55) !important;
+}
+
+.product-form__input--pill input[type='radio']:checked + label {
+  background: var(--eg-walnut) !important;
+  color: var(--eg-cream) !important;
+  border-color: var(--eg-walnut) !important;
+  box-shadow: 0 0 0 1px var(--eg-walnut) !important;
+}
+
+.product-form__input--pill input[type='radio']:focus-visible + label {
+  outline: 2px solid var(--eg-wood) !important;
+  outline-offset: 3px !important;
+}
+
+/* Unavailable pill */
+.product-form__input--pill input[type='radio'].disabled + label,
+.product-form__input--pill input[type='radio']:disabled + label {
+  color: rgba(44, 24, 16, 0.28) !important;
+  border-color: rgba(44, 24, 16, 0.1) !important;
+  cursor: not-allowed !important;
+}
+
+/* Diagonal strikethrough for unavailable */
+.product-form__input--pill input[type='radio'].disabled + label::after,
+.product-form__input--pill input[type='radio']:disabled + label::after {
+  content: '' !important;
+  position: absolute !important;
+  left: -2% !important;
+  top: 50% !important;
+  width: 104% !important;
+  height: 1px !important;
+  background: rgba(44, 24, 16, 0.2) !important;
+  transform: rotate(-8deg) !important;
+  pointer-events: none !important;
+}
+
+/* Pills: optional mini swatch (catalog / metaobject / Color metafield) */
+.product-form__input--pill input[type='radio'] + label.pill-option-label--with-visual {
+  gap: 0.75rem !important;
+  padding-left: 1.05rem !important;
+}
+
+.product-form__input--pill .pill-option-label__visual {
+  display: inline-flex !important;
+  align-items: center !important;
+  flex-shrink: 0 !important;
+}
+
+.product-form__input--pill .pill-option-label__visual .swatch {
+  width: 2.35rem !important;
+  height: 2.35rem !important;
+  min-width: 2.35rem !important;
+  min-height: 2.35rem !important;
+}
+
+.product-form__input--pill input[type='radio']:checked + label.pill-option-label--with-visual .pill-option-label__visual .swatch {
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.45) !important;
+}
+
+/* -------------------------
+   25. COLOR SWATCHES — larger hit area, spacing between colors
+   ------------------------- */
+
+.product-form__input--swatch {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 1.15rem 1.35rem !important;
+  margin-bottom: 2.75rem !important;
+  align-items: flex-start !important;
+}
+
+/* Square swatches — larger tiles, ideal for ~5 colors per row on PDP */
+.product-form__input--swatch .swatch-input__input + .swatch-input__label.swatch-input__label--square {
+  --swatch-input--size: 5.35rem !important;
+  width: calc(var(--swatch-input--size) + 10px) !important;
+  height: auto !important;
+  min-height: calc(var(--swatch-input--size) + 10px) !important;
+  margin: 0 !important;
+  padding: 5px !important;
+  border-radius: var(--eg-radius) !important;
+  border: 2px solid transparent !important;
+  cursor: pointer !important;
+  transition: border-color 0.22s ease, box-shadow 0.22s ease, transform 0.15s ease !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 0.35rem !important;
+  box-sizing: border-box !important;
+  outline: none !important;
+}
+
+.product-form__input--swatch .swatch-input__label.swatch-input__label--square .swatch.swatch--square {
+  width: var(--swatch-input--size, 5.35rem) !important;
+  height: var(--swatch-input--size, 5.35rem) !important;
+  flex-shrink: 0 !important;
+  border-radius: var(--eg-radius) !important;
+  border: 1.5px solid rgba(44, 24, 16, 0.14) !important;
+}
+
+.product-form__input--swatch .swatch-input__label.swatch-input__label--square .swatch-color-label {
+  max-width: calc(var(--swatch-input--size, 5.35rem) + 14px) !important;
+  font-size: 1.05rem !important;
+  text-align: center !important;
+  line-height: 1.25 !important;
+}
+
+/* Circle swatches (when theme editor = Circle) */
+.product-form__input--swatch .swatch-input__input + .swatch-input__label:not(.swatch-input__label--square) {
+  --swatch-input--size: 4.2rem !important;
+  width: calc(var(--swatch-input--size) + 8px) !important;
+  height: calc(var(--swatch-input--size) + 8px) !important;
+  margin: 0 !important;
+  padding: 4px !important;
+  border-radius: 50% !important;
+  border: 2px solid transparent !important;
+  cursor: pointer !important;
+  transition: border-color 0.22s ease, box-shadow 0.22s ease, transform 0.15s ease !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+  outline: none !important;
+}
+
+.product-form__input--swatch .swatch-input__label:not(.swatch-input__label--square) .swatch:not(.swatch--square) {
+  width: var(--swatch-input--size, 4.2rem) !important;
+  height: var(--swatch-input--size, 4.2rem) !important;
+  border-radius: 50% !important;
+  border: 1.5px solid rgba(44, 24, 16, 0.12) !important;
+}
+
+/* Hover ring — both shapes */
+.product-form__input--swatch .swatch-input__input + .swatch-input__label:hover {
+  border-color: rgba(44, 24, 16, 0.4) !important;
+  outline: none !important;
+  box-shadow: 0 2px 8px rgba(44, 24, 16, 0.08) !important;
+  transform: translateY(-1px);
+}
+
+/* Selected ring */
+.product-form__input--swatch .swatch-input__input:checked + .swatch-input__label {
+  border-color: var(--eg-walnut) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 1px rgba(44, 24, 16, 0.06) !important;
+}
+
+.product-form__input--swatch .swatch-input__input:focus-visible + .swatch-input__label {
+  outline: 2px solid var(--eg-wood) !important;
+  outline-offset: 3px !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-form__input--swatch .swatch-input__input + .swatch-input__label:hover {
+    transform: none !important;
+  }
+}
+
+/* Unavailable swatch */
+.product-form__input--swatch .swatch-input__input.visually-disabled + .swatch-input__label .swatch {
+  opacity: 0.28 !important;
+}
+
+/* Mobile only (≤749px): labels, pills, swatches — scale with viewport width */
+@media screen and (max-width: 749px) {
+  .product-form__input .form__label,
+  :is(.product-form__input--pill, .product-form__input--swatch, .product-form__input--dropdown) > .form__label {
+    font-size: clamp(1rem, 0.35rem + 2.6vw, 1.15rem) !important;
+    margin-bottom: clamp(0.85rem, 0.6rem + 1.2vw, 1.15rem) !important;
+    gap: clamp(0.28rem, 0.6vw, 0.35rem) clamp(0.42rem, 1.1vw, 0.5rem) !important;
+  }
+
+  .product-form__input .form__label .eg-variant-picker__label-value,
+  .product-form__input .form__label span[data-selected-value] {
+    font-size: clamp(1.18rem, 0.55rem + 3vw, 1.48rem) !important;
+  }
+
+  .product-form__input--dropdown > .eg-variant-picker__dropdown-heading .eg-variant-picker__label-value {
+    font-size: clamp(1.18rem, 0.55rem + 3vw, 1.48rem) !important;
+  }
+
+  /* Size pills: two equal columns + full-width last row when option count is odd (balances side margins) */
+  .product-form__input--pill {
+    --eg-pill-gap: clamp(0.55rem, 1.8vw, 0.85rem);
+    gap: var(--eg-pill-gap) !important;
+    margin-bottom: clamp(2rem, 4.5vw, 2.75rem) !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .product-form__input--pill input[type='radio'] + label {
+    flex: 1 1 calc((100% - var(--eg-pill-gap)) / 2) !important;
+    max-width: calc((100% - var(--eg-pill-gap)) / 2) !important;
+    min-width: 0 !important;
+    font-size: clamp(1.08rem, 0.45rem + 2.7vw, 1.42rem) !important;
+    padding: clamp(0.82rem, 0.45rem + 1.8vw, 1.05rem) clamp(1.1rem, 2.5vw + 0.5rem, 2.15rem) !important;
+    min-height: clamp(4.25rem, 2.5rem + 8vw, 4.8rem) !important;
+    white-space: normal !important;
+    text-align: center !important;
+    hyphens: manual !important;
+  }
+
+  /* Odd number of sizes: last pill uses full content width (no empty half-column on the right) */
+  .product-form__input--pill:has(input[type='radio']:last-of-type:nth-of-type(odd))
+    input[type='radio']:last-of-type
+    + label {
+    flex-basis: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .product-form__input--pill .pill-option-label__visual .swatch {
+    width: clamp(2rem, 1.2rem + 3.5vw, 2.35rem) !important;
+    height: clamp(2rem, 1.2rem + 3.5vw, 2.35rem) !important;
+    min-width: clamp(2rem, 1.2rem + 3.5vw, 2.35rem) !important;
+    min-height: clamp(2rem, 1.2rem + 3.5vw, 2.35rem) !important;
+  }
+
+  .product-form__input--swatch {
+    gap: clamp(0.72rem, 2vw, 1.15rem) clamp(0.85rem, 2.2vw, 1.35rem) !important;
+    margin-bottom: clamp(2rem, 4.5vw, 2.75rem) !important;
+  }
+
+  .product-form__input--swatch .swatch-input__input + .swatch-input__label.swatch-input__label--square {
+    --swatch-input--size: clamp(4.35rem, 2.5rem + 9vw, 5.35rem) !important;
+    padding: clamp(4px, 1vw, 5px) !important;
+    gap: clamp(0.28rem, 0.9vw, 0.35rem) !important;
+  }
+
+  .product-form__input--swatch .swatch-input__label.swatch-input__label--square .swatch-color-label {
+    font-size: clamp(0.9rem, 0.32rem + 2vw, 1.05rem) !important;
+  }
+
+  .product-form__input--swatch .swatch-input__input + .swatch-input__label:not(.swatch-input__label--square) {
+    --swatch-input--size: clamp(3.5rem, 2rem + 7vw, 4.2rem) !important;
+  }
+
+  .product-form__input--dropdown {
+    --swatch-input--size: clamp(2rem, 1.2rem + 3vw, 2.35rem);
+    margin-bottom: clamp(2rem, 4.5vw, 2.75rem) !important;
+  }
+
+  .product-form__input--dropdown .select__select {
+    min-height: clamp(4.85rem, 3rem + 8vw, 5.4rem) !important;
+    font-size: clamp(1.28rem, 0.65rem + 2.8vw, 1.52rem) !important;
+    padding: clamp(1.15rem, 0.75rem + 2vw, 1.45rem) clamp(3.75rem, 10vw, 4.75rem) clamp(1.15rem, 0.75rem + 2vw, 1.45rem)
+      clamp(1.35rem, 3vw + 0.75rem, 1.75rem) !important;
+  }
+
+  .product__info-wrapper .rating-wrapper {
+    margin-top: clamp(0.22rem, 0.6vw, 0.35rem);
+    margin-bottom: clamp(0.55rem, 1.8vw, 1rem);
+  }
+}
+
+/* -------------------------
+   26. VARIANT DROPDOWN — tall control, easy to tap and read
+   ------------------------- */
+
+.product-form__input--dropdown {
+  --swatch-input--size: 2.35rem;
+  margin-bottom: 2.75rem !important;
+}
+
+.product-form__input--dropdown > .form__label:not(.eg-variant-picker__dropdown-heading) {
+  font-family: var(--font-body-family) !important;
+  font-size: 1.15rem !important;
+  font-weight: 500 !important;
+  letter-spacing: var(--eg-track-overline) !important;
+  text-transform: uppercase !important;
+  color: rgba(44, 24, 16, 0.55) !important;
+  margin-bottom: 1rem !important;
+  display: block !important;
+}
+
+.product-form__input--dropdown > .form__label.eg-variant-picker__dropdown-heading {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 0.4rem !important;
+  margin-bottom: 1.05rem !important;
+}
+
+.product-form__input--dropdown .select {
+  position: relative !important;
+  display: block !important;
+}
+
+.product-form__input--dropdown .select__select {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  width: 100% !important;
+  min-height: 5.4rem !important;
+  background: rgba(245, 240, 232, 0.45) !important;
+  border: 1.5px solid rgba(44, 24, 16, 0.2) !important;
+  border-radius: var(--eg-radius) !important;
+  font-family: var(--font-body-family) !important;
+  font-size: 1.52rem !important;
+  font-weight: 400 !important;
+  color: var(--eg-walnut) !important;
+  padding: 1.45rem 4.75rem 1.45rem 1.75rem !important;
+  cursor: pointer !important;
+  transition: border-color 0.2s ease, background 0.2s ease !important;
+  letter-spacing: 0.02em !important;
+  line-height: 1.25 !important;
+}
+
+.product-form__input--dropdown .select__select:hover {
+  border-color: rgba(44, 24, 16, 0.45) !important;
+}
+
+.product-form__input--dropdown .select__select:focus {
+  border-color: var(--eg-walnut) !important;
+  outline: none !important;
+}
+
+.product-form__input--dropdown .select__select:focus-visible {
+  outline: 2px solid var(--eg-wood) !important;
+  outline-offset: 2px !important;
+}
+
+/* Caret icon */
+.product-form__input--dropdown .svg-wrapper {
+  position: absolute !important;
+  right: 1.6rem !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  pointer-events: none !important;
+  color: var(--eg-walnut) !important;
+  width: 1.4rem !important;
+  height: 1.4rem !important;
+}
+
+/* -------------------------
+   27. QUANTITY INPUT
+   ------------------------- */
+.quantity {
+  border: 1.5px solid rgba(44, 24, 16, 0.2) !important;
+  border-radius: var(--eg-radius) !important;
+  background: transparent !important;
+  min-height: 5.4rem !important;
+  height: auto !important;
+  display: flex !important;
+  align-items: center !important;
+  overflow: hidden !important;
+}
+
+.quantity__input {
+  font-family: var(--font-body-family) !important;
+  font-size: 1.55rem !important;
+  font-weight: 400 !important;
+  color: var(--eg-walnut) !important;
+  background: transparent !important;
+  border: none !important;
+  text-align: center !important;
+  width: 5rem !important;
+}
+
+.quantity__button {
+  border: none !important;
+  background: transparent !important;
+  color: var(--eg-walnut) !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  padding: 0 1.4rem !important;
+  height: 100% !important;
+  border-left: 1px solid rgba(44, 24, 16, 0.12) !important;
+  transition: color 0.2s ease, background 0.2s ease !important;
+}
+
+.quantity__button:first-child {
+  border-left: none !important;
+  border-right: 1px solid rgba(44, 24, 16, 0.12) !important;
+}
+
+.quantity__button:hover {
+  background: rgba(44, 24, 16, 0.05) !important;
+  color: var(--eg-wood) !important;
+}
+
+/* -------------------------
+   28. ADD TO CART BUTTON AREA
+   ------------------------- */
+.product-form__buttons {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1rem !important;
+  margin-top: 2.4rem !important;
+}
+
+.product-form__cart-submit {
+  padding: 1.7rem 2.4rem !important;
+  font-size: 1.25rem !important;
+  width: 100% !important;
+  letter-spacing: var(--eg-track-overline) !important;
+}
+
+/* "Free Shipping on all orders" notice */
+.product-form__buttons + p,
+.product-form__buttons ~ .product__text,
+.product__info-container .product__text {
+  font-family: var(--font-body-family);
+  font-size: 1.15rem;
+  font-weight: 300;
+  color: rgba(44, 24, 16, 0.5);
+  letter-spacing: var(--eg-track-body);
+  margin-top: 1.2rem;
+  border-top: 1px solid rgba(44, 24, 16, 0.08);
+  padding-top: 1.2rem;
+}
+
+/* Payment & Security — below Shop Pay / More payment options */
+.payment-security-trust {
+  margin-top: 1.6rem;
+  padding-top: 1.35rem;
+  border-top: 1px solid rgba(44, 24, 16, 0.08);
+}
+
+.payment-security-trust__heading {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 1rem;
+}
+
+.payment-security-trust__icon {
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
+}
+
+.payment-security-trust__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.payment-security-trust__title {
+  font-family: var(--font-heading-family);
+  font-size: 1.45rem;
+  font-weight: 500;
+  letter-spacing: var(--eg-track-heading);
+  color: rgba(44, 24, 16, 0.92);
+}
+
+.payment-security-trust__icons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.65rem 0.85rem;
+  margin: 0;
+  padding: 0;
+}
+
+.payment-security-trust__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.payment-security-trust__badge {
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  width: 4rem;
+  height: 2.65rem;
+  max-width: 100%;
+  padding: 0;
+  border-radius: var(--eg-radius);
+  border: 1px solid rgba(44, 24, 16, 0.12);
+  background: rgb(var(--color-background));
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.payment-security-trust__badge svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  flex: 1 1 auto;
+  object-fit: contain;
+}
+
+@media screen and (max-width: 749px) {
+  .payment-security-trust__badge {
+    width: 3.65rem;
+    height: 2.4rem;
+  }
+}
+
+/* -------------------------
+   29. PRODUCT ACCORDION (collapsible-content section)
+   ------------------------- */
+
+/* Section wrapper */
+.collapsible-content .collapsible-content__heading {
+  font-family: var(--font-heading-family) !important;
+  font-size: var(--eg-display-2) !important;
+  font-weight: 400 !important;
+  color: var(--eg-walnut) !important;
+  letter-spacing: var(--eg-track-heading) !important;
+}
+
+/* Each accordion row */
+.collapsible-content details,
+.collapsible-content .accordion {
+  border-top: 1px solid rgba(44, 24, 16, 0.1) !important;
+  border-bottom: none !important;
+}
+
+.collapsible-content details:last-child,
+.collapsible-content .accordion:last-child {
+  border-bottom: 1px solid rgba(44, 24, 16, 0.1) !important;
+}
+
+/* Summary row (clickable header) — tighter on mobile */
+.collapsible-content details summary,
+.collapsible-content .accordion__title {
+  padding: 1.25rem 0 !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  cursor: pointer !important;
+  list-style: none !important;
+}
+
+@media screen and (min-width: 750px) {
+  .collapsible-content details summary,
+  .collapsible-content .accordion__title {
+    padding: 1.75rem 0 !important;
+  }
+}
+
+.collapsible-content details summary::-webkit-details-marker {
+  display: none !important;
+}
+
+/* Row heading text */
+.collapsible-content details summary h3,
+.collapsible-content details summary .h3,
+.collapsible-content .accordion__title .h3 {
+  font-family: var(--font-body-family) !important;
+  font-size: 1.15rem !important;
+  font-weight: 500 !important;
+  letter-spacing: var(--eg-track-overline) !important;
+  text-transform: uppercase !important;
+  color: var(--eg-walnut) !important;
+  margin: 0 !important;
+}
+
+/* Expand/collapse icon */
+.collapsible-content .icon-accordion,
+.collapsible-content summary .svg-wrapper {
+  color: var(--eg-wood) !important;
+  flex-shrink: 0 !important;
+}
+
+/* Content inside accordion */
+.collapsible-content .accordion__content,
+.collapsible-content details .rte,
+.collapsible-content details p {
+  font-family: var(--font-body-family) !important;
+  font-size: 1.35rem !important;
+  font-weight: 300 !important;
+  line-height: 1.88 !important;
+  color: rgba(44, 24, 16, 0.72) !important;
+  padding-bottom: 1.35rem !important;
+}
+
+@media screen and (min-width: 750px) {
+  .collapsible-content .accordion__content,
+  .collapsible-content details .rte,
+  .collapsible-content details p {
+    padding-bottom: 2rem !important;
+  }
+}
+
+.collapsible-content details ul,
+.collapsible-content .accordion__content ul {
+  padding-left: 1.8rem !important;
+  margin-top: 0.8rem !important;
+}
+
+.collapsible-content details ul li,
+.collapsible-content .accordion__content ul li {
+  margin-bottom: 0.6rem !important;
+}
+
+/* -------------------------
+   30. COLLECTION PAGE HERO
+   ------------------------- */
+
+/* Main collection header */
+.section-main-collection-banner {
+  background: linear-gradient(135deg, #1A0F08 0%, var(--eg-walnut) 100%);
+  padding: 6rem 0 !important;
+}
+
+.section-main-collection-banner .page-header__title,
+.main-collection-banner .page-header__title {
+  font-family: var(--font-heading-family) !important;
+  font-size: var(--eg-display-1) !important;
+  font-weight: 300 !important;
+  color: var(--eg-cream) !important;
+  letter-spacing: var(--eg-track-heading) !important;
+}
+
+/* -------------------------
+   31. FILTER / FACETS
+   ------------------------- */
+.facets__heading,
+.facets .form__label {
+  font-family: var(--font-body-family) !important;
+  font-size: 1.05rem !important;
+  font-weight: 500 !important;
+  letter-spacing: var(--eg-track-overline) !important;
+  text-transform: uppercase !important;
+  color: var(--eg-walnut) !important;
+}
+
+/* Sort by label */
+.facets-wrap .facets__summary span {
+  font-family: var(--font-body-family);
+  font-size: 1.2rem;
+  letter-spacing: var(--eg-track-overline);
+  text-transform: uppercase;
+  color: rgba(44, 24, 16, 0.6);
+}
+
+/* Filter active tags */
+.active-facets__button {
+  border-radius: 0 !important;
+  border: 1px solid rgba(44, 24, 16, 0.2) !important;
+  font-family: var(--font-body-family) !important;
+  font-size: 1.1rem !important;
+  color: var(--eg-walnut) !important;
+}
+
+/* -------------------------
+   32. RELATED PRODUCTS HEADING
+   ------------------------- */
+.related-products-section .title {
+  font-family: var(--font-heading-family);
+  font-size: clamp(2.8rem, 3.5vw, 4rem);
+  font-weight: 400;
+  color: var(--eg-walnut);
+}
+
+/* -------------------------
+   33. PRODUCT CARD — SWATCH INDICATOR row on listing
+   ------------------------- */
+/* Color swatches on product grid cards (if enabled in section settings) */
+.card-information .swatch-list {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.card-information .swatch-list__item {
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  border: 1px solid rgba(44, 24, 16, 0.15);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.card-information .swatch-list__item:hover {
+  transform: scale(1.2);
+}
+
+/* -------------------------
+   34. MOBILE REFINEMENTS
+   ------------------------- */
+@media screen and (max-width: 749px) {
+  /* Stack add to cart full width on mobile */
+  .product-form__buttons {
+    flex-direction: column !important;
+  }
+
+  /* Variants: keep generous touch targets on small screens (avoid shrinking vs desktop) */
+  .product-form__input--pill {
+    gap: 0.7rem !important;
+  }
+
+  .product-form__input--pill input[type='radio'] + label {
+    font-size: 1.32rem !important;
+    padding: 1rem 1.85rem !important;
+    min-height: 4.8rem !important;
+  }
+
+  .product-form__input--swatch .swatch-input__input + .swatch-input__label.swatch-input__label--square {
+    --swatch-input--size: 4.65rem !important;
+    gap: 0.3rem !important;
+  }
+
+  .product-form__input--swatch .swatch-input__input + .swatch-input__label:not(.swatch-input__label--square) {
+    --swatch-input--size: 3.85rem !important;
+  }
+
+  .product-form__input--dropdown .select__select {
+    font-size: 1.42rem !important;
+    min-height: 5.2rem !important;
+    padding: 1.35rem 4.5rem 1.35rem 1.55rem !important;
+  }
+}
+
+/* -------------------------
+   35. MICRO-INTERACTIONS
+   ------------------------- */
+/* Smooth page transitions */
+@media (prefers-reduced-motion: no-preference) {
+  .card-wrapper,
+  .button,
+  .quick-add__submit,
+  .swatch-input__label,
+  .select__select {
+    will-change: transform, opacity;
+  }
+
+  /* Image reveal fade-in on scroll */
+  .scroll-trigger.animate--fade-in {
+    animation-duration: 0.6s;
+  }
+}
+
+/* Focus visible — walnut ring */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--eg-wood) !important;
+  outline-offset: 2px !important;
+}
+
+/* -------------------------
+   36. TYPOGRAPHY TUNING (GLOBAL + PRODUCT)
+   Uses :root tokens — single hierarchy across templates.
+   ------------------------- */
+body {
+  font-size: var(--eg-size-body);
+  line-height: var(--eg-line-body);
+  color: rgba(44, 24, 16, 0.88);
+}
+
+@media screen and (min-width: 990px) {
+  body {
+    font-size: var(--eg-size-body-lg);
+    line-height: 1.8;
+  }
+}
+
+p,
+.rte p,
+.product__description p,
+.multicolumn-card__info p,
+.image-with-text__text p {
+  line-height: 1.82;
+  margin-bottom: 1.35rem;
+}
+
+h1,
+.h1 {
+  font-size: var(--eg-display-1);
+  line-height: var(--eg-line-heading);
+  letter-spacing: var(--eg-track-heading);
+}
+
+h2,
+.h2 {
+  font-size: var(--eg-display-2);
+  line-height: 1.2;
+  letter-spacing: var(--eg-track-heading);
+}
+
+h3,
+.h3 {
+  font-size: var(--eg-display-3);
+  line-height: 1.3;
+}
+
+.product__title h1,
+.product__title .h1 {
+  font-size: var(--eg-product-title);
+  line-height: 1.22;
+  letter-spacing: var(--eg-track-heading);
+  margin-bottom: 1rem;
+}
+
+.product__info-container .price--large .price-item {
+  font-size: var(--eg-price-large);
+  line-height: 1.2;
+  letter-spacing: var(--eg-track-heading);
+}
+
+.product__description,
+.product__description.rte {
+  font-size: var(--eg-size-body);
+  line-height: 1.86;
+  color: rgba(44, 24, 16, 0.8);
+}
+
+.product__description h2,
+.product__description h3,
+.product__description h4 {
+  margin-top: 2.8rem;
+  margin-bottom: 1.2rem;
+  line-height: 1.25;
+}
+
+.product__info-container > * + * {
+  margin-top: 1.8rem;
+}
+
+/* -------------------------
+   38. MOBILE — TYPO + PRODUCT FORM (fine-tune)
+   ------------------------- */
+@media screen and (max-width: 749px) {
+  body {
+    font-size: 1.55rem;
+    line-height: 1.76;
+  }
+
+  h1,
+  .h1 {
+    font-size: clamp(2.65rem, 7.2vw, 3.55rem);
+    line-height: 1.16;
+  }
+
+  h2,
+  .h2 {
+    font-size: clamp(2.2rem, 5.8vw, 3.05rem);
+    line-height: 1.22;
+  }
+
+  h3,
+  .h3 {
+    font-size: clamp(1.85rem, 4.5vw, 2.55rem);
+    line-height: 1.28;
+  }
+
+  .title-wrapper .title,
+  .title-wrapper-with-link .title {
+    font-size: clamp(2.35rem, 6vw, 3.2rem);
+  }
+
+  .card__heading.h5,
+  .card__heading {
+    font-size: 1.62rem;
+    line-height: 1.26;
+  }
+
+  .eg-title-stars {
+    gap: 0.36rem;
+  }
+
+  .eg-title-stars__icon {
+    width: 1.38rem;
+    height: 1.38rem;
+  }
+
+  .product__title .eg-title-stars__icon {
+    width: 1.58rem;
+    height: 1.58rem;
+  }
+
+  .card-information .price .price-item {
+    font-size: 1.42rem;
+  }
+
+  .slideshow:not(.banner--mobile-bottom) .banner__heading,
+  .slideshow:not(.banner--mobile-bottom) .banner__heading.h0 {
+    font-size: clamp(2.85rem, 9.5vw, 4.4rem) !important;
+    margin-bottom: 1.2rem;
+  }
+
+  .slideshow.banner--mobile-bottom .banner__heading,
+  .slideshow.banner--mobile-bottom .banner__heading.h0 {
+    font-size: clamp(2.65rem, 8.5vw, 4rem) !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .slideshow:not(.banner--mobile-bottom) .banner__subheading {
+    font-size: 1.22rem !important;
+    margin-bottom: 1.75rem !important;
+  }
+
+  .slideshow.banner--mobile-bottom .slideshow__slide .banner__box > .banner__text {
+    margin-bottom: 0 !important;
+  }
+
+  .slideshow.banner--mobile-bottom .banner__box > * + .banner__buttons {
+    margin-top: 1.5rem !important;
+  }
+
+  .product__title h1,
+  .product__title .h1 {
+    font-size: clamp(2rem, 5.2vw, 2.65rem);
+    line-height: 1.2;
+    margin-bottom: 0.85rem;
+  }
+
+  .product__info-container .price--large .price-item {
+    font-size: clamp(1.9rem, 5.2vw, 2.35rem);
+  }
+
+  .product__description,
+  .product__description.rte {
+    font-size: 1.52rem;
+    line-height: 1.84;
+  }
+
+  .product__info-container > * + * {
+    margin-top: 2.1rem;
+  }
+
+  .product__info-container [id^='price-'] {
+    margin-bottom: 0.4rem;
+  }
+
+  .product-form__input--pill,
+  .product-form__input--swatch,
+  .product-form__input--dropdown {
+    margin-bottom: 1.6rem !important;
+  }
+
+  .product-form__quantity {
+    margin-bottom: 0.6rem;
+  }
+
+  .product-form__buttons {
+    gap: 1.15rem !important;
+    margin-top: 2rem !important;
+  }
+
+  .product-form__cart-submit {
+    padding: 1.55rem 1.8rem !important;
+    min-height: 5rem;
+  }
+
+  .product__info-container .product__text {
+    margin-top: 1.6rem;
+    padding-top: 1.4rem;
+    font-size: 1.08rem;
+    line-height: 1.55;
+  }
+
+  .multicolumn-card__info .multicolumn-card__title {
+    font-size: 1.85rem;
+  }
+
+  .multicolumn-card__info p {
+    font-size: 1.28rem;
+  }
+}
+
+/* -------------------------
+   BREADCRUMBS — navigation + schema companion styles
+   ------------------------- */
+.eg-breadcrumbs {
+  margin-bottom: 1.25rem;
+}
+
+.eg-breadcrumbs__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-body-family);
+  font-size: 1.15rem;
+  font-weight: 400;
+  letter-spacing: var(--eg-track-overline);
+  text-transform: uppercase;
+  color: rgba(44, 24, 16, 0.45);
+}
+
+.eg-breadcrumbs__link {
+  color: rgba(44, 24, 16, 0.55);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.eg-breadcrumbs__link:hover {
+  color: var(--eg-walnut);
+  border-bottom-color: rgba(44, 24, 16, 0.25);
+}
+
+.eg-breadcrumbs__sep {
+  color: rgba(44, 24, 16, 0.28);
+  font-weight: 300;
+  user-select: none;
+}
+
+.eg-breadcrumbs__current {
+  color: var(--eg-walnut);
+  font-weight: 500;
+  letter-spacing: var(--eg-track-body);
+  text-transform: none;
+}
+
+.eg-breadcrumbs__item--truncate .eg-breadcrumbs__current {
+  display: inline-block;
+  max-width: min(52vw, 36rem);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: bottom;
+}
+
+.eg-breadcrumbs--collection {
+  margin-bottom: 1rem;
+}
+
+.eg-breadcrumbs--product {
+  padding-top: 0.25rem;
+  margin-bottom: 1.35rem;
+}
+
+@media screen and (max-width: 749px) {
+  .eg-breadcrumbs__list {
+    font-size: 1.05rem;
+    letter-spacing: var(--eg-track-overline);
+  }
+
+  .eg-breadcrumbs__item--truncate .eg-breadcrumbs__current {
+    max-width: 72vw;
+  }
+}
+
+/* -------------------------
+   HOMEPAGE MOBILE — conversion (spacing, CTAs, scroll, CLS helpers)
+   Scoped: body.template-index + max-width 749px
+   ------------------------- */
+
+/* Scroll: in-page anchors / skip link land below sticky header */
+@media screen and (max-width: 749px) {
+  html:has(body.template-index) {
+    scroll-padding-top: calc(var(--header-height, 6.4rem) + 1.2rem);
+  }
+
+  body.template-index #MainContent .shopify-section[id] {
+    scroll-margin-top: calc(var(--header-height, 6.4rem) + 1rem);
+  }
+}
+
+/* CLS: hero images stay in flow (LCP slide already has width/height from Dawn) */
+@media screen and (max-width: 749px) {
+  body.template-index slideshow-component .slideshow__media.media img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* Spacing: hero (text below image) — clearer rhythm; CTA not cramped */
+@media screen and (max-width: 749px) {
+  body.template-index slideshow-component.banner--mobile-bottom .slideshow__text.banner__box {
+    padding-top: 1.6rem;
+    padding-bottom: 2rem;
+    row-gap: 1rem;
+  }
+
+  body.template-index slideshow-component.banner--mobile-bottom .banner__heading {
+    margin-bottom: 0;
+  }
+
+  body.template-index slideshow-component.banner--mobile-bottom .banner__text {
+    margin-top: 0.65rem;
+  }
+
+  body.template-index slideshow-component.banner--mobile-bottom .banner__buttons {
+    margin-top: 1.35rem;
+  }
+
+  body.template-index .collection .title-wrapper,
+  body.template-index .multicolumn .title-wrapper {
+    margin-bottom: 1.2rem;
+  }
+
+  body.template-index .collapsible-content .title-wrapper {
+    margin-bottom: 1.35rem;
+  }
+}
+
+/* CTA: tap targets + contrast (hero + featured “View all”) */
+@media screen and (max-width: 749px) {
+  body.template-index .banner__buttons {
+    gap: 1rem;
+  }
+
+  body.template-index .banner__buttons .button {
+    min-height: 4.8rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 14px rgba(44, 24, 16, 0.14);
+  }
+
+  body.template-index .banner__buttons .button--primary {
+    font-weight: 600;
+    letter-spacing: 0.08em;
+  }
+
+  body.template-index .collection .button,
+  body.template-index .collection-list .button {
+    min-height: 4.4rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 1.75rem;
+    padding-right: 1.75rem;
+  }
+
+  body.template-index .contact .field__input,
+  body.template-index .contact-form .field__input {
+    min-height: 4.8rem;
+  }
+
+  body.template-index .contact textarea.field__input {
+    min-height: 12rem;
+  }
+
+  body.template-index .multicolumn-card__info .link:not(.button) {
+    display: inline-flex;
+    min-height: 4.4rem;
+    align-items: center;
+    padding-top: 0.35rem;
+    padding-bottom: 0.35rem;
+  }
+}
+
+/* -------------------------
+   HOMEPAGE MOBILE — extended (vertical rhythm, repeat CTAs, CLS, FAQ)
+   Scope stays on body.template-index so other templates are untouched.
+   ------------------------- */
+
+/* Vertical rhythm — leave merchant section padding intact, just polish the heading→content gap.
+   Inter-section spacing is already capped globally by the earlier `.section + .section` rule. */
+@media screen and (max-width: 749px) {
+  /* First content section (slideshow) hugs the sticky header — no extra top gap */
+  body.template-index #MainContent > .shopify-section:first-child {
+    margin-top: 0;
+  }
+
+  /* Featured-collection / collection-list / featured-blog headings sit closer to grid */
+  body.template-index .featured-collection .title-wrapper-with-link,
+  body.template-index .collection-list-wrapper .title-wrapper-with-link,
+  body.template-index .blog .title-wrapper-with-link {
+    margin-bottom: 1.1rem;
+    row-gap: 0.5rem;
+  }
+
+  /* Section description (e.g. Best sellers intro paragraph) — single readable line block */
+  body.template-index .featured-collection .title-wrapper__text,
+  body.template-index .featured-collection .collection__description {
+    margin-top: 0.4rem;
+    margin-bottom: 0.25rem;
+    font-size: 1.3rem;
+    line-height: 1.6;
+  }
+}
+
+/* CLS: image-with-text — image-with-text section already reserves space via inline padding-bottom
+   on the .image-with-text__media wrapper (adapt height). Normalize the inner img so it doesn't
+   layout-shift on load and stays within that box across mobile widths. */
+@media screen and (max-width: 749px) {
+  body.template-index .image-with-text__media img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* CTA visibility: featured-collection “View all” — full-width, big tap target on mobile */
+@media screen and (max-width: 749px) {
+  body.template-index .featured-collection .collection__view-all {
+    margin-top: 1.6rem;
+    text-align: center;
+  }
+
+  body.template-index .featured-collection .collection__view-all .button {
+    width: 100%;
+    max-width: 36rem;
+    min-height: 4.8rem;
+    padding: 1.4rem 2rem;
+    font-size: 1.18rem;
+    letter-spacing: 0.1em;
+  }
+
+  /* Outline view-all — keep contrast on cream backgrounds */
+  body.template-index .featured-collection .collection__view-all .button--secondary {
+    border-width: 1.75px !important;
+    background: rgba(255, 252, 247, 0.6) !important;
+  }
+}
+
+/* Trust bar (multicolumn) — tighter swipe carousel on mobile, clearer per-card breathing room */
+@media screen and (max-width: 749px) {
+  body.template-index .multicolumn .multicolumn-list {
+    gap: 1rem !important;
+  }
+
+  body.template-index .multicolumn slider-component .multicolumn-list {
+    column-gap: 1.1rem !important;
+  }
+
+  body.template-index .multicolumn .multicolumn-card {
+    box-shadow:
+      0 1px 0 rgba(44, 24, 16, 0.05),
+      0 6px 18px rgba(44, 24, 16, 0.06);
+  }
+
+  body.template-index .multicolumn .multicolumn-card__info {
+    padding: 1.4rem 1.35rem 1.55rem !important;
+    gap: 0.6rem;
+  }
+
+  body.template-index .multicolumn .multicolumn-card__info .multicolumn-card__title {
+    font-size: 1.7rem;
+    line-height: 1.25;
+  }
+
+  body.template-index .multicolumn .multicolumn-card__info p,
+  body.template-index .multicolumn .multicolumn-card__info .rte {
+    font-size: 1.22rem;
+    line-height: 1.6;
+  }
+}
+
+/* FAQ: tighter rows, repeated CTA visibility for collapsible-content on the homepage */
+@media screen and (max-width: 749px) {
+  body.template-index .collapsible-content details summary,
+  body.template-index .collapsible-content .accordion__title {
+    padding: 1.1rem 0 !important;
+    min-height: 4.6rem;
+  }
+
+  body.template-index .collapsible-content details summary h3,
+  body.template-index .collapsible-content details summary .h3,
+  body.template-index .collapsible-content .accordion__title .h3 {
+    font-size: 1.22rem !important;
+  }
+
+  body.template-index .collapsible-content .accordion__content,
+  body.template-index .collapsible-content details .rte,
+  body.template-index .collapsible-content details p {
+    font-size: 1.28rem !important;
+    line-height: 1.72 !important;
+    padding-bottom: 1.15rem !important;
+  }
+}
+
+/* Image-with-text (craftsmanship) — copy block padding tighter than global, button grows tap area */
+@media screen and (max-width: 749px) {
+  body.template-index .image-with-text__grid .image-with-text__content {
+    padding: 1.1rem 0 0.25rem !important;
+    row-gap: 0.85rem;
+  }
+
+  body.template-index .image-with-text__content .button {
+    min-height: 4.6rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Customer reviews multicolumn (columns_mobile=1, swipe_on_mobile=true) — quote rhythm */
+@media screen and (max-width: 749px) {
+  body.template-index #shopify-section-customer_reviews .multicolumn-card__info {
+    padding: 1.55rem 1.5rem 1.7rem !important;
+  }
+
+  body.template-index #shopify-section-customer_reviews .multicolumn-card__title {
+    font-size: 1.62rem !important;
+    line-height: 1.32 !important;
+    font-style: italic;
+  }
+}
+
+/* Reduced motion: keep transforms off so jank is minimized for users who opted out */
+@media (prefers-reduced-motion: reduce) {
+  body.template-index .multicolumn-card,
+  body.template-index .card-wrapper,
+  body.template-index .button {
+    transition: none !important;
+  }
+
+  body.template-index .multicolumn-card:hover {
+    transform: none !important;
+  }
+}
+
+/* -------------------------
+   PREMIUM SHIPPING (PDP section)
+   ------------------------- */
+.eg-premium-shipping {
+  border-top: 1px solid rgba(44, 24, 16, 0.07);
+  border-bottom: 1px solid rgba(44, 24, 16, 0.07);
+}
+
+.eg-premium-shipping__header {
+  text-align: center;
+  max-width: 48rem;
+  margin-inline: auto;
+  margin-bottom: 3.2rem;
+}
+
+.eg-premium-shipping__eyebrow {
+  margin: 0 0 0.85rem;
+  font-family: var(--font-body-family);
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: var(--eg-track-overline);
+  text-transform: uppercase;
+  color: rgba(44, 24, 16, 0.48);
+}
+
+.eg-premium-shipping__title {
+  margin: 0 0 1.2rem;
+  font-family: var(--font-heading-family);
+  font-weight: 400;
+  letter-spacing: var(--eg-track-heading);
+  color: var(--eg-walnut);
+  line-height: 1.18;
+}
+
+.eg-premium-shipping__intro {
+  margin: 0;
+  font-family: var(--font-body-family);
+  font-size: 1.42rem;
+  font-weight: 300;
+  line-height: 1.65;
+  color: rgba(44, 24, 16, 0.72);
+}
+
+.eg-premium-shipping__intro p {
+  margin: 0;
+}
+
+.eg-premium-shipping__grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 2rem 2.5rem;
+  grid-template-columns: 1fr;
+}
+
+@media screen and (min-width: 750px) {
+  .eg-premium-shipping__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.25rem 3rem;
+    align-items: start;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .eg-premium-shipping__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 2rem 2.25rem;
+  }
+}
+
+.eg-premium-shipping__item {
+  padding: 1.85rem 1.65rem 2rem;
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(44, 24, 16, 0.08);
+  box-shadow: 0 10px 36px rgba(44, 24, 16, 0.05);
+  transition:
+    box-shadow 0.28s ease,
+    border-color 0.28s ease;
+}
+
+.eg-premium-shipping__item:hover {
+  border-color: rgba(44, 24, 16, 0.12);
+  box-shadow: 0 14px 42px rgba(44, 24, 16, 0.08);
+}
+
+.eg-premium-shipping__icon-wrap {
+  width: 3.6rem;
+  height: 3.6rem;
+  margin-bottom: 1.35rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--eg-wood);
+  opacity: 0.92;
+}
+
+.eg-premium-shipping__icon {
+  width: 2.75rem;
+  height: 2.75rem;
+}
+
+.eg-premium-shipping__item-title {
+  margin: 0 0 0.85rem;
+  font-family: var(--font-heading-family);
+  font-size: clamp(1.55rem, 1.5vw, 1.85rem);
+  font-weight: 400;
+  letter-spacing: var(--eg-track-heading);
+  color: var(--eg-walnut);
+  line-height: 1.22;
+}
+
+.eg-premium-shipping__text {
+  font-family: var(--font-body-family);
+  font-size: 1.28rem;
+  font-weight: 300;
+  line-height: 1.68;
+  color: rgba(44, 24, 16, 0.76);
+}
+
+.eg-premium-shipping__text p {
+  margin: 0;
+}
+
+.eg-premium-shipping__text p + p {
+  margin-top: 0.85rem;
+}
+
+@media screen and (max-width: 749px) {
+  .eg-premium-shipping__header {
+    margin-bottom: 2.4rem;
+    text-align: left;
+  }
+
+  .eg-premium-shipping__intro {
+    font-size: 1.35rem;
+  }
+
+  .eg-premium-shipping__item {
+    padding: 1.5rem 1.35rem 1.65rem;
+  }
+
+  .eg-premium-shipping__text {
+    font-size: 1.22rem;
+  }
+}
+
+/* -------------------------
+   TRUST ROW (near Add to cart)
+   ------------------------- */
+.eg-atc-trust {
+  margin-bottom: 1.35rem;
+  padding: 1rem 1.15rem 1.35rem;
+  border-bottom: 1px solid var(--eg-border);
+  background: linear-gradient(
+    180deg,
+    rgba(44, 24, 16, 0.03) 0%,
+    rgba(44, 24, 16, 0) 100%
+  );
+  border-radius: 2px;
+}
+
+.eg-atc-trust__heading {
+  font-family: var(--font-heading-family);
+  font-size: 1.28rem;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: var(--eg-track-heading);
+  color: var(--eg-walnut);
+  margin: 0 0 1rem;
+}
+
+.eg-atc-trust__support {
+  margin-top: 1.15rem;
+  padding-top: 1.15rem;
+  border-top: 1px solid var(--eg-border);
+  font-size: 1.22rem;
+  font-weight: 300;
+  line-height: 1.65;
+  letter-spacing: var(--eg-track-body);
+  color: rgba(44, 24, 16, 0.78);
+}
+
+.eg-atc-trust__support a {
+  color: var(--eg-walnut);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.eg-atc-trust__support a:hover {
+  color: var(--eg-wood);
+}
+
+/* Reviews directly under price — social proof before configuration */
+.product__info-wrapper .rating-wrapper {
+  margin-top: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.eg-atc-trust__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem 1rem;
+}
+
+@media screen and (min-width: 750px) {
+  .eg-atc-trust__list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.5rem 0.75rem;
+  }
+}
+
+.eg-atc-trust__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  min-width: 0;
+}
+
+.eg-atc-trust__icon-wrap {
+  flex-shrink: 0;
+  width: 1.65rem;
+  height: 1.65rem;
+  margin-top: 0.12rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--eg-wood);
+}
+
+.eg-atc-trust__icon-wrap svg {
+  width: 1.65rem;
+  height: 1.65rem;
+  display: block;
+  flex-shrink: 0;
+}
+
+.eg-atc-trust__label {
+  font-family: var(--font-body-family);
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.35;
+  letter-spacing: var(--eg-track-overline);
+  text-transform: uppercase;
+  color: rgba(44, 24, 16, 0.72);
+}
+
+@media screen and (max-width: 749px) {
+  .eg-atc-trust__label {
+    font-size: 0.92rem;
+    letter-spacing: 0.1em;
+  }
+}
+
+/* -------------------------
+   PRODUCT FAQ (luxury accordion)
+   ------------------------- */
+.eg-product-faq {
+  border-top: 1px solid rgba(44, 24, 16, 0.07);
+}
+
+.eg-product-faq__header {
+  text-align: center;
+  max-width: 42rem;
+  margin-inline: auto;
+  margin-bottom: 2.75rem;
+}
+
+.eg-product-faq__eyebrow {
+  margin: 0 0 0.85rem;
+  font-family: var(--font-body-family);
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: var(--eg-track-overline);
+  text-transform: uppercase;
+  color: rgba(44, 24, 16, 0.48);
+}
+
+.eg-product-faq__title {
+  margin: 0 0 1rem;
+  font-family: var(--font-heading-family);
+  font-weight: 400;
+  letter-spacing: var(--eg-track-heading);
+  color: var(--eg-walnut);
+  line-height: 1.18;
+}
+
+.eg-product-faq__intro {
+  margin: 0;
+  font-family: var(--font-body-family);
+  font-size: 1.38rem;
+  font-weight: 300;
+  line-height: 1.65;
+  color: rgba(44, 24, 16, 0.72);
+}
+
+.eg-product-faq__intro p {
+  margin: 0;
+}
+
+.eg-product-faq__column {
+  max-width: 46rem;
+  margin-inline: auto;
+}
+
+.eg-product-faq__accordion {
+  border-bottom: 1px solid rgba(44, 24, 16, 0.1);
+}
+
+.eg-product-faq__accordion:first-of-type {
+  border-top: 1px solid rgba(44, 24, 16, 0.1);
+}
+
+.eg-product-faq__accordion .accordion__title {
+  font-family: var(--font-heading-family);
+  font-weight: 400;
+  letter-spacing: var(--eg-track-heading);
+  color: var(--eg-walnut);
+}
+
+.eg-product-faq__accordion summary {
+  padding-top: 1.35rem;
+  padding-bottom: 1.35rem;
+  transition: background-color 0.25s ease;
+}
+
+.eg-product-faq__accordion summary:hover {
+  background-color: rgba(44, 24, 16, 0.03);
+}
+
+.eg-product-faq__accordion details[open] summary {
+  border-bottom: none;
+}
+
+.eg-product-faq__accordion .accordion__content {
+  font-family: var(--font-body-family);
+  font-size: 1.28rem;
+  font-weight: 300;
+  line-height: 1.68;
+  color: rgba(44, 24, 16, 0.76);
+  padding-bottom: 1.5rem;
+}
+
+.eg-product-faq__accordion .accordion__content p {
+  margin: 0;
+}
+
+.eg-product-faq__accordion .accordion__content p + p {
+  margin-top: 0.85rem;
+}
+
+.eg-product-faq__accordion .accordion__content ul {
+  margin: 0.85rem 0 0;
+  padding-left: 1.35rem;
+  list-style-position: outside;
+}
+
+.eg-product-faq__accordion .accordion__content ul li {
+  margin-bottom: 0.45rem;
+  padding-left: 0.25rem;
+}
+
+.eg-product-faq__accordion .accordion__content p + ul {
+  margin-top: 0.65rem;
+}
+
+.eg-product-faq__accordion .svg-wrapper {
+  color: var(--eg-wood);
+  opacity: 0.88;
+}
+
+@media screen and (max-width: 749px) {
+  .eg-product-faq__header {
+    text-align: left;
+    margin-bottom: 2rem;
+  }
+
+  .eg-product-faq__intro {
+    font-size: 1.32rem;
+  }
+
+  .eg-product-faq__accordion .accordion__content {
+    font-size: 1.22rem;
+  }
+}
+
+/* -------------------------
+   COLLECTION — luxury overline, internal links, SEO block
+   ------------------------- */
+
+.collection-hero__overline {
+  margin: 1.1rem 0 0;
+  max-width: 48rem;
+  font-family: var(--font-body-family);
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: var(--eg-track-overline);
+  text-transform: uppercase;
+  line-height: 1.45;
+  color: var(--eg-wood);
+}
+
+.collection-hero__overline + .collection-hero__title {
+  margin-top: 1rem;
+}
+
+@media screen and (min-width: 750px) {
+  .collection-hero__overline {
+    font-size: 1.25rem;
+  }
+
+  .collection-hero__overline + .collection-hero__title {
+    margin-top: 1.25rem;
+  }
+}
+
+.eg-collection-internal {
+  margin: 0;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid var(--eg-border);
+}
+
+.eg-collection-internal__overline {
+  margin: 0 0 0.5rem;
+  font-size: 1.15rem;
+  font-weight: 500;
+  letter-spacing: var(--eg-track-overline);
+  text-transform: uppercase;
+  color: var(--eg-wood);
+}
+
+.eg-collection-internal__title {
+  margin: 0 0 0.65rem;
+  font-family: var(--font-heading-family);
+  font-size: clamp(1.85rem, 2.2vw, 2.35rem);
+  font-weight: 400;
+  letter-spacing: var(--eg-track-heading);
+  line-height: var(--eg-line-heading);
+  color: var(--eg-walnut);
+}
+
+.eg-collection-internal__intro {
+  margin: 0 0 1.25rem;
+  max-width: 52rem;
+  font-size: 1.45rem;
+  font-weight: 300;
+  line-height: 1.65;
+  color: rgba(44, 24, 16, 0.78);
+}
+
+.eg-collection-internal__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 0.85rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.eg-collection-internal__item {
+  margin: 0;
+}
+
+.eg-collection-internal__link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.55rem 1.1rem;
+  font-size: 1.35rem;
+  font-weight: 400;
+  letter-spacing: var(--eg-track-body);
+  line-height: 1.3;
+  color: var(--eg-walnut);
+  text-decoration: none;
+  border: 1px solid rgba(44, 24, 16, 0.18);
+  background-color: rgba(255, 255, 255, 0.35);
+  transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.eg-collection-internal__link:hover {
+  border-color: var(--eg-wood);
+  background-color: rgba(139, 94, 60, 0.08);
+  color: var(--eg-walnut-dark);
+}
+
+.eg-collection-seo {
+  margin: 0 auto;
+  max-width: 52rem;
+}
+
+.eg-collection-seo__overline {
+  margin: 0 0 0.5rem;
+  font-size: 1.15rem;
+  font-weight: 500;
+  letter-spacing: var(--eg-track-overline);
+  text-transform: uppercase;
+  color: var(--eg-wood);
+}
+
+.eg-collection-seo__title {
+  margin: 0 0 1rem;
+  font-family: var(--font-heading-family);
+  font-size: clamp(1.85rem, 2.2vw, 2.35rem);
+  font-weight: 400;
+  letter-spacing: var(--eg-track-heading);
+  line-height: var(--eg-line-heading);
+  color: var(--eg-walnut);
+}
+
+.eg-collection-seo__body {
+  font-size: 1.45rem;
+  font-weight: 300;
+  line-height: 1.72;
+  color: rgba(44, 24, 16, 0.82);
+}
+
+.eg-collection-seo__body p {
+  margin: 0 0 1rem;
+}
+
+.eg-collection-seo__body p:last-child {
+  margin-bottom: 0;
+}
+
+.eg-collection-seo__body h3,
+.eg-collection-seo__body h4 {
+  font-family: var(--font-heading-family);
+  font-weight: 400;
+  color: var(--eg-walnut);
+  margin: 1.35rem 0 0.65rem;
+}
+
+.eg-collection-seo__body ul,
+.eg-collection-seo__body ol {
+  margin: 0.65rem 0 1rem;
+  padding-left: 1.35rem;
+}
+
+@media screen and (max-width: 749px) {
+  .eg-collection-internal__link {
+    font-size: 1.28rem;
+    padding: 0.5rem 0.95rem;
+  }
+
+  .eg-collection-internal__intro,
+  .eg-collection-seo__body {
+    font-size: 1.32rem;
+  }
+}

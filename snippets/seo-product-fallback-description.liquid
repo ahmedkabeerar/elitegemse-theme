@@ -1,0 +1,23 @@
+{% comment %}
+  Fallback meta/OG description when the product has no SEO description in admin.
+  Targets luxury furniture search + CTR; keeps under ~158 chars when possible.
+  Accepts: product
+{% endcomment %}
+{%- liquid
+  assign body = product.description | strip_html | strip | truncate: 100
+  assign line = product.title | append: ' — Handcrafted solid wood furniture'
+  if product.vendor != blank
+    assign line = line | append: ' · '
+    assign line = line | append: product.vendor
+  endif
+  assign line = line | append: '. Free US shipping · heirloom quality · '
+  if body != blank
+    assign line = line | append: body
+  else
+    assign line = line | append: 'Shop '
+    assign line = line | append: shop.name
+    assign line = line | append: ' for investment-grade pieces.'
+  endif
+  assign line = line | truncate: 158, ''
+-%}
+{{- line -}}

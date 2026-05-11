@@ -1,0 +1,291 @@
+{{ 'component-accordion.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section
+  id="eg-product-faq-{{ section.id }}"
+  class="eg-product-faq color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding"
+  aria-labelledby="eg-faq-heading-{{ section.id }}"
+>
+  <div class="page-width">
+    <header class="eg-product-faq__header{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="eg-product-faq__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 id="eg-faq-heading-{{ section.id }}" class="eg-product-faq__title {{ section.settings.heading_size }}">
+          {{ section.settings.heading | escape }}
+        </h2>
+      {%- endif -%}
+      {%- if section.settings.intro != blank -%}
+        <div class="eg-product-faq__intro rte">{{ section.settings.intro }}</div>
+      {%- endif -%}
+    </header>
+
+    <div class="eg-product-faq__column{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+      {%- for block in section.blocks -%}
+        <div class="eg-product-faq__accordion accordion" {{ block.shopify_attributes }}>
+          <details
+            id="Details-faq-{{ block.id }}-{{ section.id }}"
+            {% if section.settings.open_first_item and forloop.first %}
+              open
+            {% endif %}
+          >
+            <summary id="Summary-faq-{{ block.id }}-{{ section.id }}">
+              {% render 'icon-accordion', icon: block.settings.icon %}
+              <h3 class="accordion__title inline-richtext h4">
+                {{ block.settings.question | escape }}
+              </h3>
+              {{- 'icon-caret.svg' | inline_asset_content -}}
+            </summary>
+            <div
+              class="accordion__content rte"
+              id="CollapsibleFaq-{{ block.id }}-{{ section.id }}"
+              role="region"
+              aria-labelledby="Summary-faq-{{ block.id }}-{{ section.id }}"
+            >
+              {{ block.settings.answer }}
+            </div>
+          </details>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{%- liquid
+  assign faq_schema_count = 0
+  for block in section.blocks
+    if block.type == 'faq_item'
+      assign fq = block.settings.question | strip
+      assign fa = block.settings.answer | strip_html | strip
+      if fq != blank and fa != blank
+        assign faq_schema_count = faq_schema_count | plus: 1
+      endif
+    endif
+  endfor
+-%}
+{%- if faq_schema_count > 0 -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage"
+      {%- if product != blank -%}
+        ,"@id": {{ request.origin | append: product.url | append: '#eg-product-faq-' | append: section.id | json }}
+      {%- endif -%}
+      ,"mainEntity": [
+        {%- assign faq_ld_sep = false -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'faq_item' -%}
+            {%- assign fq = block.settings.question | strip -%}
+            {%- assign fa = block.settings.answer | strip_html | strip -%}
+            {%- if fq != blank and fa != blank -%}
+              {%- if fa.size > 8000 -%}
+                {%- assign fa = fa | truncate: 8000 -%}
+              {%- endif -%}
+              {%- if faq_ld_sep -%},{%- endif -%}
+              {
+                "@type": "Question",
+                "name": {{ fq | json }},
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": {{ fa | json }}
+                }
+              }
+              {%- assign faq_ld_sep = true -%}
+            {%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+      ]
+    }
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Luxury product FAQ",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Questions"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        { "value": "h2", "label": "Large" },
+        { "value": "h1", "label": "Extra large" },
+        { "value": "h3", "label": "Medium" }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "richtext",
+      "id": "intro",
+      "label": "Introduction",
+      "default": "<p>Finish accuracy, assembly, care, and how we protect your order—so you can commit with confidence.</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_first_item",
+      "label": "Open first question by default",
+      "default": false
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 52
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "What materials are used?"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "plant", "label": "Plant" },
+            { "value": "leather", "label": "Leather" },
+            { "value": "ruler", "label": "Ruler" },
+            { "value": "silhouette", "label": "Silhouette" },
+            { "value": "truck", "label": "Truck" },
+            { "value": "return", "label": "Return" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "question_mark", "label": "Question mark" },
+            { "value": "check_mark", "label": "Check mark" },
+            { "value": "price_tag", "label": "Price tag" },
+            { "value": "stopwatch", "label": "Stopwatch" },
+            { "value": "eye", "label": "Eye" },
+            { "value": "box", "label": "Box" },
+            { "value": "plane", "label": "Plane" }
+          ],
+          "default": "question_mark"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Our furniture is crafted from carefully selected solid hardwoods and premium veneers, finished by hand so grain and tone remain authentic. Each piece carries subtle natural variation—part of its character, never a flaw.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Luxury product FAQ",
+      "blocks": [
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Are the colors exactly as shown in the pictures?",
+            "icon": "eye",
+            "answer": "<p>We photograph and color-grade each piece with care, yet lighting in your room, screen calibration, and the natural variation of real wood mean subtle differences can occur. If you are choosing between finishes, reach out—we are glad to help you select the tone that suits your space.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Does the item require assembly?",
+            "icon": "box",
+            "answer": "<p>Some assembly may be required at delivery. Everything you need is included—hardware, fittings, and clear step-by-step instructions—so setup stays straightforward even if furniture assembly is not your everyday task. Questions along the way? Our support team is only a message away.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "How is the wood protected from pests and moisture?",
+            "icon": "leaf",
+            "answer": "<p>Our approach combines:</p><ul><li>Thorough treatment of timber before processing</li><li>A protective coating on the finished piece</li><li>Careful packaging to reduce moisture and mildew—conditions that can encourage pest damage</li></ul><p>Together, these measures support long-term integrity in a normal indoor environment.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do you offer customization options?",
+            "icon": "ruler",
+            "answer": "<p>Yes. We offer personalized design services to tailor dimensions, details, or finishes to your project where our workshop allows—your brief first, on a timeline that respects true craftsmanship.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "How should I care for and maintain my furniture?",
+            "icon": "heart",
+            "answer": "<p>Care instructions accompany every order. In general, regular dusting with a soft cloth and gentle, finish-appropriate cleaners will preserve the surface and patina you invested in.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do you offer international shipping?",
+            "icon": "plane",
+            "answer": "<p>Yes—international shipping is available, depending on your destination. Fees and delivery times vary by country and service level; we confirm the details with you before your order is finalized.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

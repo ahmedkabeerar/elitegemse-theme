@@ -1,0 +1,266 @@
+{%- comment -%}
+  Internal linking + long-form SEO for collection templates.
+  Per-collection copy: Admin → Metafields → Collection → namespace `custom`, key `luxury_seo` (Rich text).
+{%- endcomment -%}
+
+{%- liquid
+  assign show_links = false
+  assign show_seo = false
+  if section.settings.mode == 'links_only' or section.settings.mode == 'links_and_seo'
+    assign show_links = true
+  endif
+  if section.settings.mode == 'seo_only' or section.settings.mode == 'links_and_seo'
+    assign show_seo = true
+  endif
+-%}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
+  <div class="page-width">
+    {%- if show_links -%}
+      {%- liquid
+        assign link_count = 0
+        for block in section.blocks
+          case block.type
+            when 'collection_tile'
+              if block.settings.collection != blank
+                assign link_count = link_count | plus: 1
+              endif
+            when 'custom_link'
+              if block.settings.url != blank and block.settings.label != blank
+                assign link_count = link_count | plus: 1
+              endif
+          endcase
+        endfor
+      -%}
+      {%- if link_count > 0 -%}
+        <nav
+          class="eg-collection-internal"
+          aria-label="{% if section.settings.links_heading != blank %}{{ section.settings.links_heading | escape }}{% else %}Related collections{% endif %}"
+        >
+          {%- if section.settings.links_overline != blank -%}
+            <p class="eg-collection-internal__overline">{{ section.settings.links_overline | escape }}</p>
+          {%- endif -%}
+          {%- if section.settings.links_heading != blank -%}
+            <h2 class="eg-collection-internal__title">{{ section.settings.links_heading | escape }}</h2>
+          {%- endif -%}
+          {%- if section.settings.links_intro != blank -%}
+            <p class="eg-collection-internal__intro">{{ section.settings.links_intro | escape }}</p>
+          {%- endif -%}
+          <ul class="eg-collection-internal__list" role="list">
+            {%- for block in section.blocks -%}
+              {%- case block.type -%}
+                {%- when 'collection_tile' -%}
+                  {%- if block.settings.collection != blank -%}
+                    {%- liquid
+                      assign c = block.settings.collection
+                      assign link_text = c.title
+                      if block.settings.label != blank
+                        assign link_text = block.settings.label
+                      endif
+                    -%}
+                    <li class="eg-collection-internal__item" {{ block.shopify_attributes }}>
+                      <a class="eg-collection-internal__link" href="{{ c.url }}">{{ link_text | escape }}</a>
+                    </li>
+                  {%- endif -%}
+                {%- when 'custom_link' -%}
+                  {%- if block.settings.url != blank and block.settings.label != blank -%}
+                    <li class="eg-collection-internal__item" {{ block.shopify_attributes }}>
+                      <a class="eg-collection-internal__link" href="{{ block.settings.url }}">
+                        {{- block.settings.label | escape -}}
+                      </a>
+                    </li>
+                  {%- endif -%}
+              {%- endcase -%}
+            {%- endfor -%}
+          </ul>
+        </nav>
+      {%- endif -%}
+    {%- endif -%}
+
+    {%- if show_seo and current_page == 1 -%}
+      {%- liquid
+        assign mf_seo = collection.metafields.custom.luxury_seo
+        assign has_seo = false
+        if mf_seo != blank
+          assign has_seo = true
+        elsif section.settings.seo_body != blank
+          assign has_seo = true
+        endif
+      -%}
+      {%- if has_seo -%}
+        <article class="eg-collection-seo">
+          {%- if section.settings.seo_overline != blank -%}
+            <p class="eg-collection-seo__overline">{{ section.settings.seo_overline | escape }}</p>
+          {%- endif -%}
+          {%- if section.settings.seo_heading != blank -%}
+            <h2 class="eg-collection-seo__title">{{ section.settings.seo_heading | escape }}</h2>
+          {%- endif -%}
+          <div class="eg-collection-seo__body rte">
+            {%- if mf_seo != blank -%}
+              {{ mf_seo | metafield_tag }}
+            {%- else -%}
+              {{ section.settings.seo_body }}
+            {%- endif -%}
+          </div>
+        </article>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Collection links & SEO",
+  "class": "section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Use “Related links” near the top for internal linking. Use “SEO block” after the product grid (shown on page 1 only). Optional: Collection metafield custom.luxury_seo (Rich text) overrides the default SEO text."
+    },
+    {
+      "type": "select",
+      "id": "mode",
+      "label": "Content to show",
+      "default": "links_only",
+      "options": [
+        { "value": "links_only", "label": "Related links only" },
+        { "value": "seo_only", "label": "SEO text only" },
+        { "value": "links_and_seo", "label": "Both (links then SEO)" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Related links"
+    },
+    {
+      "type": "text",
+      "id": "links_overline",
+      "label": "Luxury overline",
+      "default": "Curated selection",
+      "info": "Short line above the heading (e.g. artisan, bespoke, heirloom)."
+    },
+    {
+      "type": "text",
+      "id": "links_heading",
+      "label": "Heading",
+      "default": "Explore related categories"
+    },
+    {
+      "type": "textarea",
+      "id": "links_intro",
+      "label": "Supporting line (optional)",
+      "default": "Discover complementary pieces and investment-grade designs across our showroom."
+    },
+    {
+      "type": "header",
+      "content": "SEO text"
+    },
+    {
+      "type": "text",
+      "id": "seo_overline",
+      "label": "SEO overline",
+      "default": "About this collection"
+    },
+    {
+      "type": "text",
+      "id": "seo_heading",
+      "label": "SEO heading",
+      "default": "Craftsmanship & materials"
+    },
+    {
+      "type": "richtext",
+      "id": "seo_body",
+      "label": "Default SEO copy",
+      "default": "<p>Replace this block with copy unique to each collection in the theme editor, or use the Collection metafield custom.luxury_seo (Rich text) so every category has its own long-form text.</p>",
+      "info": "Shown on page 1 only. Metafield custom.luxury_seo overrides this field when set."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 28
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection_tile",
+      "name": "Collection link",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label override",
+          "info": "Optional; defaults to collection title."
+        }
+      ]
+    },
+    {
+      "type": "custom_link",
+      "name": "Custom link",
+      "settings": [
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Our story"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection links & SEO",
+      "settings": {
+        "mode": "links_and_seo"
+      }
+    }
+  ]
+}
+{% endschema %}

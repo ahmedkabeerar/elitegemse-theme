@@ -1,0 +1,17 @@
+{%- comment -%}
+  CollectionPage JSON-LD — complements visible SEO copy and breadcrumbs.
+{%- endcomment -%}
+{%- if request.page_type == 'collection' and collection != blank -%}
+  {%- assign col_desc = collection.description | strip_html | strip | truncate: 320 -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": {{ collection.title | strip | json }},
+      "url": {{ canonical_url | json }}
+      {%- if col_desc != blank -%}
+      ,"description": {{ col_desc | json }}
+      {%- endif -%}
+    }
+  </script>
+{%- endif -%}

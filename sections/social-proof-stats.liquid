@@ -1,0 +1,165 @@
+<section
+  class="social-proof-stats color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding"
+>
+  <div class="page-width">
+    <ul class="social-proof-stats__list" role="list">
+      {%- for block in section.blocks -%}
+        <li class="social-proof-stats__item" {{ block.shopify_attributes }}>
+          <span class="social-proof-stats__value">
+            {%- if block.settings.show_star -%}★ {% endif -%}
+            {{ block.settings.value | escape }}
+          </span>
+          <span class="social-proof-stats__label">
+            {{ block.settings.label | escape }}
+          </span>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .social-proof-stats__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2.4rem 4.8rem;
+    list-style: none;
+    margin: 0; padding: 0;
+    text-align: center;
+  }
+  .social-proof-stats__item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    min-width: 14rem;
+  }
+  .social-proof-stats__value {
+    font-family: var(--font-heading-family);
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    font-weight: 600;
+    line-height: 1.1;
+    color: currentColor;
+  }
+  .social-proof-stats__label {
+    font-size: 1.3rem;
+    opacity: 0.65;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Social proof stats",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 28
+    }
+  ],
+  "blocks": [
+    {
+      "type": "social_proof_stat",
+      "name": "Stat",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "default": "0"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Label"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_star",
+          "label": "Show star before value",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Social proof stats",
+      "blocks": [
+        {
+          "type": "social_proof_stat",
+          "settings": {
+            "value": "4.9 / 5",
+            "label": "homeowners reviewed",
+            "show_star": true
+          }
+        },
+        {
+          "type": "social_proof_stat",
+          "settings": {
+            "value": "500+",
+            "label": "pieces in American homes",
+            "show_star": false
+          }
+        },
+        {
+          "type": "social_proof_stat",
+          "settings": {
+            "value": "30-day",
+            "label": "risk-free trial",
+            "show_star": false
+          }
+        },
+        {
+          "type": "social_proof_stat",
+          "settings": {
+            "value": "Est. 2019",
+            "label": "handcrafted in USA",
+            "show_star": false
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

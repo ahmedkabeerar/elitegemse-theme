@@ -1,0 +1,225 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section
+  class="eg-premium-shipping color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding"
+  aria-labelledby="eg-ship-heading-{{ section.id }}"
+>
+  <div class="page-width">
+    <header class="eg-premium-shipping__header{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="eg-premium-shipping__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      <h2 id="eg-ship-heading-{{ section.id }}" class="eg-premium-shipping__title {{ section.settings.heading_size }}">
+        {{ section.settings.heading | escape }}
+      </h2>
+      {%- if section.settings.intro != blank -%}
+        <div class="eg-premium-shipping__intro rte">{{ section.settings.intro }}</div>
+      {%- endif -%}
+    </header>
+
+    <ul class="eg-premium-shipping__grid" role="list">
+      {%- for block in section.blocks -%}
+        <li
+          class="eg-premium-shipping__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+          {{ block.shopify_attributes }}
+          {% if settings.animations_reveal_on_scroll %}
+            data-cascade
+            style="--animation-order: {{ forloop.index }};"
+          {% endif %}
+        >
+          <div class="eg-premium-shipping__icon-wrap" aria-hidden="true">
+            {%- case block.settings.icon -%}
+              {%- when 'white_glove' -%}
+                <svg class="eg-premium-shipping__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2">
+                  <path d="M10 22v-6l4-4h8l4 4v6M6 22h20M14 12l2-6h0l2 6"/>
+                  <path d="M12 22c0-2 1.5-3 4-3s4 1 4 3"/>
+                </svg>
+              {%- when 'lead_time' -%}
+                <svg class="eg-premium-shipping__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2">
+                  <circle cx="16" cy="16" r="11"/>
+                  <path d="M16 10v6l4 2"/>
+                </svg>
+              {%- when 'tracking' -%}
+                <svg class="eg-premium-shipping__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2">
+                  <path d="M6 14h20v10a2 2 0 01-2 2H8a2 2 0 01-2-2V14z"/>
+                  <path d="M10 14V10a6 6 0 0112 0v4M16 20v4"/>
+                  <circle cx="16" cy="20" r="1.5" fill="currentColor" stroke="none"/>
+                </svg>
+              {%- when 'protection' -%}
+                <svg class="eg-premium-shipping__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2">
+                  <path d="M16 4l10 4v9c0 6-4 11-10 13-6-2-10-7-10-13V8l10-4z"/>
+                  <path d="M12 16l3 3 6-7"/>
+                </svg>
+              {%- else -%}
+                <svg class="eg-premium-shipping__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2">
+                  <circle cx="16" cy="16" r="11"/>
+                </svg>
+            {%- endcase -%}
+          </div>
+          {%- if block.settings.heading != blank -%}
+            <h3 class="eg-premium-shipping__item-title">{{ block.settings.heading | escape }}</h3>
+          {%- endif -%}
+          {%- if block.settings.text != blank -%}
+            <div class="eg-premium-shipping__text rte">{{ block.settings.text }}</div>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Premium shipping info",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Fulfillment"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Thoughtful delivery, end to end"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        { "value": "h2", "label": "Large" },
+        { "value": "h1", "label": "Extra large" },
+        { "value": "h3", "label": "Medium" }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "richtext",
+      "id": "intro",
+      "label": "Introduction",
+      "default": "<p>We provide <strong>complimentary shipping</strong> for all orders within the United States—<strong>no minimum purchase</strong> is required. Shipments are handled through trusted carriers including <strong>USPS</strong>, <strong>FedEx</strong>, and <strong>UPS</strong>. Optional <strong>Delivery &amp; Assembly</strong> for VIP customers or selected pieces may include a service fee of <strong>$50–$100</strong>; standard delivery follows the terms outlined below.</p>"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 52
+    }
+  ],
+  "blocks": [
+    {
+      "type": "pillar",
+      "name": "Shipping pillar",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "white_glove", "label": "White glove" },
+            { "value": "lead_time", "label": "Lead time" },
+            { "value": "tracking", "label": "Tracking" },
+            { "value": "protection", "label": "Damage protection" }
+          ],
+          "default": "white_glove"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Pillar heading"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Describe your shipping promise with calm, confident language.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Premium shipping info",
+      "blocks": [
+        {
+          "type": "pillar",
+          "settings": {
+            "icon": "white_glove",
+            "heading": "Free shipping & carriers",
+            "text": "<p><strong>Free shipping</strong> applies to every order within the United States with <strong>no minimum purchase</strong>. We partner with reputable carriers—<strong>USPS</strong>, <strong>FedEx</strong>, and <strong>UPS</strong>—so your order arrives safely and promptly. Standard service typically includes delivery to the ground floor, lobby, or first accessible dry area and does not include unpacking or assembly unless you have arranged Delivery &amp; Assembly separately.</p>"
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "icon": "lead_time",
+            "heading": "Processing & delivery time",
+            "text": "<p><strong>Order processing:</strong> Most orders are processed within <strong>7–10 business days</strong> (excluding weekends and holidays). Orders placed after <strong>12:00 PM</strong> are processed on the next business day.</p><p><strong>In transit:</strong> After processing, shipping within the United States typically takes <strong>3–7 business days</strong>.</p><p><strong>Total time:</strong> From your order date, expect approximately <strong>10–17 working days</strong> for delivery, depending on location and carrier.</p>"
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "icon": "tracking",
+            "heading": "Tracking & order changes",
+            "text": "<p>You will receive a <strong>tracking number by email</strong> within <strong>1–2 business days</strong> after your order ships—use it on our website or the courier’s site. Tracking may take <strong>1–2 days</strong> to begin updating; if the number still does not work within <strong>3 business days</strong> of receipt, please contact us.</p><p>Requests to change a <strong>shipping address or products</strong> must be made within <strong>24 hours</strong> of placing the order. Changes may extend processing by <strong>1–2 business days</strong>.</p>"
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "icon": "protection",
+            "heading": "Protected delivery & support",
+            "text": "<p><strong>Lost in transit:</strong> If your order is confirmed lost, we arrange a replacement at no additional cost.</p><p><strong>Damaged or defective:</strong> Contact us with clear photographs for verification; replacement or return may apply.</p><p><strong>Missing parts, tools, or items:</strong> We send missing pieces promptly when reported; please notify us of any <strong>missing items within 48 hours</strong> of delivery for the fastest resolution.</p><p><strong>Late delivery:</strong> If arrival falls beyond the estimated window, contact us within <strong>2 business days</strong> for assistance.</p><p><strong>Delivery &amp; Assembly</strong> (VIP or selected items): Professional assembly may apply a fee of <strong>$50–$100</strong>. Prepare your space in advance—crews do not move existing furniture and are not responsible for potential floor damage.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

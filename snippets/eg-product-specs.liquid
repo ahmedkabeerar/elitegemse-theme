@@ -1,0 +1,72 @@
+{% comment %}
+  Product metafields: dimensions, wood, lead time. Config: Product section → Product specs (metafields).
+{% endcomment %}
+{%- liquid
+  assign ns = section.settings.spec_metafield_namespace | strip
+  if ns == blank
+    assign ns = 'elitegemse'
+  endif
+  assign kd = section.settings.spec_key_dimensions | strip
+  if kd == blank
+    assign kd = 'dimensions'
+  endif
+  assign kw = section.settings.spec_key_wood | strip
+  if kw == blank
+    assign kw = 'wood'
+  endif
+  assign kl = section.settings.spec_key_lead_time | strip
+  if kl == blank
+    assign kl = 'lead_time'
+  endif
+
+  assign mf_dim = product.metafields[ns][kd]
+  assign mf_wood = product.metafields[ns][kw]
+  assign mf_lead = product.metafields[ns][kl]
+
+  assign show_dim = false
+  if mf_dim != blank
+    if mf_dim.type == 'rich_text_field'
+      assign show_dim = true
+    elsif mf_dim.value != blank
+      assign show_dim = true
+    endif
+  endif
+  assign show_wood = false
+  if mf_wood != blank and mf_wood.value != blank
+    assign show_wood = true
+  endif
+  assign show_lead = false
+  if mf_lead != blank and mf_lead.value != blank
+    assign show_lead = true
+  endif
+-%}
+{%- if show_dim or show_wood or show_lead -%}
+  <div class="eg-product-specs" id="EgProductSpecs-{{ section.id }}">
+    <dl class="eg-product-specs__list">
+      {%- if show_dim -%}
+        <div class="eg-product-specs__row">
+          <dt class="eg-product-specs__term">{{ section.settings.spec_label_dimensions | escape }}</dt>
+          <dd class="eg-product-specs__detail">
+            {%- if mf_dim.type == 'rich_text_field' -%}
+              {{ mf_dim | metafield_tag }}
+            {%- else -%}
+              <span class="rte">{{ mf_dim.value | newline_to_br }}</span>
+            {%- endif -%}
+          </dd>
+        </div>
+      {%- endif -%}
+      {%- if show_wood -%}
+        <div class="eg-product-specs__row">
+          <dt class="eg-product-specs__term">{{ section.settings.spec_label_wood | escape }}</dt>
+          <dd class="eg-product-specs__detail">{{ mf_wood.value | escape }}</dd>
+        </div>
+      {%- endif -%}
+      {%- if show_lead -%}
+        <div class="eg-product-specs__row">
+          <dt class="eg-product-specs__term">{{ section.settings.spec_label_lead_time | escape }}</dt>
+          <dd class="eg-product-specs__detail">{{ mf_lead.value | escape }}</dd>
+        </div>
+      {%- endif -%}
+    </dl>
+  </div>
+{%- endif -%}

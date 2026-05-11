@@ -1,0 +1,147 @@
+{% comment %}
+  Renders product media
+
+  Accepts:
+  - media: {Object} Product Media object
+  - loop: {Boolean} Enable video looping (optional)
+  - variant_image: {Boolean} Whether or not media is associated with a variant
+  - img_loading: {String} eager | lazy (optional)
+
+  Usage:
+  {% render 'product-media',
+    media: media,
+    loop: section.settings.enable_video_looping,
+    variant_image: true
+  %}
+{% endcomment %}
+
+{%- liquid
+  unless img_loading
+    assign img_loading = 'lazy'
+  endunless
+  if img_loading == 'eager'
+    assign img_fetchpriority = 'high'
+    assign img_decoding_attr = 'sync'
+  else
+    assign img_fetchpriority = 'low'
+    assign img_decoding_attr = 'async'
+  endif
+
+  assign pm_classes = 'global-media-settings global-media-settings--no-shadow'
+  if variant_image
+    assign pm_classes = pm_classes | append: ' product__media-item--variant'
+  endif
+
+  assign pi = media.preview_image
+  assign pi_h = pi.height
+  if pi_h == blank or pi_h == 0
+    assign pi_h = pi.width | divided_by: pi.aspect_ratio | ceil
+  endif
+  assign pi_full_w = pi.width | default: 1100 | at_least: 1 | at_most: 5760
+-%}
+{%- if media.media_type == 'image' -%}
+  <img
+    class="{{ pm_classes }}"
+    srcset="
+      {%- if pi.width >= 550 -%}{{ pi | image_url: width: 550, format: 'webp' }} 550w,{%- endif -%}
+      {%- if pi.width >= 1100 -%}{{ pi | image_url: width: 1100, format: 'webp' }} 1100w,{%- endif -%}
+      {%- if pi.width >= 1445 -%}{{ pi | image_url: width: 1445, format: 'webp' }} 1445w,{%- endif -%}
+      {%- if pi.width >= 1680 -%}{{ pi | image_url: width: 1680, format: 'webp' }} 1680w,{%- endif -%}
+      {%- if pi.width >= 2048 -%}{{ pi | image_url: width: 2048, format: 'webp' }} 2048w,{%- endif -%}
+      {%- if pi.width >= 2200 -%}{{ pi | image_url: width: 2200, format: 'webp' }} 2200w,{%- endif -%}
+      {%- if pi.width >= 2890 -%}{{ pi | image_url: width: 2890, format: 'webp' }} 2890w,{%- endif -%}
+      {%- if pi.width >= 4096 -%}{{ pi | image_url: width: 4096, format: 'webp' }} 4096w,{%- endif -%}
+      {{ pi | image_url: width: pi_full_w, format: 'webp' }} {{ pi_full_w }}w
+    "
+    sizes="(min-width: 750px) calc(100vw - 22rem), 100vw"
+    src="{{ pi | image_url: width: 1445, format: 'webp' }}"
+    alt="{{ media.alt | escape }}"
+    loading="{{ img_loading }}"
+    decoding="{{ img_decoding_attr }}"
+    {% if img_loading == 'eager' %}
+      fetchpriority="{{ img_fetchpriority }}"
+    {% endif %}
+    width="{{ pi.width | default: 1100 }}"
+    height="{{ pi_h }}"
+    data-media-id="{{ media.id }}"
+  >
+{%- else -%}
+  {%- if media.media_type == 'model' -%}
+    <div class="product-media-modal__model" data-media-id="{{ media.id }}">
+      <product-model
+        class="deferred-media media media--transparent global-media-settings global-media-settings--no-shadow"
+        style="padding-top: min(calc(100vh - 12rem), 100%)"
+      >
+  {%- else -%}
+    <deferred-media
+      class="deferred-media media global-media-settings global-media-settings--no-shadow"
+      style="padding-top: min(calc(100vh - 12rem), {{ 1 | divided_by: media.aspect_ratio | times: 100 }}%)"
+      data-media-id="{{ media.id }}"
+    >
+  {%- endif -%}
+
+  <button id="Deferred-Poster-Modal-{{ media.id }}" class="deferred-media__poster" type="button">
+    <span class="deferred-media__poster-button motion-reduce">
+      {%- if media.media_type == 'model' -%}
+        <span class="svg-wrapper">{{ 'icon-3d-model' | inline_asset_content }}</span>
+      {%- else -%}
+        <span class="svg-wrapper">{{ 'icon-play.svg' | inline_asset_content }}</span>
+      {%- endif -%}
+    </span>
+    {{
+      pi
+      | image_url: width: 1100, format: 'webp'
+      | image_tag:
+        widths: '288, 576, 550, 1100',
+        sizes: '(min-width: 1200px) calc((1200px - 10rem) / 2), (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw - 4rem)',
+        loading: 'lazy',
+        decoding: 'async',
+        fetchpriority: 'low',
+        width: pi.width,
+        height: pi_h,
+        alt: media.alt | escape
+    }}
+  </button>
+  <template>
+    {%- case media.media_type -%}
+      {%- when 'external_video' -%}
+        {%- assign video_class = 'js-' | append: media.host -%}
+        {%- if media.host == 'youtube' -%}
+          {{
+            media
+            | external_video_url: autoplay: true, loop: loop, playlist: media.external_id
+            | external_video_tag: class: video_class, loading: 'lazy'
+          }}
+        {%- else -%}
+          {{
+            media
+            | external_video_url: autoplay: true, loop: loop
+            | external_video_tag: class: video_class, loading: 'lazy'
+          }}
+        {%- endif -%}
+      {%- when 'video' -%}
+        {{ media | media_tag: image_size: '2048x', autoplay: true, loop: loop, controls: true, preload: 'none' }}
+      {%- when 'model' -%}
+        {{ media | media_tag: image_size: '2048x', toggleable: true }}
+    {%- endcase -%}
+  </template>
+
+  {%- if media.media_type == 'model' -%}
+    </product-model>
+    <button
+      class="button button--full-width product__xr-button"
+      type="button"
+      aria-label="{{ 'products.product.xr_button_label' | t }}"
+      data-shopify-xr
+      data-shopify-model3d-id="{{ media.id }}"
+      data-shopify-title="title"
+      data-shopify-xr-hidden
+    >
+      <span class="svg-wrapper">{{ 'icon-3d-model' | inline_asset_content }}</span>
+      {{ 'products.product.xr_button' | t }}
+    </button>
+    </div>
+  {%- else -%}
+    </deferred-media>
+  {%- endif -%}
+{%- endif -%}

@@ -1,0 +1,332 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "rating": {
+          "type": "rating",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "square"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": false,
+            "show_payment_security": true
+          }
+        },
+        "atc_trust": {
+          "type": "eg_atc_trust",
+          "settings": {
+            "show_trust_heading": false,
+            "trust_heading": "Included with your purchase",
+            "label_payment": "Encrypted checkout",
+            "label_buyer": "30-day returns",
+            "label_materials": "Artisan-made quality",
+            "label_shipping": "Tracked US delivery",
+            "support_note": "<p>Questions on dimensions or finish? <a href=\"/pages/contact-us\">Message our team</a>—we usually reply within one business day.</p>"
+          }
+        },
+        "shipping_notice": {
+          "type": "text",
+          "settings": {
+            "text": "Free US shipping, no minimum · Est. 10–17 business days · USPS, FedEx & UPS · 30-day returns",
+            "text_style": "body"
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+            "heading": "Description",
+            "open_by_default": true
+          }
+        },
+        "share": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share"
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "price",
+        "rating",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "atc_trust",
+        "description",
+        "share"
+      ],
+      "settings": {
+        "enable_spec_metafields": true,
+        "spec_metafield_namespace": "elitegemse",
+        "spec_key_dimensions": "dimensions",
+        "spec_key_wood": "wood",
+        "spec_key_lead_time": "lead_time",
+        "spec_label_dimensions": "Dimensions",
+        "spec_label_wood": "Wood & finish",
+        "spec_label_lead_time": "Estimated lead time",
+        "enable_sticky_info": true,
+        "enable_sticky_add_to_cart": true,
+        "color_scheme": "scheme-1",
+        "media_size": "medium",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "gallery_layout": "thumbnail_slider",
+        "mobile_thumbnails": "show",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": false,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 12
+      }
+    },
+    "product_details": {
+      "type": "collapsible-content",
+      "blocks": {
+        "shipping_info": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Shipping & Delivery",
+            "icon": "truck",
+            "row_content": "<p><strong>Free shipping</strong> on all orders within the United States—<strong>no minimum purchase</strong> required.</p><p><strong>Processing:</strong> Typically <strong>7–10 business days</strong> (weekends and holidays excluded). Orders placed after <strong>12:00 PM</strong> begin processing the next business day. Address or product change requests are accepted within <strong>24 hours</strong> of ordering and may add <strong>1–2 business days</strong> to processing.</p><p><strong>Shipping time:</strong> After processing, transit usually takes <strong>3–7 business days</strong> via <strong>USPS</strong>, <strong>FedEx</strong>, or <strong>UPS</strong>. <strong>Total delivery</strong> is approximately <strong>10–17 working days</strong> from your order date.</p><p><strong>Tracking:</strong> A tracking number is emailed within <strong>1–2 business days</strong> after shipment. Tracking may take 1–2 days to update; if it does not work within <strong>3 business days</strong> of receiving the number, contact us. Report <strong>missing items within 48 hours</strong> of delivery. If delivery is <strong>late</strong> beyond the estimate, contact us within <strong>2 business days</strong>.</p>",
+            "page": ""
+          }
+        },
+        "returns_info": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Returns & Refunds",
+            "icon": "return",
+            "row_content": "<p>We accept returns within <strong>30 days</strong> of delivery for items in their original condition.</p><p>To start a return, reach out through our <a href=\"/pages/contact-us\">Contact page</a> with your order number.</p><p>Refunds are processed within 5–7 business days after we receive the returned item.</p>",
+            "page": ""
+          }
+        },
+        "care_info": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Care & Maintenance",
+            "icon": "leaf",
+            "row_content": "<p>To preserve the natural beauty of your wood furniture:</p><ul><li>Wipe with a soft, dry cloth regularly</li><li>Avoid direct sunlight and extreme humidity</li><li>Use coasters and placemats to prevent water rings</li><li>Apply wood conditioner every 6–12 months to maintain the finish</li></ul>",
+            "page": ""
+          }
+        },
+        "materials_info": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Materials & Craftsmanship",
+            "icon": "tree",
+            "row_content": "<p>Each piece is handcrafted from reclaimed and responsibly sourced wood. We honor the natural character of every piece — the grain, knots, and texture — making each item truly one of a kind.</p><p>Our artisans use traditional woodworking techniques combined with modern finishing methods to create furniture that lasts generations.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "returns_info",
+        "care_info",
+        "materials_info"
+      ],
+      "settings": {
+        "caption": "",
+        "heading": "Product Information",
+        "heading_size": "h3",
+        "heading_alignment": "left",
+        "layout": "none",
+        "container_color_scheme": "scheme-1",
+        "color_scheme": "scheme-2",
+        "open_first_collapsible_row": true,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "product_faq": {
+      "type": "product-faq-luxury",
+      "blocks": {
+        "faq_color": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Are the colors exactly as shown in the pictures?",
+            "icon": "eye",
+            "answer": "<p>We photograph and color-grade each piece with care, yet lighting in your room, screen calibration, and the natural variation of real wood mean subtle differences can occur. If you are choosing between finishes, reach out—we are glad to help you select the tone that suits your space.</p>"
+          }
+        },
+        "faq_assembly": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Does the item require assembly?",
+            "icon": "box",
+            "answer": "<p>Some assembly may be required at delivery. Everything you need is included—hardware, fittings, and clear step-by-step instructions—so setup stays straightforward even if furniture assembly is not your everyday task. Questions along the way? Our support team is only a message away.</p>"
+          }
+        },
+        "faq_pest": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How is the wood protected from pests and moisture?",
+            "icon": "leaf",
+            "answer": "<p>Our approach combines:</p><ul><li>Thorough treatment of timber before processing</li><li>A protective coating on the finished piece</li><li>Careful packaging to reduce moisture and mildew—conditions that can encourage pest damage</li></ul><p>Together, these measures support long-term integrity in a normal indoor environment.</p>"
+          }
+        },
+        "faq_custom": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do you offer customization options?",
+            "icon": "ruler",
+            "answer": "<p>Yes. We offer personalized design services to tailor dimensions, details, or finishes to your project where our workshop allows—your brief first, on a timeline that respects true craftsmanship.</p>"
+          }
+        },
+        "faq_care": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How should I care for and maintain my furniture?",
+            "icon": "heart",
+            "answer": "<p>Care instructions accompany every order. In general, regular dusting with a soft cloth and gentle, finish-appropriate cleaners will preserve the surface and patina you invested in.</p>"
+          }
+        },
+        "faq_intl": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do you offer international shipping?",
+            "icon": "plane",
+            "answer": "<p>Yes—international shipping is available, depending on your destination. Fees and delivery times vary by country and service level; we confirm the details with you before your order is finalized.</p>"
+          }
+        }
+      },
+      "block_order": ["faq_color", "faq_assembly", "faq_pest", "faq_custom", "faq_care", "faq_intl"],
+      "settings": {
+        "eyebrow": "Questions",
+        "heading": "Frequently Asked Questions",
+        "heading_size": "h2",
+        "intro": "<p>Finish accuracy, assembly, care, and how we protect your order—so you can commit with confidence.</p>",
+        "open_first_item": true,
+        "color_scheme": "scheme-1",
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    },
+    "trust_badges": {
+      "type": "multicolumn",
+      "blocks": {
+        "badge_1": {
+          "type": "column",
+          "settings": {
+            "column_icon": "shipping",
+            "title": "Complimentary shipping",
+            "text": "<p>Every US order ships free—no minimum—with tracked carriers you already trust.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "badge_2": {
+          "type": "column",
+          "settings": {
+            "column_icon": "returns",
+            "title": "Straightforward returns",
+            "text": "<p>30 days to change your mind when the piece isn’t right—clear steps and human support.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "badge_3": {
+          "type": "column",
+          "settings": {
+            "column_icon": "secure",
+            "title": "Secure checkout",
+            "text": "<p>Industry-standard encryption and trusted payment partners—your details stay protected.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "badge_4": {
+          "type": "column",
+          "settings": {
+            "column_icon": "support",
+            "title": "Real people, real answers",
+            "text": "<p>Guidance on dimensions, wood tones, and fit—before you buy and after delivery.</p>",
+            "link_label": "Get Help",
+            "link": "shopify://pages/contact-us"
+          }
+        }
+      },
+      "block_order": [
+        "badge_1",
+        "badge_2",
+        "badge_3",
+        "badge_4"
+      ],
+      "settings": {
+        "title": "",
+        "heading_size": "h3",
+        "image_width": "third",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 4,
+        "column_alignment": "center",
+        "background_style": "none",
+        "color_scheme": "scheme-2",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "related_products": {
+      "type": "related-products",
+      "settings": {
+        "heading": "You may also like",
+        "heading_size": "h2",
+        "products_to_show": 6,
+        "columns_desktop": 3,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": true,
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    }
+  },
+  "order": [
+    "main",
+    "product_details",
+    "product_faq",
+    "trust_badges",
+    "related_products"
+  ]
+}

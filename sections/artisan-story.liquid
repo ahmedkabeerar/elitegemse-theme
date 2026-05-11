@@ -1,0 +1,100 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="artisan-story color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  <div class="page-width">
+    <div class="artisan-story__grid">
+      {%- if section.settings.image != blank -%}
+        <div class="artisan-story__media">
+          {{
+            section.settings.image
+            | image_url: width: 1200
+            | image_tag:
+              loading: 'lazy',
+              widths: '400, 600, 800, 1000, 1200',
+              sizes: '(min-width: 1200px) 560px, (min-width: 750px) 50vw, 100vw',
+              alt: section.settings.image.alt | escape
+          }}
+        </div>
+      {%- endif -%}
+      <div class="artisan-story__content">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="artisan-story__eyebrow caption-with-letter-spacing">
+            {{- section.settings.eyebrow | escape -}}
+          </p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="artisan-story__heading {{ section.settings.heading_size }}">
+            {{- section.settings.heading | escape -}}
+          </h2>
+        {%- endif -%}
+        {%- if section.settings.body != blank -%}
+          <div class="artisan-story__body rte">{{ section.settings.body }}</div>
+        {%- endif -%}
+        {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+          <a href="{{ section.settings.button_link }}"
+             class="button{% if section.settings.button_style_secondary %} button--secondary{% endif %}">
+            {{- section.settings.button_label | escape -}}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .artisan-story__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3.2rem;
+    align-items: center;
+  }
+  @media screen and (min-width: 750px) {
+    .artisan-story__grid { grid-template-columns: 1fr 1fr; gap: 6.4rem; }
+  }
+  .artisan-story__media img { width: 100%; height: auto; display: block; }
+  .artisan-story__eyebrow { margin-bottom: 1.2rem; opacity: 0.7; }
+  .artisan-story__heading { margin-bottom: 2rem; }
+  .artisan-story__body { margin-bottom: 2.8rem; }
+</style>
+
+{% schema %}
+{
+  "name": "Artisan story",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Workshop image" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow text", "default": "The people behind the piece" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Every joint cut by hand. Every finish applied with intention." },
+    {
+      "type": "select", "id": "heading_size", "label": "Heading size",
+      "options": [
+        { "value": "h1", "label": "Extra large" },
+        { "value": "h2", "label": "Large" },
+        { "value": "h3", "label": "Medium" }
+      ],
+      "default": "h2"
+    },
+    { "type": "richtext", "id": "body", "label": "Body text", "default": "<p>Our woodworkers have spent decades reading grain, selecting timber, and perfecting traditional joinery techniques that make solid wood furniture last generations. No CNC shortcuts. No MDF cores. Skilled hands, honest materials, and time.</p>" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Meet the workshop" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "checkbox", "id": "button_style_secondary", "label": "Use outline button style", "default": true },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding top", "default": 52 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding bottom", "default": 52 }
+  ],
+  "presets": [{ "name": "Artisan story" }]
+}
+{% endschema %}

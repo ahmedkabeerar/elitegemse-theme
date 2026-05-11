@@ -1,0 +1,653 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "slideshow": {
+      "type": "slideshow",
+      "blocks": {
+        "slide_hero": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Memorial_Day_Sale_Refresh_Your_Home_23dfa2d3-36b1-4e85-838d-445e3c412003.webp",
+            "image_overlay_opacity": 0,
+            "heading": "The Wood Your Home Deserves",
+            "heading_size": "hxl",
+            "subheading": "Bench-built solid wood for homeowners who are done replacing disposable furniture. Crafted for American rooms—with grain, joinery, and a finish you'll still admire years from now.",
+            "button_label": "Explore the collection",
+            "link": "/collections/all",
+            "button_style_secondary": false,
+            "show_text_box": true,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": "scheme-5"
+          }
+        }
+      },
+      "block_order": [
+        "slide_hero"
+      ],
+      "settings": {
+        "layout": "full_bleed",
+        "slide_height": "adapt_image",
+        "slider_visual": "dots",
+        "auto_rotate": false,
+        "change_slides_speed": 7,
+        "image_behavior": "none",
+        "show_text_below": true,
+        "accessibility_info": "Hero — luxury handcrafted wood furniture for U.S. homes"
+      }
+    },
+    "social_proof_stats": {
+      "type": "social-proof-stats",
+      "blocks": {
+        "stat_1": {
+          "type": "social_proof_stat",
+          "settings": {
+            "value": "4.9 / 5",
+            "label": "homeowners reviewed",
+            "show_star": true
+          }
+        },
+        "stat_2": {
+          "type": "social_proof_stat",
+          "settings": {
+            "value": "500+",
+            "label": "pieces in American homes",
+            "show_star": false
+          }
+        },
+        "stat_3": {
+          "type": "social_proof_stat",
+          "settings": {
+            "value": "30-day",
+            "label": "risk-free trial",
+            "show_star": false
+          }
+        },
+        "stat_4": {
+          "type": "social_proof_stat",
+          "settings": {
+            "value": "Est. 2019",
+            "label": "handcrafted in USA",
+            "show_star": false
+          }
+        }
+      },
+      "block_order": [
+        "stat_1",
+        "stat_2",
+        "stat_3",
+        "stat_4"
+      ],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "best_sellers": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "best-sellers",
+        "products_to_show": 8,
+        "title": "Most loved by homeowners",
+        "heading_size": "h2",
+        "description": "<p>Pieces our clients anchor in living rooms, dining rooms, and primary suites—chosen for presence in your home, not passing trends.</p>",
+        "show_description": true,
+        "description_style": "body",
+        "columns_desktop": 4,
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "outline",
+        "color_scheme": "scheme-1",
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": true,
+        "quick_add": "standard",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
+    "trust_bar": {
+      "type": "multicolumn",
+      "blocks": {
+        "trust_1": {
+          "type": "column",
+          "settings": {
+            "column_icon": "shipping",
+            "title": "Delivered with care, coast to coast",
+            "text": "<p>Complimentary insured shipping within the contiguous U.S.—tracked from our workshop to your door, so you always know where your piece is.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "trust_2": {
+          "type": "column",
+          "settings": {
+            "column_icon": "returns",
+            "title": "Thirty days to love it in place",
+            "text": "<p>Live with it in your lighting and layout. If it isn't right, our team helps you through a straightforward return or exchange—we're here for homeowners, not one-click abandonments.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "trust_3": {
+          "type": "column",
+          "settings": {
+            "column_icon": "secure",
+            "title": "Checkout you can trust",
+            "text": "<p>Your payment details stay protected with industry-standard encryption—so you can focus on how the grain will look in your space.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "trust_4": {
+          "type": "column",
+          "settings": {
+            "column_icon": "support",
+            "title": "Real advice before you commit",
+            "text": "<p>Questions on dimensions, finish, or placement? You reach people who know these pieces—not scripts. We help you choose once, beautifully.</p>",
+            "link_label": "Ask us anything",
+            "link": "shopify://pages/contact-us"
+          }
+        }
+      },
+      "block_order": [
+        "trust_1",
+        "trust_2",
+        "trust_3",
+        "trust_4"
+      ],
+      "settings": {
+        "title": "",
+        "heading_size": "h2",
+        "image_width": "third",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 4,
+        "column_alignment": "center",
+        "background_style": "none",
+        "color_scheme": "scheme-2",
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "press_strip": {
+      "type": "press-strip",
+      "blocks": {
+        "logo_1": { "type": "press_logo", "settings": { "text": "Architectural Digest", "alt": "Architectural Digest" } },
+        "logo_2": { "type": "press_logo", "settings": { "text": "House Beautiful", "alt": "House Beautiful" } },
+        "logo_3": { "type": "press_logo", "settings": { "text": "Elle Decor", "alt": "Elle Decor" } }
+      },
+      "block_order": [
+        "logo_1",
+        "logo_2",
+        "logo_3"
+      ],
+      "settings": {
+        "heading": "As seen in",
+        "color_scheme": "scheme-1",
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "craftsmanship": {
+      "type": "image-with-text",
+      "blocks": {
+        "craft_caption": {
+          "type": "caption",
+          "settings": {
+            "caption": "From the bench",
+            "text_style": "caption-with-letter-spacing",
+            "text_size": "medium"
+          }
+        },
+        "craft_heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Built by hand. Made to be inherited.",
+            "heading_size": "h2"
+          }
+        },
+        "craft_text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Each piece is shaped, joined, and finished by skilled woodworkers who respect the grain — no disposable flat-pack, no mystery materials. You get honest timber, careful joinery, and a quiet luxury that deepens as your home ages.</p>",
+            "text_style": "body"
+          }
+        },
+        "craft_button": {
+          "type": "button",
+          "settings": {
+            "button_label": "How we build · Why it lasts",
+            "button_link": "shopify://pages/about-us",
+            "button_style_secondary": true
+          }
+        }
+      },
+      "block_order": [
+        "craft_caption",
+        "craft_heading",
+        "craft_text",
+        "craft_button"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/Solid-Wood-Console-Table-with-Live-Edge-Design-Rustiracraft-28692018266157_113ba5a8-236d-4691-9502-aa3d367bb79d.webp",
+        "height": "medium",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "scheme-1",
+        "color_scheme": "scheme-2",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "homepage_shipping": {
+      "type": "premium-shipping-info",
+      "blocks": {
+        "ship_1": {
+          "type": "pillar",
+          "settings": {
+            "icon": "white_glove",
+            "heading": "Free shipping, every order",
+            "text": "<p>Complimentary insured shipping to all 48 contiguous states. No minimums. We partner with FedEx and UPS freight carriers experienced with oversized furniture.</p>"
+          }
+        },
+        "ship_2": {
+          "type": "pillar",
+          "settings": {
+            "icon": "lead_time",
+            "heading": "Made-to-order timelines",
+            "text": "<p>Most pieces ship within 7–10 business days from our workshop. Your product page shows the current lead time. You will receive email confirmation when your order enters production.</p>"
+          }
+        },
+        "ship_3": {
+          "type": "pillar",
+          "settings": {
+            "icon": "tracking",
+            "heading": "Full tracking, door to door",
+            "text": "<p>A tracking number arrives by email within 1–2 business days of shipment. Monitor your piece from workshop to threshold — we update you at every hand-off.</p>"
+          }
+        },
+        "ship_4": {
+          "type": "pillar",
+          "settings": {
+            "icon": "protection",
+            "heading": "Fully insured against damage",
+            "text": "<p>Every shipment is insured for its full retail value. Arrive to damaged goods? Photograph it and contact us — we replace, not argue.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "ship_1",
+        "ship_2",
+        "ship_3",
+        "ship_4"
+      ],
+      "settings": {
+        "eyebrow": "Delivery",
+        "heading": "Your furniture, protected the whole way",
+        "color_scheme": "scheme-2",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "featured_collection_Tgkdt7": {
+      "type": "featured-collection",
+      "name": "t:sections.featured-collection.presets.name",
+      "settings": {
+        "collection": "traditional-bathroom-vanities",
+        "products_to_show": 4,
+        "title": "Traditional bathroom vanities",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 4,
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "color_scheme": "",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": true,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "featured_collection_DpNPq4": {
+      "type": "featured-collection",
+      "name": "t:sections.featured-collection.presets.name",
+      "settings": {
+        "collection": "sofas",
+        "products_to_show": 4,
+        "title": "Sofas & seating — a solid foundation",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 4,
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "color_scheme": "",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": true,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 48,
+        "padding_bottom": 60
+      }
+    },
+    "wood_materials": {
+      "type": "multicolumn",
+      "blocks": {
+        "wood_1": {
+          "type": "column",
+          "settings": {
+            "column_icon": "",
+            "title": "Solid hardwoods",
+            "text": "<p>Dense, stable boards selected for grain clarity and structural integrity — the foundation of furniture that stays flat and quiet for decades.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "wood_2": {
+          "type": "column",
+          "settings": {
+            "column_icon": "",
+            "title": "Reclaimed character",
+            "text": "<p>Where we use reclaimed stock, we celebrate nail holes, tone variation, and history — each piece tells a story.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "wood_3": {
+          "type": "column",
+          "settings": {
+            "column_icon": "",
+            "title": "Natural finishes",
+            "text": "<p>Oils and clear finishes that let the wood breathe and age honestly — never obscured by heavy plastics.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "wood_4": {
+          "type": "column",
+          "settings": {
+            "column_icon": "",
+            "title": "Responsible sourcing",
+            "text": "<p>We prioritize responsibly harvested and reclaimed inputs so your home reflects care for forests and craft.</p>",
+            "link_label": "Explore our woods & finishes",
+            "link": "shopify://collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "wood_1",
+        "wood_2",
+        "wood_3",
+        "wood_4"
+      ],
+      "settings": {
+        "title": "The timber behind the furniture",
+        "heading_size": "h2",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 4,
+        "column_alignment": "left",
+        "background_style": "primary",
+        "color_scheme": "scheme-2",
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "collection_list_8yqwRX": {
+      "type": "collection-list",
+      "blocks": {
+        "featured_collection_CJeGDi": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "console-tables"
+          }
+        },
+        "featured_collection_YE34Em": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "sofas"
+          }
+        },
+        "featured_collection_46AqJN": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "tv-stands"
+          }
+        },
+        "featured_collection_EKrKYj": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "traditional-bathroom-vanities"
+          }
+        }
+      },
+      "block_order": [
+        "featured_collection_CJeGDi",
+        "featured_collection_YE34Em",
+        "featured_collection_46AqJN",
+        "featured_collection_EKrKYj"
+      ],
+      "name": "t:sections.collection-list.presets.name",
+      "settings": {
+        "title": "Shop by room & category",
+        "heading_size": "h2",
+        "image_ratio": "square",
+        "columns_desktop": 4,
+        "color_scheme": "",
+        "show_view_all": false,
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "customer_reviews": {
+      "type": "multicolumn",
+      "blocks": {
+        "review_1": {
+          "type": "column",
+          "settings": {
+            "column_icon": "",
+            "title": "“Quality you can feel the minute it arrives.”",
+            "text": "<p><strong>— Patricia R., North Carolina</strong><br/>Retired teacher · Dining table & bench</p>",
+            "link_label": "",
+            "link": "",
+            "show_stars": true
+          }
+        },
+        "review_2": {
+          "type": "column",
+          "settings": {
+            "column_icon": "",
+            "title": "“Finally furniture that matches our home’s permanence.”",
+            "text": "<p><strong>— David & Elaine M., Colorado</strong><br/>Homeowners · Living room & media pieces</p>",
+            "link_label": "",
+            "link": "",
+            "show_stars": true
+          }
+        },
+        "review_3": {
+          "type": "column",
+          "settings": {
+            "column_icon": "",
+            "title": "“Worth the wait — and the investment.”",
+            "text": "<p><strong>— Sandra L., Texas</strong><br/>Empty-nester · Primary bedroom suite</p>",
+            "link_label": "",
+            "link": "",
+            "show_stars": true
+          }
+        }
+      },
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3"
+      ],
+      "settings": {
+        "title": "What homeowners are saying",
+        "heading_size": "h2",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "none",
+        "color_scheme": "scheme-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "artisan_story": {
+      "type": "artisan-story",
+      "settings": {
+        "eyebrow": "The people behind the piece",
+        "heading": "Every joint cut by hand. Every finish applied with intention.",
+        "heading_size": "h2",
+        "body": "<p>Our woodworkers have spent decades reading grain, selecting timber, and perfecting traditional joinery techniques that make solid wood furniture last generations. No CNC shortcuts. No MDF cores. Skilled hands, honest materials, and time.</p>",
+        "button_label": "Meet the workshop",
+        "button_link": "shopify://pages/about-us",
+        "button_style_secondary": true,
+        "color_scheme": "scheme-1",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    },
+    "homepage_faq": {
+      "type": "collapsible-content",
+      "blocks": {
+        "faq_1": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How long until my furniture ships?",
+            "icon": "truck",
+            "row_content": "<p>Many pieces are made to order. Typical lead times are listed on each product page and confirmed at checkout. You’ll receive tracking as soon as your order leaves our workshop.</p>",
+            "page": ""
+          }
+        },
+        "faq_2": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Will it fit my space?",
+            "icon": "ruler",
+            "row_content": "<p>Every listing includes dimensions and finish notes. If you’re unsure, contact us with room measurements — we’ll help you choose the right size and wood tone before you buy.</p>",
+            "page": ""
+          }
+        },
+        "faq_3": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How do I care for solid wood?",
+            "icon": "leaf",
+            "row_content": "<p>Use coasters, avoid standing water, and dust with a soft dry cloth. Periodically refresh with a wood conditioner recommended for your finish. Natural wood will develop a richer patina over time.</p>",
+            "page": ""
+          }
+        },
+        "faq_4": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What if I need to return or exchange?",
+            "icon": "return",
+            "row_content": "<p>We offer a 30-day window for eligible items. Made-to-order and custom orders may follow different terms—see our policies or reach out and we'll walk you through the best option.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4"
+      ],
+      "settings": {
+        "caption": "Investing in furniture that stays",
+        "heading": "Questions worth asking",
+        "heading_size": "h2",
+        "heading_alignment": "center",
+        "layout": "none",
+        "container_color_scheme": "scheme-2",
+        "color_scheme": "scheme-1",
+        "open_first_collapsible_row": true,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_first",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "contact_form_U8hFhR": {
+      "type": "contact-form",
+      "name": "t:sections.contact-form.presets.name",
+      "settings": {
+        "heading": "Start with a conversation",
+        "heading_size": "h2",
+        "color_scheme": "",
+        "padding_top": 48,
+        "padding_bottom": 64
+      }
+    }
+  },
+  "order": [
+    "slideshow",
+    "social_proof_stats",
+    "best_sellers",
+    "trust_bar",
+    "press_strip",
+    "craftsmanship",
+    "homepage_shipping",
+    "featured_collection_Tgkdt7",
+    "featured_collection_DpNPq4",
+    "wood_materials",
+    "collection_list_8yqwRX",
+    "customer_reviews",
+    "artisan_story",
+    "homepage_faq",
+    "contact_form_U8hFhR"
+  ]
+}

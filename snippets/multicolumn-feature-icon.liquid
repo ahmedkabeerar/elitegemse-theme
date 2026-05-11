@@ -1,0 +1,14 @@
+{% comment %}
+  Trust / feature icons — uses theme SVG assets (currentColor from parent).
+  Accepts: icon — shipping | returns | secure | support
+{% endcomment %}
+{%- case icon -%}
+  {%- when 'shipping' -%}
+    <span class="multicolumn-card__icon-inner">{{ 'icon-truck.svg' | inline_asset_content }}</span>
+  {%- when 'returns' -%}
+    <span class="multicolumn-card__icon-inner">{{ 'icon-return.svg' | inline_asset_content }}</span>
+  {%- when 'secure' -%}
+    <span class="multicolumn-card__icon-inner">{{ 'icon-lock.svg' | inline_asset_content }}</span>
+  {%- when 'support' -%}
+    <span class="multicolumn-card__icon-inner">{{ 'icon-chat-bubble.svg' | inline_asset_content }}</span>
+{%- endcase -%}

@@ -1,0 +1,152 @@
+{% comment %}
+  BreadcrumbList JSON-LD (schema.org) — Google-compatible, safe JSON via | json filter only.
+  - Skips homepage (index): breadcrumbs not meaningful there.
+  - Home URL uses request.origin + routes.root_url (markets / locales).
+  - Product: prefers contextual `collection` when URL contains /collections/handle/products/...
+    otherwise falls back to first collection (same heuristic as visible eg-breadcrumbs).
+  - All `item` URLs are absolute HTTPS-style strings aligned with the active storefront domain.
+{% endcomment %}
+{%- liquid
+  assign skip_breadcrumb_ld = false
+  if template.name == 'index'
+    assign skip_breadcrumb_ld = true
+  endif
+
+  assign eg_bc_root = request.origin | append: routes.root_url
+-%}
+{%- unless skip_breadcrumb_ld -%}
+  {%- case request.page_type -%}
+    {%- when 'product' -%}
+      {%- liquid
+        assign bc_collection = nil
+        if collection != blank
+          assign bc_collection = collection
+        elsif product.collections.size > 0
+          assign bc_collection = product.collections.first
+        endif
+      -%}
+      <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": {{ shop.name | json }},
+              "item": {{ eg_bc_root | json }}
+            }
+            {%- if bc_collection != blank -%}
+            ,{
+              "@type": "ListItem",
+              "position": 2,
+              "name": {{ bc_collection.title | strip | json }},
+              "item": {{ request.origin | append: bc_collection.url | json }}
+            }
+            {%- endif -%}
+            ,{
+              "@type": "ListItem",
+              "position": {% if bc_collection != blank %}3{% else %}2{% endif %},
+              "name": {{ product.title | strip | json }},
+              "item": {{ request.origin | append: product.url | json }}
+            }
+          ]
+        }
+      </script>
+
+    {%- when 'collection' -%}
+      <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": {{ shop.name | json }},
+              "item": {{ eg_bc_root | json }}
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": {{ collection.title | strip | json }},
+              "item": {{ request.origin | append: collection.url | json }}
+            }
+          ]
+        }
+      </script>
+
+    {%- when 'article' -%}
+      <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": {{ shop.name | json }},
+              "item": {{ eg_bc_root | json }}
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": {{ blog.title | strip | json }},
+              "item": {{ request.origin | append: blog.url | json }}
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": {{ article.title | strip | json }},
+              "item": {{ request.origin | append: article.url | json }}
+            }
+          ]
+        }
+      </script>
+
+    {%- when 'blog' -%}
+      <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": {{ shop.name | json }},
+              "item": {{ eg_bc_root | json }}
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": {{ blog.title | strip | json }},
+              "item": {{ request.origin | append: blog.url | json }}
+            }
+          ]
+        }
+      </script>
+
+    {%- when 'page' -%}
+      <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": {{ shop.name | json }},
+              "item": {{ eg_bc_root | json }}
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": {{ page.title | strip | json }},
+              "item": {{ request.origin | append: page.url | json }}
+            }
+          ]
+        }
+      </script>
+
+  {%- endcase -%}
+{%- endunless -%}

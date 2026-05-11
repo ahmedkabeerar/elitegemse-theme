@@ -1,0 +1,42 @@
+{% comment %}
+  Renders a swatch component.
+  - swatch: Shopify catalog swatch (color/image) from option value, or nil
+  - fallback_image: optional image/media from variant metaobject (file / image field .value)
+  - fallback_color: optional color drop from variant metafield (type Color, storefront access)
+  - fallback_rgb_string: optional rgb(...) when only the option label is known (name→color map)
+  - shape: 'square' or default circle
+
+  Priority: catalog swatch, metaobject image, Color metafield, name fallback rgb.
+{% endcomment %}
+
+{%- liquid
+  assign swatch_value = null
+  assign swatch_focal_point = null
+
+  if swatch != blank and swatch.image
+    assign image_url = swatch.image | image_url: width: 50
+    assign swatch_value = 'url(' | append: image_url | append: ')'
+    assign swatch_focal_point = swatch.image.presentation.focal_point
+  elsif swatch != blank and swatch.color
+    assign swatch_value = 'rgb(' | append: swatch.color.rgb | append: ')'
+  elsif fallback_image != blank
+    assign image_url = fallback_image | image_url: width: 50
+    assign swatch_value = 'url(' | append: image_url | append: ')'
+    if fallback_image.presentation and fallback_image.presentation.focal_point
+      assign swatch_focal_point = fallback_image.presentation.focal_point
+    endif
+  elsif fallback_color != blank and fallback_color.rgb != blank
+    assign swatch_value = 'rgb(' | append: fallback_color.rgb | append: ')'
+  elsif fallback_rgb_string != blank
+    assign swatch_value = fallback_rgb_string
+  endif
+-%}
+
+<span
+  {% if swatch_value %}
+    class="swatch{% if shape == 'square' %} swatch--square{% endif %}"
+    style="--swatch--background: {{ swatch_value }};{% if swatch_focal_point %} --swatch-focal-point: {{ swatch_focal_point }};{% endif %}"
+  {% else %}
+    class="swatch swatch--unavailable{% if shape == 'square' %} swatch--square{% endif %}"
+  {% endif %}
+></span>

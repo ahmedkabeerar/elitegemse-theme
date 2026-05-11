@@ -1,0 +1,70 @@
+{%- comment -%}
+  Minimal luxury breadcrumbs (visual + nav landmark).
+  JSON-LD BreadcrumbList uses the same collection rule: contextual collection URL when present, else first collection.
+{%- endcomment -%}
+{%- liquid
+  assign show = false
+  case request.page_type
+    when 'product', 'collection', 'article', 'blog', 'page'
+      assign show = true
+  endcase
+-%}
+{%- if show -%}
+  <nav class="eg-breadcrumbs{% if class_modifier != blank %} {{ class_modifier }}{% endif %}" aria-label="Breadcrumb">
+    <ol class="eg-breadcrumbs__list">
+      <li class="eg-breadcrumbs__item">
+        <a class="eg-breadcrumbs__link" href="{{ routes.root_url }}">Home</a>
+      </li>
+
+      {%- case request.page_type -%}
+        {%- when 'collection' -%}
+          <li class="eg-breadcrumbs__sep" aria-hidden="true">/</li>
+          <li class="eg-breadcrumbs__item">
+            <span class="eg-breadcrumbs__current" aria-current="page">{{ collection.title | escape }}</span>
+          </li>
+
+        {%- when 'product' -%}
+          {%- liquid
+            assign bc_show_collection = nil
+            if collection != blank
+              assign bc_show_collection = collection
+            elsif product.collections.size > 0
+              assign bc_show_collection = product.collections.first
+            endif
+          -%}
+          {%- if bc_show_collection != blank -%}
+            <li class="eg-breadcrumbs__sep" aria-hidden="true">/</li>
+            <li class="eg-breadcrumbs__item">
+              <a class="eg-breadcrumbs__link" href="{{ bc_show_collection.url }}">{{ bc_show_collection.title | escape }}</a>
+            </li>
+          {%- endif -%}
+          <li class="eg-breadcrumbs__sep" aria-hidden="true">/</li>
+          <li class="eg-breadcrumbs__item eg-breadcrumbs__item--truncate">
+            <span class="eg-breadcrumbs__current" aria-current="page">{{ product.title | escape }}</span>
+          </li>
+
+        {%- when 'blog' -%}
+          <li class="eg-breadcrumbs__sep" aria-hidden="true">/</li>
+          <li class="eg-breadcrumbs__item">
+            <span class="eg-breadcrumbs__current" aria-current="page">{{ blog.title | escape }}</span>
+          </li>
+
+        {%- when 'article' -%}
+          <li class="eg-breadcrumbs__sep" aria-hidden="true">/</li>
+          <li class="eg-breadcrumbs__item">
+            <a class="eg-breadcrumbs__link" href="{{ blog.url }}">{{ blog.title | escape }}</a>
+          </li>
+          <li class="eg-breadcrumbs__sep" aria-hidden="true">/</li>
+          <li class="eg-breadcrumbs__item eg-breadcrumbs__item--truncate">
+            <span class="eg-breadcrumbs__current" aria-current="page">{{ article.title | escape }}</span>
+          </li>
+
+        {%- when 'page' -%}
+          <li class="eg-breadcrumbs__sep" aria-hidden="true">/</li>
+          <li class="eg-breadcrumbs__item eg-breadcrumbs__item--truncate">
+            <span class="eg-breadcrumbs__current" aria-current="page">{{ page.title | escape }}</span>
+          </li>
+      {%- endcase -%}
+    </ol>
+  </nav>
+{%- endif -%}

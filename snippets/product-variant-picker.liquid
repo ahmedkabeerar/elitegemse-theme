@@ -1,0 +1,465 @@
+{% comment %}
+  Renders product variant-picker
+
+  Accepts:
+  - product: {Object} product object.
+  - block: {Object} passing the block information.
+  - product_form_id: {String} Id of the product form to which the variant picker is associated.
+  Usage:
+  {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
+{% endcomment %}
+{%- unless product.has_only_default_variant -%}
+  <variant-selects
+    id="variant-selects-{{ section.id }}"
+    data-section="{{ section.id }}"
+    {{ block.shopify_attributes }}
+  >
+    <div class="eg-variant-picker">
+    {%- for option in product.options_with_values -%}
+      {%- liquid
+        assign catalog_swatches_only = settings.catalog_swatches_only | default: false
+
+        assign variant_color_mf_enabled = false
+        if catalog_swatches_only == false
+          if block.settings.use_variant_color_metafield and block.settings.variant_color_metafield_key != blank
+            if block.settings.variant_color_option_name == blank or option.name == block.settings.variant_color_option_name
+              assign variant_color_mf_enabled = true
+            endif
+          endif
+        endif
+        assign mf_ns = block.settings.variant_color_metafield_namespace | strip
+        if mf_ns == blank
+          assign mf_ns = 'custom'
+        endif
+        assign mf_key = block.settings.variant_color_metafield_key | strip
+
+        assign variant_mo_enabled = false
+        if catalog_swatches_only == false
+          if block.settings.use_variant_metaobject_swatch and block.settings.variant_metaobject_metafield_key != blank
+            if block.settings.variant_color_option_name == blank or option.name == block.settings.variant_color_option_name
+              assign variant_mo_enabled = true
+            endif
+          endif
+        endif
+        assign mo_ns = block.settings.variant_metaobject_metafield_namespace | strip
+        if mo_ns == blank
+          assign mo_ns = 'custom'
+        endif
+        assign mo_key = block.settings.variant_metaobject_metafield_key | strip
+        assign mo_img_field = block.settings.variant_metaobject_image_field | strip
+        if mo_img_field == blank
+          assign mo_img_field = 'image'
+        endif
+
+        assign variant_file_image_enabled = false
+        if catalog_swatches_only == false
+          if block.settings.use_variant_swatch_file_metafield and block.settings.variant_swatch_file_metafield_key != blank
+            if block.settings.variant_color_option_name == blank or option.name == block.settings.variant_color_option_name
+              assign variant_file_image_enabled = true
+            endif
+          endif
+        endif
+        assign vfs_ns = block.settings.variant_swatch_file_metafield_namespace | strip
+        if vfs_ns == blank
+          assign vfs_ns = 'custom'
+        endif
+        assign vfs_key = block.settings.variant_swatch_file_metafield_key | strip
+
+        assign color_option_heuristic = false
+        if catalog_swatches_only == false
+          assign opt_lower = option.name | downcase
+          if opt_lower contains 'color'
+            assign color_option_heuristic = true
+          elsif opt_lower contains 'colour'
+            assign color_option_heuristic = true
+          elsif opt_lower contains 'màu'
+            assign color_option_heuristic = true
+          elsif opt_lower contains 'finish'
+            assign color_option_heuristic = true
+          elsif opt_lower contains 'stain'
+            assign color_option_heuristic = true
+          elsif opt_lower contains 'tone'
+            assign color_option_heuristic = true
+            elsif opt_lower contains 'wood'
+              assign color_option_heuristic = true
+            elsif opt_lower contains 'material'
+              assign color_option_heuristic = true
+            elsif opt_lower contains 'shade'
+              assign color_option_heuristic = true
+            elsif opt_lower contains 'style'
+              assign color_option_heuristic = true
+            elsif opt_lower contains 'laminate'
+              assign color_option_heuristic = true
+            elsif opt_lower contains 'veneer'
+              assign color_option_heuristic = true
+            elsif opt_lower contains 'paint'
+              assign color_option_heuristic = true
+            endif
+          endif
+
+        assign color_mo_lookup_active_picker = false
+        assign cm_type_h = block.settings.color_metaobject_type_handle | strip
+        if cm_type_h == blank
+          assign cm_type_h = 'shopify--color-pattern'
+        endif
+        assign cm_img_key_picker = block.settings.color_metaobject_image_field_key | strip
+        if cm_img_key_picker == blank
+          assign cm_img_key_picker = 'image'
+        endif
+        if catalog_swatches_only == false
+          assign cm_gate_p = true
+          if block.settings.color_metaobject_lookup_by_handle == false
+            assign cm_gate_p = false
+          endif
+          if cm_gate_p
+            if block.settings.variant_color_option_name != blank
+              if option.name == block.settings.variant_color_option_name
+                assign color_mo_lookup_active_picker = true
+              endif
+            elsif color_option_heuristic
+              assign color_mo_lookup_active_picker = true
+            endif
+          endif
+        endif
+
+        assign option_visual_count = 0
+        if catalog_swatches_only == false and color_option_heuristic
+          assign option_visual_count = option.values.size
+        else
+        for val in option.values
+          assign resolved_variant = val.variant
+          if resolved_variant == blank and product.variants.size > 0
+            assign sv = product.selected_or_first_available_variant
+            for v in product.variants
+              assign hit = false
+              case option.position
+                when 1
+                  if v.option1 == val.name and v.option2 == sv.option2 and v.option3 == sv.option3
+                    assign hit = true
+                  endif
+                when 2
+                  if v.option1 == sv.option1 and v.option2 == val.name and v.option3 == sv.option3
+                    assign hit = true
+                  endif
+                when 3
+                  if v.option1 == sv.option1 and v.option2 == sv.option2 and v.option3 == val.name
+                    assign hit = true
+                  endif
+              endcase
+              if hit
+                assign resolved_variant = v
+                break
+              endif
+            endfor
+          endif
+          if resolved_variant == blank and product.variants.size > 0
+            for v in product.variants
+              assign hit2 = false
+              case option.position
+                when 1
+                  if v.option1 == val.name
+                    assign hit2 = true
+                  endif
+                when 2
+                  if v.option2 == val.name
+                    assign hit2 = true
+                  endif
+                when 3
+                  if v.option3 == val.name
+                    assign hit2 = true
+                  endif
+              endcase
+              if hit2
+                assign resolved_variant = v
+                break
+              endif
+            endfor
+          endif
+
+          assign val_has_visual = false
+          if val.swatch != blank and val.swatch.image
+            assign val_has_visual = true
+          elsif val.swatch != blank and val.swatch.color
+            assign val_has_visual = true
+          endif
+          if catalog_swatches_only == false and variant_mo_enabled and resolved_variant
+            assign mo_ref = resolved_variant.metafields[mo_ns][mo_key]
+            if mo_ref != blank and mo_ref.value != blank
+              assign mo_entry = mo_ref.value
+              assign mo_field_drop = nil
+              case mo_img_field
+                when 'image'
+                  assign mo_field_drop = mo_entry.image
+                when 'photo'
+                  assign mo_field_drop = mo_entry.photo
+                when 'thumbnail'
+                  assign mo_field_drop = mo_entry.thumbnail
+                when 'swatch'
+                  assign mo_field_drop = mo_entry.swatch
+                when 'picture'
+                  assign mo_field_drop = mo_entry.picture
+                when 'media'
+                  assign mo_field_drop = mo_entry.media
+                when 'featured_image'
+                  assign mo_field_drop = mo_entry.featured_image
+                else
+                  assign mo_field_drop = mo_entry[mo_img_field]
+              endcase
+              if mo_field_drop == blank and mo_entry.swatch != blank
+                assign mo_field_drop = mo_entry.swatch
+              endif
+              if mo_field_drop == blank and mo_entry.thumbnail != blank
+                assign mo_field_drop = mo_entry.thumbnail
+              endif
+              if mo_field_drop == blank
+                assign mo_field_drop = mo_entry.image
+              endif
+              if mo_field_drop != blank
+                if mo_field_drop.value != blank
+                  assign mo_test_img = mo_field_drop.value
+                else
+                  assign mo_test_img = mo_field_drop
+                endif
+                if mo_test_img != blank
+                  assign val_has_visual = true
+                endif
+              endif
+            endif
+          endif
+          if catalog_swatches_only == false and variant_color_mf_enabled and resolved_variant
+            assign color_metafield_drop = resolved_variant.metafields[mf_ns][mf_key]
+            if color_metafield_drop != blank and color_metafield_drop.value != blank and color_metafield_drop.value.rgb != blank
+              assign val_has_visual = true
+            endif
+          endif
+          if catalog_swatches_only == false and variant_file_image_enabled and resolved_variant
+            assign vfs_mf = resolved_variant.metafields[vfs_ns][vfs_key]
+            if vfs_mf != blank and vfs_mf.value != blank
+              assign vfs_type = vfs_mf.type | default: ''
+              assign vfs_img = nil
+              if vfs_type == 'list.file_reference'
+                assign vfs_img = vfs_mf.value.first
+              elsif vfs_type contains 'list.'
+                assign vfs_img = vfs_mf.value.first
+              else
+                assign vfs_img = vfs_mf.value
+              endif
+              if vfs_img != blank
+                assign val_has_visual = true
+              endif
+            endif
+          endif
+          if catalog_swatches_only == false and color_mo_lookup_active_picker
+            assign cm_entry_h = val.name | handleize
+            assign cm_color_entry = metaobjects[cm_type_h][cm_entry_h]
+            if cm_color_entry != blank
+              assign cm_pick_img_wrap = cm_color_entry[cm_img_key_picker]
+              assign cm_pick_has = false
+              if cm_pick_img_wrap != blank and cm_pick_img_wrap.value != blank
+                assign cm_pick_has = true
+              elsif cm_pick_img_wrap != blank
+                assign cm_pick_has = true
+              elsif cm_color_entry.image != blank
+                assign cm_pick_has = true
+              endif
+              if cm_pick_has
+                assign val_has_visual = true
+              elsif cm_color_entry.color != blank and cm_color_entry.color.value != blank and cm_color_entry.color.value.rgb != blank
+                assign val_has_visual = true
+              elsif cm_color_entry.color != blank and cm_color_entry.color.rgb != blank
+                assign val_has_visual = true
+              endif
+            endif
+          endif
+          if val_has_visual
+            assign option_visual_count = option_visual_count | plus: 1
+          endif
+        endfor
+        endif
+
+        assign swatch_gate_shape = block.settings.swatch_shape
+        if swatch_gate_shape == 'none' and option_visual_count > 0
+          assign swatch_gate_shape = 'circle'
+        endif
+
+        assign picker_type = block.settings.picker_type
+        if option_visual_count > 0 and swatch_gate_shape != 'none'
+          if block.settings.picker_type == 'dropdown'
+            assign picker_type = 'swatch_dropdown'
+          else
+            assign picker_type = 'swatch'
+          endif
+        endif
+
+        assign dropdown_fallback_image = nil
+        if catalog_swatches_only == false and variant_mo_enabled and picker_type == 'swatch_dropdown' and product.selected_or_first_available_variant
+          assign dd_mo_ref = product.selected_or_first_available_variant.metafields[mo_ns][mo_key]
+          if dd_mo_ref != blank and dd_mo_ref.value != blank
+            assign dd_mo_entry = dd_mo_ref.value
+            assign dd_field_drop = nil
+            case mo_img_field
+              when 'image'
+                assign dd_field_drop = dd_mo_entry.image
+              when 'photo'
+                assign dd_field_drop = dd_mo_entry.photo
+              when 'thumbnail'
+                assign dd_field_drop = dd_mo_entry.thumbnail
+              when 'swatch'
+                assign dd_field_drop = dd_mo_entry.swatch
+              when 'picture'
+                assign dd_field_drop = dd_mo_entry.picture
+              when 'media'
+                assign dd_field_drop = dd_mo_entry.media
+              when 'featured_image'
+                assign dd_field_drop = dd_mo_entry.featured_image
+              else
+                assign dd_field_drop = dd_mo_entry[mo_img_field]
+            endcase
+            if dd_field_drop == blank and dd_mo_entry.swatch != blank
+              assign dd_field_drop = dd_mo_entry.swatch
+            endif
+            if dd_field_drop == blank and dd_mo_entry.thumbnail != blank
+              assign dd_field_drop = dd_mo_entry.thumbnail
+            endif
+            if dd_field_drop == blank
+              assign dd_field_drop = dd_mo_entry.image
+            endif
+            if dd_field_drop != blank
+              if dd_field_drop.value != blank
+                assign dropdown_fallback_image = dd_field_drop.value
+              else
+                assign dropdown_fallback_image = dd_field_drop
+              endif
+            endif
+          endif
+        endif
+        if dropdown_fallback_image == blank and catalog_swatches_only == false and variant_file_image_enabled and product.selected_or_first_available_variant
+          assign dd_vfs_mf = product.selected_or_first_available_variant.metafields[vfs_ns][vfs_key]
+          if dd_vfs_mf != blank and dd_vfs_mf.value != blank
+            assign dd_vfs_type = dd_vfs_mf.type | default: ''
+            if dd_vfs_type == 'list.file_reference'
+              assign dropdown_fallback_image = dd_vfs_mf.value.first
+            elsif dd_vfs_type contains 'list.'
+              assign dropdown_fallback_image = dd_vfs_mf.value.first
+            else
+              assign dropdown_fallback_image = dd_vfs_mf.value
+            endif
+          endif
+        endif
+        if dropdown_fallback_image == blank and catalog_swatches_only == false and color_mo_lookup_active_picker and picker_type == 'swatch_dropdown' and option.selected_value
+          assign dd_sel_handle = option.selected_value.name | handleize
+          assign dd_cm_entry = metaobjects[cm_type_h][dd_sel_handle]
+          if dd_cm_entry != blank
+            assign dd_cm_wrap = dd_cm_entry[cm_img_key_picker]
+            if dd_cm_wrap != blank and dd_cm_wrap.value != blank
+              assign dropdown_fallback_image = dd_cm_wrap.value
+            elsif dd_cm_wrap != blank
+              assign dropdown_fallback_image = dd_cm_wrap
+            elsif dd_cm_entry.image != blank and dd_cm_entry.image.value != blank
+              assign dropdown_fallback_image = dd_cm_entry.image.value
+            elsif dd_cm_entry.image != blank
+              assign dropdown_fallback_image = dd_cm_entry.image
+            endif
+          endif
+        endif
+
+        assign dropdown_fallback_color = nil
+        if catalog_swatches_only == false and variant_color_mf_enabled and picker_type == 'swatch_dropdown' and product.selected_or_first_available_variant
+          assign dropdown_color_mf = product.selected_or_first_available_variant.metafields[mf_ns][mf_key]
+          if dropdown_color_mf != blank and dropdown_color_mf.value != blank
+            assign dropdown_fallback_color = dropdown_color_mf.value
+          endif
+        endif
+        if dropdown_fallback_color == blank and catalog_swatches_only == false and color_mo_lookup_active_picker and picker_type == 'swatch_dropdown' and option.selected_value
+          assign dd_sel_h2 = option.selected_value.name | handleize
+          assign dd_cm_e2 = metaobjects[cm_type_h][dd_sel_h2]
+          if dd_cm_e2 != blank and dd_cm_e2.color != blank
+            if dd_cm_e2.color.value != blank
+              assign dropdown_fallback_color = dd_cm_e2.color.value
+            else
+              assign dropdown_fallback_color = dd_cm_e2.color
+            endif
+          endif
+        endif
+      -%}
+      {%- assign dropdown_fallback_rgb = '' -%}
+      {%- if catalog_swatches_only == false and option.selected_value -%}
+        {%- capture dropdown_fallback_rgb_capture -%}{% render 'color-label-fallback-rgb', color_label: option.selected_value.name %}{%- endcapture -%}
+        {%- assign dropdown_fallback_rgb = dropdown_fallback_rgb_capture | strip -%}
+      {%- endif -%}
+      {%- if picker_type == 'swatch' -%}
+        <fieldset class="js product-form__input product-form__input--swatch eg-variant-picker__group">
+          <legend class="form__label">
+            <span class="eg-variant-picker__label-key">{{ option.name }}</span>
+            <span class="eg-variant-picker__label-sep" aria-hidden="true">:</span>
+            <span data-selected-value class="eg-variant-picker__label-value">{{ option.selected_value }}</span>
+          </legend>
+          {% render 'product-variant-options',
+            product: product,
+            option: option,
+            block: block,
+            picker_type: picker_type
+          %}
+        </fieldset>
+      {%- elsif picker_type == 'button' -%}
+        <fieldset class="js product-form__input product-form__input--pill eg-variant-picker__group">
+          <legend class="form__label">
+            <span class="eg-variant-picker__label-key">{{ option.name }}</span>
+            <span class="eg-variant-picker__label-sep" aria-hidden="true">:</span>
+            <span data-selected-value class="eg-variant-picker__label-value">{{ option.selected_value }}</span>
+          </legend>
+          {% render 'product-variant-options',
+            product: product,
+            option: option,
+            block: block,
+            picker_type: picker_type
+          %}
+        </fieldset>
+      {%- else -%}
+        <div class="product-form__input product-form__input--dropdown eg-variant-picker__group">
+          <label class="form__label eg-variant-picker__dropdown-heading" for="Option-{{ section.id }}-{{ forloop.index0 }}">
+            <span class="eg-variant-picker__label-key">{{ option.name }}</span>
+            <span data-variant-selection-label class="eg-variant-picker__label-value">{{ option.selected_value }}</span>
+          </label>
+          <div class="select">
+            {%- if picker_type == 'swatch_dropdown' -%}
+              <span
+                data-selected-value
+                class="dropdown-swatch"
+              >
+                {% render 'swatch',
+                  swatch: option.selected_value.swatch,
+                  shape: swatch_gate_shape,
+                  fallback_image: dropdown_fallback_image,
+                  fallback_color: dropdown_fallback_color,
+                  fallback_rgb_string: dropdown_fallback_rgb
+                %}
+              </span>
+            {%- endif -%}
+            <select
+              id="Option-{{ section.id }}-{{ forloop.index0 }}"
+              class="select__select"
+              name="options[{{ option.name | escape }}]"
+              form="{{ product_form_id }}"
+            >
+              {% render 'product-variant-options',
+                product: product,
+                option: option,
+                block: block,
+                picker_type: picker_type
+              %}
+            </select>
+            <span class="svg-wrapper">
+              {{- 'icon-caret.svg' | inline_asset_content -}}
+            </span>
+          </div>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+    </div>
+
+    <script type="application/json" data-selected-variant>
+      {{ product.selected_or_first_available_variant | json }}
+    </script>
+  </variant-selects>
+{%- endunless -%}

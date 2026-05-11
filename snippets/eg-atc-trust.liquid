@@ -1,0 +1,50 @@
+{% comment %}
+  Compact trust row for product form — icons + short labels (near Add to cart).
+  Expects: block with settings label_payment, label_buyer, label_materials, label_shipping;
+  optional trust_heading, support_note (high-ticket reassurance / expert access).
+{% endcomment %}
+<aside class="eg-atc-trust" aria-label="{{ 'products.product.eg_atc_trust.accessibility_label' | t }}" {{ block.shopify_attributes }}>
+  {%- if block.settings.show_trust_heading and block.settings.trust_heading != blank -%}
+    <p class="eg-atc-trust__heading">{{ block.settings.trust_heading | escape }}</p>
+  {%- endif -%}
+  <ul class="eg-atc-trust__list" role="list">
+    <li class="eg-atc-trust__item">
+      <span class="eg-atc-trust__icon-wrap" aria-hidden="true">
+        <span class="eg-atc-trust__icon-svg">{{ 'icon-lock.svg' | inline_asset_content }}</span>
+      </span>
+      <span class="eg-atc-trust__label">{{ block.settings.label_payment | escape }}</span>
+    </li>
+    <li class="eg-atc-trust__item">
+      <span class="eg-atc-trust__icon-wrap" aria-hidden="true">
+        <svg
+          class="eg-atc-trust__icon-svg eg-atc-trust__icon-svg--stroke"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 32 32"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.2"
+          aria-hidden="true"
+        >
+          <path d="M16 4l10 4v9c0 6-4 11-10 13-6-2-10-7-10-13V8l10-4z"/>
+          <path d="M12 16l3 3 6-7"/>
+        </svg>
+      </span>
+      <span class="eg-atc-trust__label">{{ block.settings.label_buyer | escape }}</span>
+    </li>
+    <li class="eg-atc-trust__item">
+      <span class="eg-atc-trust__icon-wrap" aria-hidden="true">
+        <span class="eg-atc-trust__icon-svg">{{ 'icon-leaf.svg' | inline_asset_content }}</span>
+      </span>
+      <span class="eg-atc-trust__label">{{ block.settings.label_materials | escape }}</span>
+    </li>
+    <li class="eg-atc-trust__item">
+      <span class="eg-atc-trust__icon-wrap" aria-hidden="true">
+        <span class="eg-atc-trust__icon-svg">{{ 'icon-truck.svg' | inline_asset_content }}</span>
+      </span>
+      <span class="eg-atc-trust__label">{{ block.settings.label_shipping | escape }}</span>
+    </li>
+  </ul>
+  {%- if block.settings.support_note != blank -%}
+    <div class="eg-atc-trust__support rte">{{ block.settings.support_note }}</div>
+  {%- endif -%}
+</aside>

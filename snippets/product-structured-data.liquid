@@ -1,0 +1,159 @@
+{% comment %}
+  Product JSON-LD — schema.org Product with Offer per variant, optional AggregateRating (reviews metafields).
+{% endcomment %}
+{%- liquid
+  assign sd_currency = cart.currency.iso_code
+  assign sd_canonical = request.origin | append: product.url
+  assign sd_brand = product.vendor | default: shop.name
+  assign sd_desc = product.description | strip_html | truncate: 5000 | strip
+  if sd_desc == blank
+    capture sd_desc_fallback
+      render 'seo-product-fallback-description', product: product
+    endcapture
+    assign sd_desc = sd_desc_fallback | strip | truncate: 5000, ''
+  endif
+
+  assign sd_return_url = ''
+  if shop.refund_policy != blank and shop.refund_policy.url != blank
+    assign sd_return_url = shop.refund_policy.url
+  endif
+
+  if product.selected_or_first_available_variant.featured_media
+    assign sd_media = product.selected_or_first_available_variant.featured_media
+  else
+    assign sd_media = product.featured_media
+  endif
+
+  assign sd_review_count = 0
+  if product.metafields.reviews.rating_count.value != blank
+    assign sd_review_count = product.metafields.reviews.rating_count.value
+  elsif product.metafields.reviews.rating_count != blank
+    assign sd_review_count = product.metafields.reviews.rating_count
+  endif
+
+  assign sd_rating_scale = 5
+  assign sd_rating_val = blank
+  if product.metafields.reviews.rating.value != blank
+    assign sd_rating_val = product.metafields.reviews.rating.value.rating
+    if product.metafields.reviews.rating.value.scale_max != blank
+      assign sd_rating_scale = product.metafields.reviews.rating.value.scale_max
+    endif
+  endif
+
+  assign sd_review_count = sd_review_count | plus: 0
+
+  assign spec_ns = section.settings.spec_metafield_namespace | strip
+  if spec_ns == blank
+    assign spec_ns = 'elitegemse'
+  endif
+  assign spec_wood_key = section.settings.spec_key_wood | strip
+  if spec_wood_key == blank
+    assign spec_wood_key = 'wood'
+  endif
+  assign spec_dim_key = section.settings.spec_key_dimensions | strip
+  if spec_dim_key == blank
+    assign spec_dim_key = 'dimensions'
+  endif
+  assign ap_wood = product.metafields[spec_ns][spec_wood_key].value | default: ''
+  assign ap_dim_mf = product.metafields[spec_ns][spec_dim_key]
+  assign ap_dim = ''
+  if ap_dim_mf != blank and ap_dim_mf.type != 'rich_text_field' and ap_dim_mf.value != blank
+    assign ap_dim = ap_dim_mf.value | strip | truncate: 280
+  endif
+-%}
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "@id": {{ sd_canonical | append: '#product' | json }},
+    "name": {{ product.title | json }},
+    "description": {{ sd_desc | json }},
+    "url": {{ sd_canonical | json }}
+    {%- if product.type != blank -%}
+      ,"category": {{ product.type | json }}
+    {%- endif -%}
+    ,"brand": {
+      "@type": "Brand",
+      "name": {{ sd_brand | json }}
+    }
+    {%- if product.images.size > 0 -%}
+      ,"image": [
+        {%- for image in product.images limit: 12 -%}
+          {{ image | image_url: width: 1920 | prepend: 'https:' | json }}{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      ]
+    {%- elsif sd_media != blank -%}
+      ,"image": [ {{ sd_media | image_url: width: 1920 | prepend: 'https:' | json }} ]
+    {%- endif -%}
+    {%- if product.selected_or_first_available_variant.sku != blank -%}
+      ,"sku": {{ product.selected_or_first_available_variant.sku | json }}
+    {%- endif -%}
+    {%- if product.metafields.reviews.rating.value != blank and sd_review_count > 0 -%}
+      ,"aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": {{ sd_rating_val | json }},
+        "reviewCount": {{ sd_review_count | json }},
+        "bestRating": {{ sd_rating_scale | json }},
+        "worstRating": 1
+      }
+    {%- endif -%}
+    {%- if ap_wood != blank or ap_dim != blank -%}
+      ,"additionalProperty": [
+        {%- if ap_wood != blank -%}
+          {
+            "@type": "PropertyValue",
+            "name": "Material",
+            "value": {{ ap_wood | json }}
+          }{%- if ap_dim != blank -%},{%- endif -%}
+        {%- endif -%}
+        {%- if ap_dim != blank -%}
+          {
+            "@type": "PropertyValue",
+            "name": "Dimensions",
+            "value": {{ ap_dim | json }}
+          }
+        {%- endif -%}
+      ]
+    {%- endif -%}
+    {%- if shop.address.country_code != blank -%}
+      ,"areaServed": {
+        "@type": "Country",
+        "name": {{ shop.address.country | default: shop.address.country_code | json }}
+      }
+    {%- endif -%}
+    ,"offers": [
+      {%- for variant in product.variants -%}
+        {
+          "@type": "Offer",
+          "url": {{ request.origin | append: variant.url | json }},
+          "priceCurrency": {{ sd_currency | json }},
+          "price": {{ variant.price | divided_by: 100.0 | json }},
+          "availability": "{% if variant.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
+          "itemCondition": "https://schema.org/NewCondition",
+          "seller": {
+            "@type": "Organization",
+            "name": {{ shop.name | json }}
+          }
+          {%- if variant.sku != blank -%}
+            ,"sku": {{ variant.sku | json }}
+          {%- endif -%}
+          {%- assign barcode_clean = variant.barcode | strip -%}
+          {%- if barcode_clean.size == 12 -%}
+            ,"gtin12": {{ barcode_clean | json }}
+          {%- elsif barcode_clean.size == 13 -%}
+            ,"gtin13": {{ barcode_clean | json }}
+          {%- elsif barcode_clean.size == 14 -%}
+            ,"gtin14": {{ barcode_clean | json }}
+          {%- endif -%}
+          {%- if sd_return_url != blank -%}
+            ,"hasMerchantReturnPolicy": {
+              "@type": "MerchantReturnPolicy",
+              "url": {{ sd_return_url | json }},
+              "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow"
+            }
+          {%- endif -%}
+        }{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+    ]
+  }
+</script>
