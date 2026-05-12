@@ -131,7 +131,8 @@
             "title": "Delivered with care, coast to coast",
             "text": "<p>Complimentary insured shipping within the contiguous U.S.—tracked from our workshop to your door, so you always know where your piece is.</p>",
             "link_label": "",
-            "link": ""
+            "link": "",
+            "show_stars": false
           }
         },
         "trust_2": {
@@ -141,7 +142,8 @@
             "title": "Thirty days to love it in place",
             "text": "<p>Live with it in your lighting and layout. If it isn't right, our team helps you through a straightforward return or exchange—we're here for homeowners, not one-click abandonments.</p>",
             "link_label": "",
-            "link": ""
+            "link": "",
+            "show_stars": false
           }
         },
         "trust_3": {
@@ -151,7 +153,8 @@
             "title": "Checkout you can trust",
             "text": "<p>Your payment details stay protected with industry-standard encryption—so you can focus on how the grain will look in your space.</p>",
             "link_label": "",
-            "link": ""
+            "link": "",
+            "show_stars": false
           }
         },
         "trust_4": {
@@ -161,7 +164,8 @@
             "title": "Real advice before you commit",
             "text": "<p>Questions on dimensions, finish, or placement? You reach people who know these pieces—not scripts. We help you choose once, beautifully.</p>",
             "link_label": "Ask us anything",
-            "link": "shopify://pages/contact-us"
+            "link": "shopify://pages/contact-us",
+            "show_stars": false
           }
         }
       },
@@ -191,11 +195,45 @@
     "press_strip": {
       "type": "press-strip",
       "blocks": {
-        "logo_1": { "type": "press_logo", "settings": { "text": "Architectural Digest", "alt": "Architectural Digest" } },
-        "logo_2": { "type": "press_logo", "settings": { "text": "House Beautiful", "alt": "House Beautiful" } },
-        "logo_3": { "type": "press_logo", "settings": { "text": "Elle Decor", "alt": "Elle Decor" } }
+        "press_logo_97Hrny": {
+          "type": "press_logo",
+          "settings": {
+            "image": "shopify://shop_images/luxe_interiors_d88f6add-89f1-49ef-ab21-e4f6cc1be4d7.webp",
+            "text": "Luxe",
+            "alt": "",
+            "link": ""
+          }
+        },
+        "logo_1": {
+          "type": "press_logo",
+          "settings": {
+            "image": "shopify://shop_images/architectural_digest_ff35c760-222e-48b7-863f-12a5746ab1a4.webp",
+            "text": "Architectural Digest",
+            "alt": "Architectural Digest",
+            "link": ""
+          }
+        },
+        "logo_2": {
+          "type": "press_logo",
+          "settings": {
+            "image": "shopify://shop_images/house_beautiful_de552155-49de-473c-8afa-5a4ff535c035.webp",
+            "text": "House Beautiful",
+            "alt": "House Beautiful",
+            "link": ""
+          }
+        },
+        "logo_3": {
+          "type": "press_logo",
+          "settings": {
+            "image": "shopify://shop_images/elle_decor_1d650756-1a8a-4151-b76f-8d14af30cae6.webp",
+            "text": "Elle Decor",
+            "alt": "Elle Decor",
+            "link": ""
+          }
+        }
       },
       "block_order": [
+        "press_logo_97Hrny",
         "logo_1",
         "logo_2",
         "logo_3"
@@ -203,8 +241,8 @@
       "settings": {
         "heading": "As seen in",
         "color_scheme": "scheme-1",
-        "padding_top": 28,
-        "padding_bottom": 28
+        "padding_top": 12,
+        "padding_bottom": 8
       }
     },
     "craftsmanship": {
@@ -308,6 +346,8 @@
       "settings": {
         "eyebrow": "Delivery",
         "heading": "Your furniture, protected the whole way",
+        "heading_size": "h2",
+        "intro": "<p>We provide <strong>complimentary shipping</strong> for all orders within the United States—<strong>no minimum purchase</strong> is required. Shipments are handled through trusted carriers including <strong>USPS</strong>, <strong>FedEx</strong>, and <strong>UPS</strong>. Optional <strong>Delivery & Assembly</strong> for VIP customers or selected pieces may include a service fee of <strong>$50–$100</strong>; standard delivery follows the terms outlined below.</p>",
         "color_scheme": "scheme-2",
         "padding_top": 40,
         "padding_bottom": 40
@@ -381,7 +421,8 @@
             "title": "Solid hardwoods",
             "text": "<p>Dense, stable boards selected for grain clarity and structural integrity — the foundation of furniture that stays flat and quiet for decades.</p>",
             "link_label": "",
-            "link": ""
+            "link": "",
+            "show_stars": false
           }
         },
         "wood_2": {
@@ -391,7 +432,8 @@
             "title": "Reclaimed character",
             "text": "<p>Where we use reclaimed stock, we celebrate nail holes, tone variation, and history — each piece tells a story.</p>",
             "link_label": "",
-            "link": ""
+            "link": "",
+            "show_stars": false
           }
         },
         "wood_3": {
@@ -401,7 +443,8 @@
             "title": "Natural finishes",
             "text": "<p>Oils and clear finishes that let the wood breathe and age honestly — never obscured by heavy plastics.</p>",
             "link_label": "",
-            "link": ""
+            "link": "",
+            "show_stars": false
           }
         },
         "wood_4": {
@@ -411,7 +454,8 @@
             "title": "Responsible sourcing",
             "text": "<p>We prioritize responsibly harvested and reclaimed inputs so your home reflects care for forests and craft.</p>",
             "link_label": "Explore our woods & finishes",
-            "link": "shopify://collections/all"
+            "link": "shopify://collections/all",
+            "show_stars": false
           }
         }
       },
