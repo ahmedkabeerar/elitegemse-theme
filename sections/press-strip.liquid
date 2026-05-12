@@ -31,11 +31,11 @@
             {%- assign press_logo_alt = block.settings.alt | default: block.settings.image.alt | escape -%}
             {{
               block.settings.image
-              | image_url: width: 320
+              | image_url: width: 560
               | image_tag:
                 loading: 'lazy',
-                widths: '80, 120, 160, 240, 320',
-                sizes: '120px',
+                widths: '120, 160, 240, 320, 400, 560',
+                sizes: '(min-width: 750px) 200px, 42vw',
                 alt: press_logo_alt,
                 class: 'press-strip__logo'
             }}
@@ -57,21 +57,63 @@
     text-transform: uppercase; font-size: 1.1rem;
   }
   .press-strip__list {
-    display: flex; flex-wrap: wrap; align-items: center;
-    justify-content: center; gap: 3.2rem 4.8rem;
-    list-style: none; margin: 0; padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: center;
+    justify-items: center;
+    gap: 2.8rem 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-width: 42rem;
+    margin-inline: auto;
+  }
+  .press-strip__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
   }
   .press-strip__logo {
-    display: block; height: 3.2rem; width: auto;
-    max-width: 12rem; filter: grayscale(1);
-    opacity: 0.55; transition: opacity 0.2s ease;
+    display: block;
+    width: auto;
+    height: auto;
+    max-height: 3.2rem;
+    max-width: min(100%, 14rem);
+    filter: grayscale(1);
+    opacity: 0.55;
+    transition: opacity 0.2s ease;
   }
   .press-strip__item:hover .press-strip__logo { opacity: 0.85; }
-  .press-strip__link { display: block; text-decoration: none; }
+  .press-strip__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-decoration: none;
+  }
   .press-strip__text-logo {
     font-family: var(--font-heading-family);
-    font-size: 1.4rem; font-style: italic;
-    opacity: 0.55; letter-spacing: 0.05em;
+    font-size: 1.3rem;
+    font-style: italic;
+    opacity: 0.55;
+    letter-spacing: 0.05em;
+    text-align: center;
+  }
+  @media screen and (min-width: 750px) {
+    .press-strip__list {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 2.4rem 3.2rem;
+      max-width: 100%;
+    }
+    .press-strip__logo {
+      max-height: 4.8rem;
+      max-width: min(100%, 18rem);
+    }
+    .press-strip__text-logo {
+      font-size: 1.5rem;
+    }
   }
 </style>
 
