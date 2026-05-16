@@ -131,8 +131,7 @@
           "availability": "{% if variant.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
           "itemCondition": "https://schema.org/NewCondition",
           "seller": {
-            "@type": "Organization",
-            "name": {{ shop.name | json }}
+            "@id": {{ shop.url | append: '#organization' | json }}
           }
           {%- if variant.sku != blank -%}
             ,"sku": {{ variant.sku | json }}

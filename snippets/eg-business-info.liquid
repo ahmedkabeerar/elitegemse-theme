@@ -1,0 +1,34 @@
+{% comment %}
+  Elitegemse business contact — single source from Theme settings.
+  Usage: {% render 'eg-business-info' %}
+{% endcomment %}
+{%- liquid
+  assign eg_name = settings.eg_business_name | default: 'Elitegemse' | strip
+  assign eg_line1 = settings.eg_business_address_line1 | default: '1001 S Main St, STE 600' | strip
+  assign eg_line2 = settings.eg_business_address_line2 | default: 'Kalispell, Montana 59901' | strip
+  assign eg_line3 = settings.eg_business_address_line3 | default: 'United States' | strip
+  assign eg_support_label = settings.eg_business_support_label | default: 'Customer Support:' | strip
+  assign eg_support_email = settings.eg_business_support_email | default: 'support@elitegemse.com' | strip
+-%}
+<address class="eg-business-info" translate="no">
+  <p class="eg-business-info__name">{{ eg_name | escape }}</p>
+  {%- if eg_line1 != blank -%}
+    <p class="eg-business-info__line">{{ eg_line1 | escape }}</p>
+  {%- endif -%}
+  {%- if eg_line2 != blank -%}
+    <p class="eg-business-info__line">{{ eg_line2 | escape }}</p>
+  {%- endif -%}
+  {%- if eg_line3 != blank -%}
+    <p class="eg-business-info__line">{{ eg_line3 | escape }}</p>
+  {%- endif -%}
+  {%- if eg_support_email != blank -%}
+    <p class="eg-business-info__support">
+      {%- if eg_support_label != blank -%}
+        <span class="eg-business-info__support-label">{{ eg_support_label | escape }}</span>
+      {%- endif -%}
+      <a class="eg-business-info__email link" href="mailto:{{ eg_support_email | escape }}">
+        {{- eg_support_email | escape -}}
+      </a>
+    </p>
+  {%- endif -%}
+</address>

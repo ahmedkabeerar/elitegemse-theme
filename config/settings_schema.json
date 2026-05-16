@@ -34,6 +34,51 @@
     ]
   },
   {
+    "name": "Business information",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Used in the footer, Contact page, and About page. Update once to keep business details consistent across the store."
+      },
+      {
+        "type": "text",
+        "id": "eg_business_name",
+        "label": "Business name",
+        "default": "Elitegemse"
+      },
+      {
+        "type": "text",
+        "id": "eg_business_address_line1",
+        "label": "Address line 1",
+        "default": "1001 S Main St, STE 600"
+      },
+      {
+        "type": "text",
+        "id": "eg_business_address_line2",
+        "label": "Address line 2",
+        "default": "Kalispell, Montana 59901"
+      },
+      {
+        "type": "text",
+        "id": "eg_business_address_line3",
+        "label": "Address line 3",
+        "default": "United States"
+      },
+      {
+        "type": "text",
+        "id": "eg_business_support_label",
+        "label": "Support label",
+        "default": "Customer Support:"
+      },
+      {
+        "type": "text",
+        "id": "eg_business_support_email",
+        "label": "Support email",
+        "default": "support@elitegemse.com"
+      }
+    ]
+  },
+  {
     "name": "t:settings_schema.colors.name",
     "settings": [
       {

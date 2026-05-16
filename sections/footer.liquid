@@ -83,8 +83,12 @@
                   {%- when '@app' -%}
                     {% render block %}
                   {%- when 'text' -%}
-                    <div class="footer-block__details-content rte">
-                      {{ block.settings.subtext }}
+                    <div class="footer-block__details-content{% unless block.settings.use_theme_business_info %} rte{% endunless %}">
+                      {%- if block.settings.use_theme_business_info -%}
+                        {% render 'eg-business-info' %}
+                      {%- else -%}
+                        {{ block.settings.subtext }}
+                      {%- endif -%}
                     </div>
                   {%- when 'link_list' -%}
                     {%- if block.settings.menu != blank -%}
@@ -378,6 +382,13 @@
           "id": "subtext",
           "default": "t:sections.footer.blocks.text.settings.subtext.default",
           "label": "t:sections.footer.blocks.text.settings.subtext.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "use_theme_business_info",
+          "label": "Use business information from theme settings",
+          "default": false,
+          "info": "Shows name, address, and support email from Theme settings → Business information."
         }
       ]
     },

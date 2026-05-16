@@ -31,7 +31,8 @@
           "type": "text",
           "settings": {
             "heading": "Contact Us",
-            "subtext": "<p>Email: Support@Elitegemse.com</p><p>117 S Lexington Street, STE 100<br/>Harrisonville, Missouri, 64701<br/>United States</p><p>Available 24/7</p>"
+            "subtext": "",
+            "use_theme_business_info": true
           }
         },
         "shop_links": {

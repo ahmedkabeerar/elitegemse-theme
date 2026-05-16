@@ -1356,6 +1356,71 @@ html {
   color: rgba(44, 24, 16, 0.5);
 }
 
+/* Business information (footer, Contact, About) */
+.eg-business-info {
+  font-family: var(--font-body-family);
+  font-style: normal;
+  font-size: 1.3rem;
+  font-weight: 300;
+  line-height: 1.65;
+  color: rgba(44, 24, 16, 0.72);
+  margin: 0;
+}
+
+.eg-business-info p {
+  margin: 0 0 0.4rem;
+}
+
+.eg-business-info__name {
+  font-weight: 500;
+  color: var(--eg-walnut);
+  margin-bottom: 0.6rem !important;
+}
+
+.eg-business-info__support {
+  margin-top: 1.2rem !important;
+}
+
+.eg-business-info__support-label {
+  display: block;
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--eg-walnut);
+  margin-bottom: 0.35rem;
+}
+
+.eg-business-info__email {
+  color: rgba(44, 24, 16, 0.85);
+  text-decoration: none;
+  word-break: break-word;
+}
+
+.eg-business-info__email:hover {
+  color: var(--eg-wood);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.eg-business-info-section__heading {
+  font-family: var(--font-heading-family);
+  font-weight: 400;
+  letter-spacing: var(--eg-track-heading, 0.02em);
+  color: var(--eg-walnut);
+  margin: 0 0 1.6rem;
+}
+
+.eg-business-info-section .eg-business-info {
+  font-size: 1.4rem;
+}
+
+@media screen and (max-width: 749px) {
+  .eg-business-info-section .eg-business-info {
+    font-size: 1.3rem;
+  }
+}
+
 /* -------------------------
    15. COLLECTION PAGE
    ------------------------- */

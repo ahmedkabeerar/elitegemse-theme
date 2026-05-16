@@ -73,6 +73,9 @@
 
     {% render 'meta-tags' %}
 
+    {% render 'eg-entity-structured-data' %}
+    {% render 'eg-webpage-structured-data' %}
+
     {% render 'structured-data-breadcrumbs' %}
     {% render 'collection-structured-data' %}
 
@@ -371,58 +374,41 @@
 
     {%- if template.name == 'index' -%}
       {%- liquid
-        assign eg_store_desc = shop.description | strip_html | strip | truncate: 600
-        assign eg_store_logo = ''
+        assign eg_fs_name = settings.eg_business_name | default: 'Elitegemse' | strip
+        assign eg_fs_desc = shop.description | strip_html | strip | truncate: 600
+        if eg_fs_desc == blank
+          assign eg_fs_desc = 'Elitegemse designs and crafts luxury handcrafted solid wood furniture for US homeowners who value premium materials, artisan craftsmanship, and timeless interiors.'
+        endif
+        assign eg_fs_logo = ''
         if settings.logo != blank
-          assign eg_store_logo = settings.logo | image_url: width: 512 | prepend: 'https:'
+          assign eg_fs_logo = settings.logo | image_url: width: 512 | prepend: 'https:'
         endif
-        assign eg_fs_street = shop.address.address1 | append: ' ' | append: shop.address.address2 | strip
-        assign eg_fs_has_addr = false
-        if shop.address.country_code != blank or eg_fs_street != blank or shop.address.city != blank or shop.address.province != blank or shop.address.zip != blank
-          assign eg_fs_has_addr = true
-        endif
+        assign eg_fs_street = settings.eg_business_address_line1 | default: '1001 S Main St, STE 600' | strip
       -%}
       <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "FurnitureStore",
         "@id": {{ shop.url | append: '#furniturestore' | json }},
-        "name": {{ shop.name | json }},
-        "url": {{ shop.url | json }}
-        {%- if eg_store_desc != blank -%}
-        ,"description": {{ eg_store_desc | json }}
-        {%- endif -%}
-        {%- if eg_store_logo != blank -%}
-        ,"image": {{ eg_store_logo | json }}
+        "name": {{ eg_fs_name | json }},
+        "url": {{ shop.url | json }},
+        "description": {{ eg_fs_desc | json }}
+        {%- if eg_fs_logo != blank -%}
+        ,"image": {{ eg_fs_logo | json }}
         {%- endif -%}
         ,"parentOrganization": {
           "@id": {{ shop.url | append: '#organization' | json }}
-        }
-        {%- if eg_fs_has_addr -%}
-        ,"address": {
-          "@type": "PostalAddress"
-          {%- if eg_fs_street != blank -%}
-          ,"streetAddress": {{ eg_fs_street | json }}
-          {%- endif -%}
-          {%- if shop.address.city != blank -%}
-          ,"addressLocality": {{ shop.address.city | json }}
-          {%- endif -%}
-          {%- if shop.address.province != blank -%}
-          ,"addressRegion": {{ shop.address.province | json }}
-          {%- endif -%}
-          {%- if shop.address.zip != blank -%}
-          ,"postalCode": {{ shop.address.zip | json }}
-          {%- endif -%}
-          {%- if shop.address.country_code != blank -%}
-          ,"addressCountry": {{ shop.address.country_code | json }}
-          {%- endif -%}
-        }
-        {%- endif -%}
-        ,"currenciesAccepted": {{ shop.currency | json }},
-        "priceRange": "$$"
-        {%- if shop.phone != blank -%}
-        ,"telephone": {{ shop.phone | strip | json }}
-        {%- endif -%}
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": {{ eg_fs_street | json }},
+          "addressLocality": "Kalispell",
+          "addressRegion": "MT",
+          "postalCode": "59901",
+          "addressCountry": "US"
+        },
+        "currenciesAccepted": {{ shop.currency | json }},
+        "priceRange": "$$$"
       }
       </script>
     {%- endif -%}

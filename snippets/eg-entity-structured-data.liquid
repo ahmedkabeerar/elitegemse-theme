@@ -1,0 +1,91 @@
+{% comment %}
+  Global Organization + WebSite JSON-LD (@graph). Single source: Theme settings → Business information.
+  Render once in layout/theme.liquid <head>. No telephone, no sameAs.
+{% endcomment %}
+{%- liquid
+  assign eg_origin = shop.url
+  assign eg_org_id = eg_origin | append: '#organization'
+  assign eg_site_id = eg_origin | append: '#website'
+  assign eg_logo_id = eg_origin | append: '#logo'
+
+  assign eg_name = settings.eg_business_name | default: 'Elitegemse' | strip
+  assign eg_email = settings.eg_business_support_email | default: 'support@elitegemse.com' | strip
+  assign eg_street = settings.eg_business_address_line1 | default: '1001 S Main St, STE 600' | strip
+
+  assign eg_locality = 'Kalispell'
+  assign eg_region = 'MT'
+  assign eg_postal = '59901'
+  assign eg_country_code = 'US'
+
+  assign eg_entity_desc = shop.description | strip_html | strip
+  if eg_entity_desc == blank
+    assign eg_entity_desc = 'Elitegemse designs and crafts luxury handcrafted solid wood furniture for US homeowners who value premium materials, artisan craftsmanship, and timeless interiors.'
+  else
+    assign eg_entity_desc = eg_entity_desc | truncate: 800
+  endif
+
+  assign eg_logo_url = ''
+  if settings.logo != blank
+    assign eg_logo_url = settings.logo | image_url: width: 512 | prepend: 'https:'
+  endif
+
+  assign eg_search_template = request.origin | append: routes.search_url | append: '?q={search_term_string}'
+-%}
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": {{ eg_org_id | json }},
+        "name": {{ eg_name | json }},
+        "url": {{ eg_origin | json }},
+        "email": {{ eg_email | json }},
+        "description": {{ eg_entity_desc | json }}
+        {%- if eg_logo_url != blank -%}
+        ,"logo": {
+          "@type": "ImageObject",
+          "@id": {{ eg_logo_id | json }},
+          "url": {{ eg_logo_url | json }},
+          "contentUrl": {{ eg_logo_url | json }}
+          {%- if settings.logo.width > 0 -%}
+          ,"width": {{ settings.logo.width | json }}
+          {%- endif -%}
+          {%- if settings.logo.height > 0 -%}
+          ,"height": {{ settings.logo.height | json }}
+          {%- endif -%}
+        }
+        ,"image": {{ eg_logo_url | json }}
+        {%- endif -%}
+        ,"address": {
+          "@type": "PostalAddress",
+          "streetAddress": {{ eg_street | json }},
+          "addressLocality": {{ eg_locality | json }},
+          "addressRegion": {{ eg_region | json }},
+          "postalCode": {{ eg_postal | json }},
+          "addressCountry": {{ eg_country_code | json }}
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": {{ eg_site_id | json }},
+        "url": {{ eg_origin | json }},
+        "name": {{ eg_name | json }},
+        "inLanguage": {{ request.locale.iso_code | default: 'en' | json }},
+        "publisher": {
+          "@id": {{ eg_org_id | json }}
+        }
+        {%- if request.page_type == 'index' -%}
+        ,"potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": {{ eg_search_template | json }}
+          },
+          "query-input": "required name=search_term_string"
+        }
+        {%- endif -%}
+      }
+    ]
+  }
+</script>

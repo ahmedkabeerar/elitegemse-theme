@@ -1,0 +1,63 @@
+{% comment %}
+  WebPage JSON-LD for static/general templates only.
+  Excludes: product, collection, article, index (homepage).
+{% endcomment %}
+{%- liquid
+  assign eg_wp_emit = false
+
+  case request.page_type
+    when 'page', 'cart', 'search'
+      assign eg_wp_emit = true
+  endcase
+
+  if template.name == 'policy'
+    assign eg_wp_emit = true
+  endif
+
+  if request.page_type == 'index'
+    assign eg_wp_emit = false
+  endif
+  if request.page_type == 'product' or request.page_type == 'collection' or request.page_type == 'article'
+    assign eg_wp_emit = false
+  endif
+-%}
+{%- if eg_wp_emit -%}
+  {%- liquid
+    assign eg_origin = shop.url
+    assign eg_org_id = eg_origin | append: '#organization'
+    assign eg_site_id = eg_origin | append: '#website'
+    assign eg_wp_url = canonical_url | default: request.origin
+    assign eg_wp_id = eg_wp_url | append: '#webpage'
+    assign eg_wp_name = page_title | strip
+
+    assign eg_wp_desc = page_description | strip
+    if eg_wp_desc == blank and request.page_type == 'page' and page != blank
+      assign eg_wp_desc = page.content | strip_html | strip | truncate: 320
+    endif
+    if eg_wp_desc == blank and template.name == 'policy' and policy != blank
+      assign eg_wp_desc = policy.body | strip_html | strip | truncate: 320
+    endif
+  -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "@id": {{ eg_wp_id | json }},
+      "url": {{ eg_wp_url | json }},
+      "name": {{ eg_wp_name | json }}
+      {%- if eg_wp_desc != blank -%}
+      ,"description": {{ eg_wp_desc | json }}
+      {%- endif -%}
+      ,"isPartOf": {
+        "@id": {{ eg_site_id | json }}
+      },
+      "about": {
+        "@id": {{ eg_org_id | json }}
+      },
+      "publisher": {
+        "@id": {{ eg_org_id | json }}
+      },
+      "inLanguage": {{ request.locale.iso_code | default: 'en' | json }}
+    }
+  </script>
+{%- endif -%}
