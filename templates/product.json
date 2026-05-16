@@ -81,8 +81,8 @@
         "price",
         "rating",
         "variant_picker",
-        "quantity_selector",
         "buy_buttons",
+        "shipping_notice",
         "atc_trust",
         "description",
         "share"
